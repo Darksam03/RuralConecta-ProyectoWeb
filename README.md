@@ -1,4 +1,4 @@
-# RuralConecta-Proyecto
+# RuralConecta-ProyectoWeb
 
 ## Badges
 
@@ -16,7 +16,7 @@
 
 ## Descripción
 
-**RuralConecta-Proyecto** es un Producto Mínimo Viable (MVP) de una aplicación web Full Stack diseñada para centralizar, organizar y facilitar el acceso a la información sobre servicios esenciales y trámites disponibles para las comunidades rurales de los municipios de Antioquia, Colombia.
+**RuralConecta-ProyectoWeb** es un Producto Mínimo Viable (MVP) de una aplicación web Full Stack diseñada para centralizar, organizar y facilitar el acceso a la información sobre servicios esenciales y trámites disponibles para las comunidades rurales de los municipios de Antioquia, Colombia.
 
 ---
 
@@ -121,128 +121,131 @@ Frontend muestra los resultados
 
 ---
 
-## Estado del proyecto
+## 📈 Progreso general
 
-| Elemento | Estado |
-|---|---|
-| Análisis del problema | 🟡 En progreso |
-| Alcance del MVP | 🟢 Completado |
-| Arquitectura | ⚪ Pendiente |
-| Base de datos | ⚪ Pendiente |
-| Backend | ⚪ Pendiente |
-| API REST | ⚪ Pendiente |
-| Frontend | ⚪ Pendiente |
-| Integración | ⚪ Pendiente |
-| Pruebas | ⚪ Pendiente |
-| Despliegue | ⚪ Pendiente |
-| Documentación | 🟡 En progreso |
-| Presentación | ⚪ Pendiente |
+```text
+Progreso: ██░░░░░░░░ 17% (11/64 tareas completadas)
+```
 
-*Leyenda: 🟢 Completado | 🟡 En progreso | 🔴 Bloqueado | ⚪ Pendiente*
+> **Nota:** Este indicador visual representa el avance global del proyecto calculado a partir de las tareas completadas versus el total planificado en el tablero. Debe actualizarse manualmente a medida que se ejecuten y verifiquen nuevas actividades con evidencia respaldada en el repositorio.
 
 ---
 
-## 📋 Tareas y progreso
+## 📌 Convención para actualizar el progreso
 
-### Fase 0 — Análisis y planificación
-- [ ] Definir problemática
-- [ ] Definir alcance del MVP
-- [ ] Definir requisitos funcionales
-- [ ] Definir requisitos no funcionales
-- [ ] Diseñar arquitectura del sistema
+Para mantener la consistencia, trazabilidad y rigor técnico en el seguimiento del proyecto:
+
+- `[ ]` = Tarea pendiente por iniciar o en ejecución.
+- `[x]` = Tarea completada y verificada.
+- Las tareas deben marcarse como completadas únicamente cuando exista evidencia tangible del trabajo realizado en el repositorio.
+- Cada avance significativo debe estar respaldado por un commit descriptivo en Git siguiendo las pautas de commits semánticos (`feat:`, `fix:`, `docs:`, `chore:`, etc.).
+- No marcar tareas futuras como completadas anticipadamente.
+
+---
+
+## 📊 Estado del proyecto
+
+Este apartado permite realizar un seguimiento estructurado e interactivo del ciclo de vida y desarrollo de **RuralConecta-ProyectoWeb**, dividido por fases y áreas de trabajo:
+
+### 🟢 Fase 0 — Análisis y planificación
+
+- [x] Crear repositorio GitHub
+- [x] Configurar estructura inicial del proyecto
+- [x] Crear README.md
+- [x] Crear .gitignore
+- [x] Definir problemática
+- [x] Definir objetivo general
+- [x] Definir objetivos específicos
+- [x] Definir alcance del MVP
+- [x] Definir arquitectura tecnológica
+- [x] Seleccionar stack tecnológico
+- [x] Crear especificación técnica
 - [ ] Diseñar modelo entidad-relación
-- [ ] Definir estructura de la API REST
-- [ ] Definir medidas de seguridad
-- [ ] Definir estrategia de despliegue en la nube
+- [ ] Definir modelo de datos PostgreSQL
+- [ ] Definir estructura inicial de la API REST
 
-### Fase 1 — Preparación del entorno
-- [ ] Configurar entorno de desarrollo
-- [ ] Configurar Python
-- [ ] Configurar Django
+### 🔵 Fase 1 — Diseño y arquitectura
+
+- [ ] Diseñar diagrama de arquitectura
+- [ ] Diseñar diagrama entidad-relación definitivo
+- [ ] Definir estructura del backend
+- [ ] Definir estructura del frontend
+- [ ] Documentar endpoints de la API
+- [ ] Revisar arquitectura antes de programar
+
+### 🟡 Fase 2 — Desarrollo Backend
+
+- [ ] Crear proyecto Django
 - [ ] Configurar Django REST Framework
 - [ ] Configurar PostgreSQL
-- [ ] Configurar frontend
-- [ ] Configurar Git
-- [ ] Configurar GitHub
-
-### Fase 2 — Backend
-- [ ] Crear proyecto Django
-- [ ] Configurar base de datos
 - [ ] Crear modelos
 - [ ] Crear migraciones
 - [ ] Crear serializers
-- [ ] Crear vistas
 - [ ] Crear endpoints
-- [ ] Implementar consultas por municipio
-- [ ] Implementar consultas por categoría
-- [ ] Implementar validaciones
-- [ ] Implementar medidas de seguridad
+- [ ] Implementar filtros por municipio
+- [ ] Implementar filtros por categoría
+- [ ] Realizar pruebas de API
 
-### Fase 3 — Frontend
-- [ ] Diseñar interfaz principal
-- [ ] Implementar selector de municipio
-- [ ] Implementar selector de categoría
-- [ ] Implementar consulta de servicios
-- [ ] Mostrar información de servicios
-- [ ] Mostrar ubicación
-- [ ] Mostrar horarios
-- [ ] Mostrar requisitos
-- [ ] Mostrar contacto
-- [ ] Implementar diseño responsive
+### 🟣 Fase 3 — Desarrollo Frontend
 
-### Fase 4 — Integración y pruebas
-- [ ] Conectar frontend con API REST
-- [ ] Probar consultas
-- [ ] Validar formularios
-- [ ] Validar respuestas de API
+- [ ] Crear estructura HTML
+- [ ] Configurar Tailwind CSS
+- [ ] Implementar interfaz responsive
+- [ ] Implementar selección de municipio
+- [ ] Implementar selección de categoría
+- [ ] Implementar listado de servicios
+- [ ] Implementar ficha detallada del servicio
+- [ ] Integrar frontend con API REST
+- [ ] Manejar estados de carga y errores
+
+### 🟠 Fase 4 — Integración y pruebas
+
+- [ ] Probar integración frontend-backend
+- [ ] Validar respuestas JSON
+- [ ] Validar filtros
+- [ ] Realizar pruebas responsive
 - [ ] Realizar pruebas de usabilidad
-- [ ] Medir tiempos de respuesta
-- [ ] Corregir errores
-- [ ] Validar funcionamiento del MVP
+- [ ] Medir tiempo de respuesta de la API
+- [ ] Corregir errores encontrados
+- [ ] Verificar cumplimiento de requisitos funcionales
 
-### Fase 5 — Despliegue
-- [ ] Preparar aplicación para producción
-- [ ] Configurar variables de entorno
-- [ ] Configurar base de datos en la nube
-- [ ] Configurar backend
-- [ ] Configurar frontend
-- [ ] Desplegar aplicación
-- [ ] Verificar funcionamiento
-- [ ] Documentar despliegue
+### ☁️ Fase 5 — Despliegue
 
-### Fase 6 — Documentación y presentación
-- [ ] Completar README
-- [ ] Documentar arquitectura
-- [ ] Documentar base de datos
+- [ ] Preparar variables de entorno
+- [ ] Configurar producción
+- [ ] Configurar PostgreSQL en la nube
+- [ ] Desplegar backend
+- [ ] Desplegar frontend
+- [ ] Configurar CORS
+- [ ] Verificar funcionamiento en producción
+- [ ] Documentar proceso de despliegue
+
+### 📚 Documentación y presentación
+
+- [ ] Completar documentación técnica
+- [ ] Actualizar README
+- [ ] Agregar diagrama de arquitectura
+- [ ] Agregar diagrama entidad-relación
 - [ ] Documentar API
-- [ ] Documentar seguridad
-- [ ] Agregar evidencias
-- [ ] Crear diagramas
-- [ ] Crear presentación
-- [ ] Revisar repositorio
-- [ ] Realizar revisión final
+- [ ] Preparar presentación
+- [ ] Exportar presentación a PDF
+- [ ] Agregar presentación al repositorio
+- [ ] Realizar revisión final del repositorio
 
 ---
 
-## 🏆 Logros
+## 🏆 Logros alcanzados
 
-- [ ] Repositorio GitHub creado
-- [ ] Estructura inicial definida
-- [ ] Problemática documentada
-- [ ] Arquitectura diseñada
-- [ ] Modelo de datos diseñado
-- [ ] API REST diseñada
-- [ ] Entorno configurado
-- [ ] Backend implementado
-- [ ] Base de datos implementada
-- [ ] API REST implementada
-- [ ] Frontend implementado
-- [ ] Integración completada
-- [ ] MVP funcional
-- [ ] Pruebas completadas
-- [ ] Aplicación desplegada en la nube
-- [ ] Documentación completada
-- [ ] Presentación finalizada
+Registro de hitos consolidados a lo largo del ciclo del proyecto:
+
+- ✅ Repositorio inicial creado
+- ✅ Arquitectura tecnológica definida
+- ✅ Stack tecnológico seleccionado
+- ⬜ MVP implementado
+- ⬜ API REST funcional
+- ⬜ Frontend integrado
+- ⬜ Pruebas completadas
+- ⬜ Aplicación desplegada en la nube
 
 ---
 
@@ -348,3 +351,11 @@ La documentación técnica del proyecto se organiza dentro del directorio `docs/
 ## Presentación
 
 Pendiente de implementación.
+
+---
+
+## 👥 Equipo
+
+| Integrante | Rol | Institución |
+|---|---|---|
+| Samuel Gallego Cardona | Desarrollador Full Stack | Fundación Universitaria Católica del Norte |
