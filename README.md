@@ -124,7 +124,7 @@ Frontend muestra los resultados
 ## 📈 Progreso general
 
 ```text
-Progreso: ██░░░░░░░░ 17% (11/64 tareas completadas)
+Progreso: ███░░░░░░░ 27% (17/64 tareas completadas)
 ```
 
 > **Nota:** Este indicador visual representa el avance global del proyecto calculado a partir de las tareas completadas versus el total planificado en el tablero. Debe actualizarse manualmente a medida que se ejecuten y verifiquen nuevas actividades con evidencia respaldada en el repositorio.
@@ -160,15 +160,15 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - ✅ Definir arquitectura tecnológica
 - ✅ Seleccionar stack tecnológico
 - ✅ Crear especificación técnica
-- [ ] Diseñar modelo entidad-relación
-- [ ] Definir modelo de datos PostgreSQL
-- [ ] Definir estructura inicial de la API REST
+- ✅ Diseñar modelo entidad-relación
+- ✅ Definir modelo de datos PostgreSQL
+- ✅ Definir estructura inicial de la API REST
 
 ### 🔵 Fase 1 — Diseño y arquitectura
 
-- [ ] Diseñar diagrama de arquitectura
-- [ ] Diseñar diagrama entidad-relación definitivo
-- [ ] Definir estructura del backend
+- ✅ Diseñar diagrama de arquitectura
+- ✅ Diseñar diagrama entidad-relación definitivo
+- ✅ Definir estructura del backend
 - [ ] Definir estructura del frontend
 - [ ] Documentar endpoints de la API
 - [ ] Revisar arquitectura antes de programar
