@@ -130,42 +130,45 @@ Cada archivo y módulo dentro del backend cumple una responsabilidad estricta de
 
 A continuación se ilustra el ciclo de vida completo paso a paso para una consulta típica de catálogo de servicios:
 
-$$\text{Petición}: \quad \mathbf{GET} \quad \texttt{/api/servicios/?municipio=1&categoria=3}$$
+> **Petición HTTP de Ejemplo**: `GET /api/servicios/?municipio=1&categoria=3`
 
-```text
-[1. Navegador Web]
-       │  Petición HTTP: GET /api/servicios/?municipio=1&categoria=3
-       ▼
-[2. config/urls.py]
-       │  Detecta prefijo '/api/' y delega en 'servicios.urls'
-       ▼
-[3. servicios/urls.py]
-       │  Enruta la ruta 'servicios/' hacia 'ServicioViewSet' o 'ServicioListView'
-       ▼
-[4. servicios/views.py]
-       │  - Extrae parámetros: municipio_id = 1, categoria_id = 3
-       │  - Construye consulta ORM: Servicio.objects.filter(municipio_id=1, categoria_id=3)
-       ▼
-[5. Django ORM]
-       │  Genera SQL parametrizado:
-       │  SELECT * FROM servicios_servicio WHERE municipio_id = 1 AND categoria_id = 3;
-       ▼
-[6. PostgreSQL]
-       │  Ejecuta consulta sobre índices y retorna registros
-       ▼
-[7. Django ORM]
-       │  Convierte registros en QuerySet de instancias del modelo Servicio
-       ▼
-[8. servicios/serializers.py]
-       │  Toma el QuerySet y genera lista de diccionarios con campos seleccionados:
-       │  [{"id": 2, "nombre": "Cooperativa...", "municipio": 1, ...}]
-       ▼
-[9. servicios/views.py]
-       │  Empaqueta los datos en un objeto Response(status=200)
-       ▼
-[10. Navegador Web]
-       │  Recibe payload JSON y procede a renderizar las tarjetas en la interfaz
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Cliente as 1. Cliente Web (Navegador)
+    participant ConfigURLs as 2. Enrutador Principal (config/urls.py)
+    participant AppURLs as 3. Enrutador App (servicios/urls.py)
+    participant Views as 4. Vistas (servicios/views.py)
+    participant ORM as 5. Django ORM
+    participant DB as 6. Base de Datos (PostgreSQL)
+    participant Serializer as 7. Serializador (servicios/serializers.py)
+
+    Cliente->>ConfigURLs: Petición HTTP: GET /api/servicios/?municipio=1&categoria=3
+    ConfigURLs->>AppURLs: Detecta prefijo '/api/' y delega en 'servicios.urls'
+    AppURLs->>Views: Enruta 'servicios/' a ServicioViewSet / ServicioListView
+    Views->>ORM: Extrae params y ejecuta Servicio.objects.filter(municipio_id=1, categoria_id=3)
+    ORM->>DB: SELECT * FROM servicios_servicio WHERE municipio_id=1 AND categoria_id=3;
+    DB-->>ORM: Retorna registros / filas coincidentes
+    ORM-->>Views: Retorna QuerySet de instancias del modelo Servicio
+    Views->>Serializer: Pasa QuerySet a ServicioSerializer(many=True)
+    Serializer-->>Views: Retorna datos serializados (lista de diccionarios JSON)
+    Views-->>Cliente: Retorna Response(status=200, data=JSON)
 ```
+
+### Descripción Paso a Paso del Ciclo de Vida
+
+| Paso | Componente | Acción / Responsabilidad |
+|---|---|---|
+| **1** | **Navegador Web** | El usuario aplica los filtros en la interfaz web; el frontend emite la petición asíncrona: `GET /api/servicios/?municipio=1&categoria=3`. |
+| **2** | **`config/urls.py`** | El enrutador raíz de Django intercepta el prefijo `/api/` y delega la gestión a las rutas de la aplicación `servicios`. |
+| **3** | **`servicios/urls.py`** | Mapea la ruta `servicios/` y deriva la petición hacia el controlador correspondiente (`ServicioViewSet` o `ServicioListView`). |
+| **4** | **`servicios/views.py`** | Extrae y valida los parámetros `municipio_id=1` y `categoria_id=3`. Construye la consulta ORM: `Servicio.objects.filter(municipio_id=1, categoria_id=3)`. |
+| **5** | **Django ORM** | Traduce la consulta de Python a una sentencia SQL segura y parametrizada: `SELECT * FROM servicios_servicio WHERE municipio_id = 1 AND categoria_id = 3;`. |
+| **6** | **PostgreSQL** | Ejecuta la consulta SQL sobre los índices de la base de datos relacional y retorna las tuplas resultantes. |
+| **7** | **Django ORM** | Convierte las filas de la base de datos en un `QuerySet` compuesto por instancias del modelo `Servicio`. |
+| **8** | **`servicios/serializers.py`** | Recibe el `QuerySet` y transforma las instancias del modelo en estructuras nativas de Python (diccionarios) según los campos expuestos. |
+| **9** | **`servicios/views.py`** | Empaqueta los datos serializados en un objeto `Response` con código de estado HTTP `200 OK`. |
+| **10** | **Navegador Web** | Recibe el payload JSON y procede a renderizar dinámicamente las tarjetas de servicios en la interfaz de usuario. |
 
 ---
 
