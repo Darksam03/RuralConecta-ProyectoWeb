@@ -136,7 +136,7 @@ Progreso: ██░░░░░░░░ 17% (11/64 tareas completadas)
 Para mantener la consistencia, trazabilidad y rigor técnico en el seguimiento del proyecto:
 
 - `[ ]` = Tarea pendiente por iniciar o en ejecución.
-- `[x]` = Tarea completada y verificada.
+- `✅` = Tarea completada y verificada.
 - Las tareas deben marcarse como completadas únicamente cuando exista evidencia tangible del trabajo realizado en el repositorio.
 - Cada avance significativo debe estar respaldado por un commit descriptivo en Git siguiendo las pautas de commits semánticos (`feat:`, `fix:`, `docs:`, `chore:`, etc.).
 - No marcar tareas futuras como completadas anticipadamente.
@@ -149,17 +149,17 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 
 ### 🟢 Fase 0 — Análisis y planificación
 
-- [x] Crear repositorio GitHub
-- [x] Configurar estructura inicial del proyecto
-- [x] Crear README.md
-- [x] Crear .gitignore
-- [x] Definir problemática
-- [x] Definir objetivo general
-- [x] Definir objetivos específicos
-- [x] Definir alcance del MVP
-- [x] Definir arquitectura tecnológica
-- [x] Seleccionar stack tecnológico
-- [x] Crear especificación técnica
+- ✅ Crear repositorio GitHub
+- ✅ Configurar estructura inicial del proyecto
+- ✅ Crear README.md
+- ✅ Crear .gitignore
+- ✅ Definir problemática
+- ✅ Definir objetivo general
+- ✅ Definir objetivos específicos
+- ✅ Definir alcance del MVP
+- ✅ Definir arquitectura tecnológica
+- ✅ Seleccionar stack tecnológico
+- ✅ Crear especificación técnica
 - [ ] Diseñar modelo entidad-relación
 - [ ] Definir modelo de datos PostgreSQL
 - [ ] Definir estructura inicial de la API REST
