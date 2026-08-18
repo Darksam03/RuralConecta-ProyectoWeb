@@ -124,7 +124,7 @@ Frontend muestra los resultados
 ## 📈 Progreso general
 
 ```text
-Progreso: ███░░░░░░░ 27% (17/64 tareas completadas)
+Progreso: ███░░░░░░░ 30% (19/64 tareas completadas)
 ```
 
 > **Nota:** Este indicador visual representa el avance global del proyecto calculado a partir de las tareas completadas versus el total planificado en el tablero. Debe actualizarse manualmente a medida que se ejecuten y verifiquen nuevas actividades con evidencia respaldada en el repositorio.
@@ -170,7 +170,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - ✅ Diseñar diagrama entidad-relación definitivo
 - ✅ Definir estructura del backend
 - [ ] Definir estructura del frontend
-- [ ] Documentar endpoints de la API
+- ✅ Documentar endpoints de la API
 - [ ] Revisar arquitectura antes de programar
 
 ### 🟡 Fase 2 — Desarrollo Backend
@@ -226,7 +226,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - [ ] Actualizar README
 - [ ] Agregar diagrama de arquitectura
 - [ ] Agregar diagrama entidad-relación
-- [ ] Documentar API
+- ✅ Documentar API
 - [ ] Preparar presentación
 - [ ] Exportar presentación a PDF
 - [ ] Agregar presentación al repositorio
