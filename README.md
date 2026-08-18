@@ -358,4 +358,6 @@ Pendiente de implementación.
 
 | Integrante | Rol | Institución |
 |---|---|---|
-| Samuel Gallego Cardona | Desarrollador Full Stack | Fundación Universitaria Católica del Norte |
+| Samuel Arboleda Echeverri | Desarrollador Full Stack | Fundación Universitaria Católica del Norte |
+| Josue Agudelo Gallego | Desarrollador Full Stack | Fundación Universitaria Católica del Norte |
+
