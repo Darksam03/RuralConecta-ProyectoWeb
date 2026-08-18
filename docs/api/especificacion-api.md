@@ -58,9 +58,9 @@ flowchart LR
     Serializers -->|"Respuesta HTTP (200 OK / JSON)"| Fetch
     Fetch -->|"Renderiza tarjetas"| UI
 
-    classDef client fill:#e0f2fe,stroke:#0284c7,stroke-width:2px;
-    classDef api fill:#fef3c7,stroke:#d97706,stroke-width:2px;
-    classDef db fill:#f3e8ff,stroke:#9333ea,stroke-width:2px;
+    classDef client fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#111827;
+    classDef api fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
+    classDef db fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#111827;
 
     class UI,Fetch client;
     class Router,Views,Serializers api;
@@ -527,7 +527,7 @@ graph TD
         S5["5. Autenticación JWT (Módulo Admin Futuro)"] -.->|"Protege endpoints de mutación"| S2
     end
 
-    classDef sec fill:#ecfdf5,stroke:#059669,stroke-width:2px;
+    classDef sec fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#111827;
     class S1,S2,S3,S4,S5 sec;
 ```
 

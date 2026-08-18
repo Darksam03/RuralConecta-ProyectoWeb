@@ -149,10 +149,10 @@ graph TD
         H -->|"Resultados de Consulta"| G
     end
 
-    classDef client fill:#e0f2fe,stroke:#0284c7,stroke-width:2px;
-    classDef comm fill:#fef3c7,stroke:#d97706,stroke-width:2px;
-    classDef server fill:#dcfce7,stroke:#16a34a,stroke-width:2px;
-    classDef db fill:#f3e8ff,stroke:#9333ea,stroke-width:2px;
+    classDef client fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#111827;
+    classDef comm fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
+    classDef server fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827;
+    classDef db fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#111827;
 
     class A,B,C client;
     class D comm;
@@ -264,7 +264,7 @@ graph LR
     C --> D["4. Pruebas de Usabilidad"]
     D --> E["5. Pruebas de Rendimiento"]
 
-    classDef testStage fill:#f0fdf4,stroke:#15803d,stroke-width:2px;
+    classDef testStage fill:#f0fdf4,stroke:#15803d,stroke-width:2px,color:#111827;
     class A,B,C,D,E testStage;
 ```
 

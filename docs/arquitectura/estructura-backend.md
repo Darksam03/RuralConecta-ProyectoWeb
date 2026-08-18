@@ -44,12 +44,12 @@ graph TD
     D -->|"Estructuras de datos nativas (Diccionarios / JSON)"| C
     C -->|"Respuesta HTTP estructurada (200 OK / JSON)"| A
 
-    classDef client fill:#e0f2fe,stroke:#0284c7,stroke-width:2px;
-    classDef routing fill:#fef3c7,stroke:#d97706,stroke-width:2px;
-    classDef logic fill:#dcfce7,stroke:#16a34a,stroke-width:2px;
-    classDef serial fill:#fef08a,stroke:#ca8a04,stroke-width:2px;
-    classDef orm fill:#ffedd5,stroke:#ea580c,stroke-width:2px;
-    classDef db fill:#f3e8ff,stroke:#9333ea,stroke-width:2px;
+    classDef client fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#111827;
+    classDef routing fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
+    classDef logic fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827;
+    classDef serial fill:#fef08a,stroke:#ca8a04,stroke-width:2px,color:#111827;
+    classDef orm fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#111827;
+    classDef db fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#111827;
 
     class A client;
     class B routing;
