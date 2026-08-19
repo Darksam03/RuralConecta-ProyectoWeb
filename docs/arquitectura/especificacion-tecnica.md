@@ -1,6 +1,6 @@
 # Especificación Técnica Base — RuralConecta-Proyecto
 
-> **Versión 3.0** — Actualización de la arquitectura backend para utilizar FastAPI (Python 3.10+), Pydantic y SQLAlchemy ORM, manteniendo JSP, HTML5, CSS3 y JavaScript Vanilla en el frontend y PostgreSQL como base de datos relacional.
+> **Versión 4.0** — Actualización de la arquitectura frontend para utilizar HTML5 semántico, CSS3 y JavaScript Vanilla desacoplado. Eliminación de JavaServer Pages (JSP). Mantenimiento de FastAPI (Python 3.10+), Pydantic, SQLAlchemy ORM y PostgreSQL como componentes de backend y persistencia.
 
 ## 1. Identificación del Proyecto
 
@@ -115,7 +115,7 @@ Centralizar y facilitar el acceso a la información de servicios y trámites mun
 
 | Componente | Tecnología Seleccionada | Justificación |
 |---|---|---|
-| **Frontend — Presentación** | JSP (JavaServer Pages) | Tecnología principal para la construcción de vistas dinámicas y reutilizables mediante fragmentos `.jspf`. |
+| **Frontend — Presentación** | HTML5 | Estructuración semántica de las páginas y vistas del cliente web (header, nav, main, section, article, footer, form). |
 | **Frontend — Estructura** | HTML5 | Estructuración semántica de las páginas y contenido (header, nav, main, section, article, footer). |
 | **Frontend — Estilos** | CSS3 | Diseño visual, Responsive Design (Flexbox, Grid, variables CSS, media queries). Tecnología oficial de estilos. |
 | **Frontend — Lógica cliente** | JavaScript Vanilla | Interacción del usuario, manipulación del DOM, filtros, validaciones y consumo de la API REST mediante Fetch API. |
@@ -134,8 +134,8 @@ La arquitectura del sistema sigue un patrón multicapa desacoplado:
 ```mermaid
 graph TD
     subgraph "Capa de Presentación (Frontend)"
-        A["Usuario"] -->|"Interactúa con la UI"| B["Navegador Web / Vistas JSP"]
-        B -->|"JSP + HTML5 + CSS3 + JavaScript"| C["Cliente HTTP / Fetch API"]
+        A["Usuario"] -->|"Interactúa con la UI"| B["Navegador Web / Cliente HTML5"]
+        B -->|"HTML5 + CSS3 + JavaScript"| C["Cliente HTTP / Fetch API"]
     end
 
     subgraph "Capa de Comunicación"
@@ -235,8 +235,8 @@ Durante todas las etapas de diseño e implementación del proyecto se aplicarán
 
 1. **Protección contra Inyección SQL**: Acceso exclusivo a la base de datos a través de SQLAlchemy ORM con sentencias preparadas y parametrizadas.
 2. **Validación y Sanitización de Entradas**: Validación estricta de tipos de datos y esquemas mediante Pydantic antes de procesar las consultas.
-3. **Mitigación de Cross-Site Scripting (XSS)**: En el Frontend JSP, se evitará insertar contenido no confiable directamente en las vistas. En JavaScript, se usará `textContent` en lugar de `innerHTML` sobre datos dinámicos provenientes de la API. Se sanitizarán las respuestas JSON antes de renderizarlas.
-4. **Seguridad en Vistas JSP**: No se colocará lógica de negocio compleja directamente dentro de archivos JSP. Se validarán parámetros recibidos. No se expondrá información sensible en los fragmentos de presentación.
+3. **Mitigación de Cross-Site Scripting (XSS)**: En el Frontend HTML5/JavaScript, se usará `textContent` en lugar de `innerHTML` sobre datos dinámicos provenientes de la API REST para evitar la inyección de código malicioso.
+4. **Seguridad en la Interfaz Web**: No se colocará lógica de negocio en la capa cliente. Se validarán parámetros recibidos y no se expondrá información sensible en las páginas de presentación.
 5. **Control de Orígenes Cruzados (CORS)**: Configuración restrictiva mediante `CORSMiddleware` en FastAPI, autorizando únicamente el origen del cliente web permitido.
 6. **Gestión Segura de Secretos y Configuración**: Uso estricto de variables de entorno mediante `pydantic-settings` (`.env`) para almacenar claves secretas, cadenas de conexión a base de datos y configuraciones sensibles.
 7. **Configuración Segura para Producción**: Deshabilitación de documentación interactiva pública en producción si se requiere y encabezados de seguridad HTTP.
@@ -294,7 +294,7 @@ graph LR
 
 La solución se diseñará bajo lineamientos de despliegue desacoplado en la nube:
 
-- **Estructura Desacoplada**: Posibilidad de desplegar el backend (API FastAPI con Uvicorn/Gunicorn) y el frontend (sitio JSP/cliente web) de forma independiente.
+- **Estructura Desacoplada**: Posibilidad de desplegar el backend (API FastAPI con Uvicorn/Gunicorn) y el frontend (cliente estático HTML5/CSS3/JS) de forma independiente.
 - **Configuración por Entorno**: Parametrización externa de variables (`DATABASE_URL`, `DEBUG`, `ALLOWED_HOSTS`, `CORS_ALLOWED_ORIGINS`).
 - **Base de Datos Gestionada**: Uso de instancia PostgreSQL administrada en la nube para persistencia segura.
 - **Servicio de Archivos Estáticos**: Preparación mediante `WhiteNoise` o almacenamiento de objetos para producción.
@@ -320,5 +320,6 @@ El alcance actual está acotado al MVP para garantizar entrega ágil y estabilid
 | Versión | Fecha | Descripción | Responsable |
 |---|---|---|---|
 | 1.0 | 2026-08-18 | Creación de la especificación técnica inicial del proyecto. | Equipo RuralConecta |
-| 2.0 | 2026-08-19 | Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla. Eliminación de Tailwind CSS. Mantenimiento de Django, DRF y PostgreSQL como componentes principales del backend y persistencia. | Equipo RuralConecta |
-| 3.0 | 2026-08-19 | Migración de la arquitectura backend de Django/DRF a FastAPI (Python 3.10+), Pydantic, SQLAlchemy 2.0 y servidor ASGI Uvicorn, conservando el frontend JSP y la base de datos PostgreSQL. | Equipo RuralConecta |
+| 2.0 | 2026-08-19 | Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla. Eliminación de Tailwind CSS. | Equipo RuralConecta |
+| 3.0 | 2026-08-19 | Migración de la arquitectura backend de Django/DRF a FastAPI (Python 3.10+), Pydantic, SQLAlchemy 2.0 y servidor ASGI Uvicorn. | Equipo RuralConecta |
+| 4.0 | 2026-08-19 | Eliminación de JavaServer Pages (JSP) y simplificación del Frontend a HTML5 semántico, CSS3 y JavaScript Vanilla desacoplado. | Equipo RuralConecta |

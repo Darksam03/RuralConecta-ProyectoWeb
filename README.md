@@ -2,8 +2,6 @@
 
 ## Badges
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![JSP](https://img.shields.io/badge/JSP-007396?style=for-the-badge&logo=oracle&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
@@ -39,10 +37,9 @@ Centralizar y facilitar el acceso a la información de servicios y trámites mun
 ## Tecnologías
 
 ### Frontend
-- **JSP (JavaServer Pages)** — Tecnología principal para la construcción de vistas dinámicas.
-- **HTML5** — Estructura semántica de las páginas.
+- **HTML5** — Estructuración semántica de las páginas y vistas del cliente web.
 - **CSS3** — Estilos visuales, Responsive Design (Flexbox, Grid, variables CSS, media queries).
-- **JavaScript Vanilla** — Interacción del usuario, manipulación del DOM y consumo de la API REST.
+- **JavaScript Vanilla** — Interacción del usuario, manipulación del DOM y consumo asíncrono de la API REST mediante Fetch API.
 
 ### Backend
 - **Python** — Lenguaje de programación base (versión 3.10+).
@@ -70,8 +67,8 @@ El sistema adopta una arquitectura **Full Stack desacoplada basada en API REST**
               ┌─────────────────────┐
               │      FRONTEND       │
               │                     │
-              │ JSP + HTML5         │
-              │ CSS3 + JavaScript   │
+              │ HTML5 + CSS3        │
+              │ JavaScript Vanilla  │
               └──────────┬──────────┘
                          │
                       HTTP/JSON
@@ -151,7 +148,7 @@ RuralConecta-ProyectoWeb/
 │   (Pendiente de implementación — FastAPI + Pydantic + SQLAlchemy + Uvicorn)
 │
 └── frontend/
-    (Pendiente de implementación — JSP + HTML5 + CSS3 + JavaScript)
+    (Pendiente de implementación — HTML5 + CSS3 + JavaScript Vanilla)
 ```
 
 ---
@@ -161,11 +158,11 @@ RuralConecta-ProyectoWeb/
 ```text
 Usuario
    ↓
-Selecciona municipio (vista JSP)
+Selecciona municipio (vista HTML5)
    ↓
-Selecciona categoría (vista JSP)
+Selecciona categoría (vista HTML5)
    ↓
-Consulta servicios (vista JSP)
+Consulta servicios (vista HTML5)
    ↓
 Frontend consume API REST (JavaScript Fetch)
    ↓
@@ -175,7 +172,7 @@ PostgreSQL proporciona los datos mediante SQLAlchemy ORM
    ↓
 API devuelve información JSON
    ↓
-Frontend muestra los resultados (JSP + JavaScript)
+Frontend muestra los resultados (HTML5 + JavaScript)
 ```
 
 ---
@@ -230,7 +227,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - ✅ Definir estructura del backend
 - ✅ Definir estructura del frontend
 - ✅ Documentar endpoints de la API
-- ✅ Adaptar arquitectura a JSP + HTML5 + CSS3
+- ✅ Adaptar arquitectura a HTML5 + CSS3 + JavaScript Vanilla
 - ✅ Actualizar documentación tecnológica completa
 - ✅ Validar arquitectura completa antes de programar
 
@@ -249,16 +246,15 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 
 ### 🟣 Fase 3 — Desarrollo Frontend
 
-- [ ] Crear estructura JSP (WEB-INF/views/)
-- [ ] Configurar CSS3 (styles.css con variables, Flexbox, Grid)
-- [ ] Implementar fragmentos JSPF (header, navbar, footer)
-- [ ] Implementar interfaz responsive (media queries CSS3)
-- [ ] Implementar vista de selección de municipio
-- [ ] Implementar vista de selección de categoría
-- [ ] Implementar vista de listado de servicios
-- [ ] Implementar ficha detallada del servicio
-- [ ] Integrar frontend con API REST (JavaScript Fetch)
-- [ ] Manejar estados de carga y errores
+- [ ] Crear estructura HTML5 del cliente web (`index.html`, `municipios.html`, `categorias.html`, `servicios.html`, `servicio-detalle.html`)
+- [ ] Configurar CSS3 (`styles.css` con variables, Flexbox, Grid, media queries)
+- [ ] Implementar interfaz responsive
+- [ ] Implementar vista de selección de municipio (`municipios.html`)
+- [ ] Implementar vista de selección de categoría (`categorias.html`)
+- [ ] Implementar vista de listado de servicios (`servicios.html`)
+- [ ] Implementar ficha detallada del servicio (`servicio-detalle.html`)
+- [ ] Integrar frontend con API REST (JavaScript Fetch API)
+- [ ] Manejar estados de carga, éxito, sin resultados y errores
 
 ### 🟠 Fase 4 — Integración y pruebas
 
@@ -277,7 +273,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - [ ] Configurar entorno de producción para FastAPI
 - [ ] Configurar PostgreSQL en la nube
 - [ ] Desplegar backend FastAPI (Uvicorn / Gunicorn)
-- [ ] Configurar servidor para Frontend JSP (Tomcat o equivalente)
+- [ ] Configurar servidor para el Frontend estático (Nginx, Netlify, Vercel o servicio estático en FastAPI)
 - [ ] Configurar CORS
 - [ ] Verificar funcionamiento en producción
 - [ ] Documentar proceso de despliegue
@@ -343,8 +339,7 @@ Registrar el avance de acuerdo con el cronograma definido para el taller.
 - Entorno virtual Python (`venv`)
 
 ### Frontend
-- Servidor de aplicaciones compatible con JSP (Apache Tomcat u otro servidor Java EE)
-- Navegador web moderno (Chrome, Firefox, Edge)
+- Navegador web moderno (Chrome, Firefox, Edge) o servidor HTTP estático (Nginx, Netlify, Vercel)
 
 ### Herramientas
 - Git
@@ -366,12 +361,12 @@ Durante el desarrollo del proyecto se contemplarán e implementarán las siguien
 
 - Protección contra inyección SQL mediante el uso exclusivo de SQLAlchemy ORM (consultas parametrizadas).
 - Validación y sanitización rigurosa de datos con esquemas Pydantic.
-- Prevención de vulnerabilidades Cross-Site Scripting (XSS): en JSP, evitar insertar contenido no confiable directamente; en JavaScript, usar `textContent` en lugar de `innerHTML` sobre datos no confiables.
+- Prevención de vulnerabilidades Cross-Site Scripting (XSS): en JavaScript, usar `textContent` en lugar de `innerHTML` sobre datos no confiables provenientes de la API.
 - Configuración estricta de Cross-Origin Resource Sharing (CORS) mediante `CORSMiddleware` en FastAPI.
 - Uso de variables de entorno mediante `pydantic-settings` para la gestión segura de parámetros de configuración y claves sensibles.
 - No almacenar credenciales en el repositorio de control de versiones.
 - Configuración segura para el entorno de producción (deshabilitar OpenAPI docs públicas en producción si se requiere, encabezados de seguridad HTTP).
-- Separación estricta entre presentación (JSP/CSS3/JavaScript) y lógica de negocio (FastAPI/SQLAlchemy).
+- Separación estricta entre presentación (HTML5/CSS3/JavaScript) y lógica de negocio (FastAPI/SQLAlchemy).
 - No exponer información sensible en mensajes de error visibles al usuario.
 - Autenticación mediante JWT únicamente si las funcionalidades finales requieren autenticación.
 
@@ -400,8 +395,8 @@ La documentación técnica del proyecto se organiza dentro del directorio `docs/
 
 ## Buenas Prácticas
 
-- Separación de responsabilidades: JSP (presentación) / CSS3 (estilos) / JavaScript (comportamiento) / FastAPI+SQLAlchemy (lógica y API) / PostgreSQL (persistencia).
-- Modularidad y reutilización de fragmentos JSP (`.jspf`).
+- Separación de responsabilidades: HTML5 (estructura) / CSS3 (estilos) / JavaScript (comportamiento) / FastAPI+SQLAlchemy (lógica y API) / PostgreSQL (persistencia).
+- Modularidad y reutilización de estilos CSS3 y módulos JavaScript.
 - Código limpio y nombres descriptivos.
 - No duplicar lógica entre módulos.
 - Commits semánticos y descriptivos.

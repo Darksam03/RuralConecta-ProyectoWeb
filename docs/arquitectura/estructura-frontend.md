@@ -1,6 +1,6 @@
 # Estructura del Frontend — RuralConecta-Proyecto
 
-> **Versión 3.0** — Actualización de la arquitectura frontend (JSP, HTML5, CSS3, JS Vanilla) e integración con el backend basado en FastAPI, Pydantic y SQLAlchemy sobre PostgreSQL.
+> **Versión 4.0** — Actualización de la arquitectura frontend para utilizar HTML5 semántico, CSS3 y JavaScript Vanilla desacoplado. Eliminación de JavaServer Pages (JSP) y dependencias de servidores Java. Integración directa con la API REST desarrollada en FastAPI.
 
 ---
 
@@ -11,7 +11,7 @@
 | **Proyecto** | RuralConecta-Proyecto |
 | **Componente** | Frontend |
 | **Tipo de aplicación** | Aplicación web Full Stack — MVP |
-| **Tecnologías principales** | JSP + HTML5 + CSS3 + JavaScript Vanilla |
+| **Tecnologías principales** | HTML5 + CSS3 + JavaScript Vanilla |
 | **Arquitectura** | Frontend desacoplado mediante API REST |
 | **Ubicación** | `frontend/` |
 | **Documento relacionado** | `docs/arquitectura/especificacion-tecnica.md` |
@@ -64,27 +64,23 @@ Diseñar y estructurar una interfaz web responsiva que permita a los usuarios co
 
 | Tecnología | Rol en el Frontend |
 |---|---|
-| **JSP (JavaServer Pages)** | Tecnología principal para la construcción de vistas dinámicas. Permite presentar información, reutilizar fragmentos (`.jspf`) y separar la presentación de la lógica. |
-| **HTML5** | Estructuración semántica de las páginas y contenido (header, nav, main, section, article, footer, form). |
-| **CSS3** | Diseño visual, Responsive Design y estilos de la interfaz. Tecnología oficial de estilos. Incluye: Flexbox, Grid, variables CSS, media queries, transiciones. |
-| **JavaScript Vanilla** | Lógica de interacción, manipulación del DOM, filtros, validaciones del lado cliente y consumo de la API REST. |
-| **Fetch API** | Comunicación HTTP asíncrona con el Backend. |
+| **HTML5** | Estructuración semántica de las páginas y vistas del cliente web (header, nav, main, section, article, footer, form). |
+| **CSS3** | Diseño visual, Responsive Design y estilos de la interfaz (Flexbox, Grid, variables CSS, media queries, transiciones). |
+| **JavaScript Vanilla** | Lógica de interacción, manipulación del DOM, filtros, validaciones del lado cliente y consumo asíncrono de la API REST. |
+| **Fetch API** | Comunicación HTTP asíncrona nativa con el Backend. |
 | **JSON** | Formato de intercambio de información entre Frontend y Backend. |
-| **Fragmentos JSPF** | Componentes de presentación reutilizables (header, navbar, footer). Extensión `.jspf`. |
 | **Git** | Control de versiones. |
 | **GitHub** | Almacenamiento y colaboración sobre el código fuente. |
 
 ### 4.1. Justificación tecnológica
 
-Se utilizará JSP, HTML5, CSS3 y JavaScript Vanilla porque estas tecnologías permiten construir un MVP ligero sin introducir la complejidad adicional de frameworks frontend como React, Vue o Angular.
+Se utilizará HTML5, CSS3 y JavaScript Vanilla porque estas tecnologías permiten construir un cliente web desacoplado, ligero y de alto rendimiento sin requerir frameworks frontend complejos (React, Vue, Angular) ni dependencias de servidores de aplicaciones Java (Tomcat / JSP).
 
-- **JSP** permite generar vistas dinámicas en el servidor, reutilizar fragmentos de presentación y mantener una separación clara entre estructura y lógica.
-- **HTML5** proporciona la base semántica de todas las páginas, mejorando accesibilidad y SEO.
-- **CSS3** permite implementar una interfaz responsiva y organizada mediante Flexbox, Grid, variables CSS y media queries, sin depender de frameworks externos.
-- **JavaScript Vanilla** permite controlar la interacción, manipular el DOM y realizar solicitudes HTTP hacia la API REST sin agregar dependencias innecesarias.
+- **HTML5** proporciona la base semántica de todas las páginas de consulta, garantizando accesibilidad y legibilidad.
+- **CSS3** permite implementar una interfaz responsiva y organizada mediante Flexbox, Grid, variables CSS y media queries.
+- **JavaScript Vanilla** permite controlar la interacción, manipular el DOM y realizar solicitudes HTTP asíncronas hacia la API REST en FastAPI sin dependencias externas.
 
-> **Tecnologías eliminadas del Frontend:** Tailwind CSS no forma parte de la arquitectura del Frontend.
-> No se utilizarán frameworks frontend (React, Vue, Angular).
+> **Tecnologías eliminadas del Frontend:** JavaServer Pages (JSP), fragmentos JSPF, Tailwind CSS y frameworks JS pesados no forman parte de la arquitectura del Frontend.
 
 ---
 
@@ -98,8 +94,8 @@ flowchart TD
     U["USUARIO"]
     U --> F
 
-    subgraph F["FRONTEND — JSP + HTML5 + CSS3 + JavaScript"]
-        UI["Vistas JSP"]
+    subgraph F["FRONTEND — HTML5 + CSS3 + JavaScript Vanilla"]
+        UI["Páginas HTML5"]
         CSS["CSS3 (Estilos)"]
         JS["JavaScript Vanilla"]
         UI --> JS
@@ -126,48 +122,37 @@ El Frontend únicamente será responsable de la presentación, interacción y co
 
 ## 6. Estructura de Directorios
 
-La estructura propuesta para el Frontend, adaptada al uso de JSP, es:
+La estructura propuesta para el Frontend es:
 
 ```text
 frontend/
-└── src/
-    └── main/
-        └── webapp/
-            ├── WEB-INF/
-            │   └── views/
-            │       ├── index.jsp
-            │       ├── municipios.jsp
-            │       ├── categorias.jsp
-            │       ├── servicios.jsp
-            │       ├── servicio-detalle.jsp
-            │       └── fragments/
-            │           ├── header.jspf
-            │           ├── navbar.jspf
-            │           └── footer.jspf
-            │
-            ├── css/
-            │   └── styles.css
-            │
-            ├── js/
-            │   ├── main.js
-            │   ├── api.js
-            │   ├── municipios.js
-            │   ├── categorias.js
-            │   ├── servicios.js
-            │   └── servicio-detalle.js
-            │
-            └── assets/
-                ├── images/
-                └── icons/
+├── index.html                  # Página de inicio e identidad del proyecto
+├── municipios.html             # Catálogo de municipios disponibles
+├── categorias.html             # Catálogo de categorías temáticas
+├── servicios.html              # Listado de servicios y filtros dinámicos
+├── servicio-detalle.html       # Ficha técnica detallada del servicio
+│
+├── css/
+│   └── styles.css              # Hoja de estilos principal (Flexbox, Grid, variables, media queries)
+│
+├── js/
+│   ├── main.js                 # Inicialización general y eventos globales
+│   ├── api.js                  # Cliente Fetch API centralizado (comunicación con FastAPI)
+│   ├── municipios.js           # Lógica y renderizado del catálogo de municipios
+│   ├── categorias.js           # Lógica y renderizado de categorías
+│   ├── servicios.js            # Consulta y filtrado dinámico de servicios
+│   └── servicio-detalle.js     # Renderización de la ficha técnica detallada
+│
+└── assets/
+    ├── images/                 # Imágenes estáticas e ilustraciones
+    └── icons/                  # Iconos SVG de navegación y categorías
 ```
-
-> **Nota:** Esta estructura es la propuesta arquitectónica. Si durante la implementación se adopta una organización diferente pero funcionalmente equivalente, la estructura real deberá documentarse en ese momento.
 
 Esta organización separa las responsabilidades del Frontend en:
 
-- **Vistas JSP** (`WEB-INF/views/`) — Páginas de la aplicación y fragmentos reutilizables.
-- **Estilos CSS3** (`css/`) — Hoja de estilos principal.
-- **Lógica JavaScript** (`js/`) — Módulos de interacción y comunicación con la API.
+- **Páginas HTML5** (`*.html`) — Estructura semántica de cada vista del cliente web.
+- **Estilos CSS3** (`css/styles.css`) — Hoja de estilos única y centralizada.
+- **Lógica JavaScript** (`js/`) — Módulos de interacción y consumo asíncrono de la API REST.
 - **Recursos visuales** (`assets/`) — Imágenes e iconos.
 
 ```mermaid
@@ -204,46 +189,25 @@ flowchart LR
 
 ---
 
-## 7. JSP — JavaServer Pages
+## 7. Estructura de Vistas HTML5 Semánticas
 
-### 7.1. Responsabilidad de JSP en la arquitectura
+### 7.1. Responsabilidad de HTML5 en la arquitectura
 
-JSP es la tecnología principal de presentación del Frontend. Sus responsabilidades son:
+HTML5 constituye la base estructural directa del Frontend. Sus responsabilidades son:
 
-- Construcción de las vistas de la aplicación.
-- Presentación de información dinámica recibida de la API REST.
-- Reutilización de fragmentos de interfaz mediante archivos `.jspf`.
-- Integración de datos con la capa de presentación.
-- Separación de la estructura de presentación respecto a la lógica de negocio.
+- Proporcionar la estructura semántica de la interfaz del usuario.
+- Servir como contenedor declarativo sobre el cual JavaScript renderiza los datos dinámicos provenientes de la API REST.
+- Garantizar accesibilidad y optimización de carga en el navegador.
 
-### 7.2. Páginas principales (`.jsp`)
+### 7.2. Páginas Principales (`.html`)
 
-| Archivo JSP | Responsabilidad |
+| Archivo HTML | Responsabilidad |
 |---|---|
-| `index.jsp` | Página de inicio: identidad del proyecto, acceso al flujo de consulta. |
-| `municipios.jsp` | Presentación del catálogo de municipios disponibles. |
-| `categorias.jsp` | Presentación de las categorías temáticas de servicios. |
-| `servicios.jsp` | Listado de servicios con soporte de filtros por municipio y categoría. |
-| `servicio-detalle.jsp` | Ficha técnica completa de un servicio seleccionado. |
-
-### 7.3. Fragmentos reutilizables (`.jspf`)
-
-Los fragmentos JSP permiten definir una sola vez los elementos comunes de la interfaz y reutilizarlos en todas las páginas, evitando duplicación de código HTML.
-
-| Fragmento | Contenido |
-|---|---|
-| `header.jspf` | Encabezado general de la aplicación (logo, nombre del proyecto). |
-| `navbar.jspf` | Barra de navegación principal con los accesos del flujo de consulta. |
-| `footer.jspf` | Pie de página con información institucional. |
-
-### 7.4. Buenas prácticas para JSP
-
-- No colocar lógica de negocio compleja dentro de archivos JSP.
-- Utilizar fragmentos `.jspf` para evitar duplicar estructuras HTML.
-- Validar los parámetros recibidos antes de utilizarlos en las vistas.
-- No exponer información sensible en los fragmentos de presentación.
-- Evitar insertar contenido no confiable directamente en el HTML de la vista.
-- Mantener separación estricta entre presentación (JSP) y comportamiento (JavaScript).
+| `index.html` | Página de inicio: presentación institucional y acceso directo al flujo de consulta. |
+| `municipios.html` | Presentación del catálogo de municipios rurales de Antioquia. |
+| `categorias.html` | Presentación de las categorías temáticas (Salud, Educación, Transporte, etc.). |
+| `servicios.html` | Listado dinámico de servicios con barra de filtrado por municipio y categoría. |
+| `servicio-detalle.html` | Ficha técnica detallada con ubicación, horarios, requisitos y contactos. |
 
 ---
 
@@ -251,7 +215,7 @@ Los fragmentos JSP permiten definir una sola vez los elementos comunes de la int
 
 ### 8.1. Responsabilidad
 
-HTML5 es la base estructural de todas las vistas JSP. Define la semántica y jerarquía del contenido de cada página.
+HTML5 es la base estructural del cliente web. Define la semántica y la jerarquía de contenidos en cada página.
 
 ### 8.2. Elementos semánticos a utilizar
 
@@ -398,27 +362,17 @@ flowchart TD
 
 ## 11. Componentes Reutilizables
 
-Los fragmentos JSPF y los módulos JavaScript permiten organizar elementos de interfaz que se utilizarán en diferentes páginas.
+Los módulos JavaScript y las clases CSS3 estructuradas permiten organizar elementos de interfaz que se utilizarán en diferentes páginas.
 
-### 11.1. Fragmentos JSP reutilizables
+### 11.1. Recursos visuales y módulos
 
 ```text
-fragments/
-├── header.jspf   — Encabezado general de la aplicación
-├── navbar.jspf   — Barra de navegación principal
-└── footer.jspf   — Pie de página con información institucional
+assets/
+├── images/   — Imágenes estáticas e ilustraciones
+└── icons/    — Iconos de categorías, navegación y acciones
 ```
 
-La inclusión de fragmentos en las vistas se realizará mediante la directiva JSP estándar:
-
-```jsp
-<%@ include file="fragments/header.jspf" %>
-<%@ include file="fragments/navbar.jspf" %>
-
-<!-- contenido principal -->
-
-<%@ include file="fragments/footer.jspf" %>
-```
+Los recursos deberán mantenerse optimizados para reducir el peso de transferencia.
 
 ### 11.2. Recursos visuales
 
@@ -497,7 +451,7 @@ stateDiagram-v2
 | Estado | Descripción | Responsable |
 |---|---|---|
 | **Carga** | Indicación visual mientras se obtiene información de la API. | JavaScript + CSS3 |
-| **Exitoso** | Los datos se presentan de manera estructurada en la vista. | JSP + JavaScript |
+| **Exitoso** | Los datos se presentan de manera estructurada en la vista HTML5. | HTML5 + JavaScript |
 | **Sin resultados** | Mensaje claro indicando que no existen resultados para los filtros seleccionados. | JavaScript |
 | **Error** | Mensaje comprensible para el usuario sin exponer información técnica sensible. | JavaScript |
 
@@ -568,8 +522,7 @@ La interfaz seguirá buenas prácticas básicas de accesibilidad:
 - Mantener la comunicación mediante HTTPS en producción.
 - Respetar las políticas CORS configuradas en el Backend.
 - No realizar conexiones directas con la base de datos.
-- No exponer información sensible en mensajes de error.
-- En JSP: no colocar lógica de negocio compleja directamente en las vistas; validar parámetros recibidos.
+- En el frontend: no colocar lógica de negocio en la capa de presentación; validar parámetros de consulta en el cliente.
 
 ---
 
@@ -579,8 +532,8 @@ Debido al contexto de comunidades rurales y posibles limitaciones de conectivida
 
 - CSS3 ligero y bien organizado, sin dependencias externas.
 - JavaScript Vanilla sin frameworks pesados.
-- JSP con estructuras simples y bien definidas.
-- Imágenes optimizadas.
+- Estructura HTML5 limpia y semántica.
+- Imágenes e iconos optimizados.
 - Pocas dependencias.
 - Solicitudes HTTP estrictamente necesarias.
 - Respuestas JSON compactas desde el Backend.
@@ -598,7 +551,7 @@ Debido al contexto de comunidades rurales y posibles limitaciones de conectivida
 
 | Capa | Tecnología | Responsabilidad |
 |---|---|---|
-| Presentación | JSP + HTML5 | Estructura y visualización de vistas |
+| Presentación | HTML5 | Estructura y visualización de vistas semánticas |
 | Estilos | CSS3 | Apariencia visual y diseño responsive |
 | Comportamiento | JavaScript Vanilla | Interacción, DOM, consumo de API |
 | Lógica de negocio | FastAPI + SQLAlchemy | Validación, procesamiento, API REST |
@@ -606,11 +559,11 @@ Debido al contexto de comunidades rurales y posibles limitaciones de conectivida
 
 ### 19.2. Reutilización
 
-Se evitará duplicar código y elementos de interfaz cuando puedan ser reutilizados (fragmentos JSPF, módulos JS).
+Se evitará duplicar código y elementos de interfaz cuando puedan ser reutilizados (módulos JS, clases CSS3).
 
 ### 19.3. Código legible
 
-Se utilizarán nombres descriptivos para archivos, variables, funciones, clases CSS y elementos JSP.
+Se utilizarán nombres descriptivos para archivos, variables, funciones, clases CSS y estructuras HTML.
 
 ### 19.4. Modularidad
 
@@ -625,7 +578,7 @@ No se incorporarán frameworks o librerías adicionales sin una justificación t
 Cada cambio significativo se registrará mediante commits semánticos descriptivos.
 
 ```
-feat: create JSP frontend structure
+feat: create HTML5 frontend structure
 feat: add service listing view
 fix: correct service filtering
 docs: update frontend architecture
@@ -646,10 +599,9 @@ El Frontend y Backend mantendrán responsabilidades independientes:
 %%{init: {'themeVariables': {'textColor':'#111827','primaryTextColor':'#111827','primaryColor':'#eef2f7','primaryBorderColor':'#1f2937','lineColor':'#1f2937','secondaryColor':'#eef2f7','tertiaryColor':'#f3f4f6','edgeLabelBackground':'#ffffff'}}}%%
 flowchart TD
     subgraph FE["FRONTEND"]
-        F1["JSP — Vistas"]
-        F2["HTML5 — Estructura"]
-        F3["CSS3 — Estilos"]
-        F4["JavaScript Vanilla — Comportamiento"]
+        F1["HTML5 — Páginas"]
+        F2["CSS3 — Estilos"]
+        F3["JavaScript Vanilla — Comportamiento"]
     end
 
     FE -->|"HTTP / JSON"| BE
@@ -675,12 +627,12 @@ Esta separación permitirá desarrollar y probar cada componente de forma indepe
 
 | Requisito | Componente Frontend relacionado |
 |---|---|
-| RF-01 — Consultar municipios | `municipios.jsp` + `municipios.js` |
-| RF-02 — Consultar categorías | `categorias.jsp` + `categorias.js` |
-| RF-03 — Consultar servicios | `servicios.jsp` + `servicios.js` |
-| RF-04 — Filtrar por municipio | `servicios.jsp` + `servicios.js` (filtros en `styles.css`) |
-| RF-05 — Filtrar por categoría | `servicios.jsp` + `servicios.js` (filtros en `styles.css`) |
-| RF-06 — Visualizar detalle | `servicio-detalle.jsp` + `servicio-detalle.js` |
+| RF-01 — Consultar municipios | `municipios.html` + `municipios.js` |
+| RF-02 — Consultar categorías | `categorias.html` + `categorias.js` |
+| RF-03 — Consultar servicios | `servicios.html` + `servicios.js` |
+| RF-04 — Filtrar por municipio | `servicios.html` + `servicios.js` (filtros en `styles.css`) |
+| RF-05 — Filtrar por categoría | `servicios.html` + `servicios.js` (filtros en `styles.css`) |
+| RF-06 — Visualizar detalle | `servicio-detalle.html` + `servicio-detalle.js` |
 | RF-07 — Consumo JSON | `api.js` (centraliza peticiones HTTP) |
 
 ---
@@ -689,9 +641,8 @@ Esta separación permitirá desarrollar y probar cada componente de forma indepe
 
 ### Incluido
 
-- Estructura de directorios JSP propuesta.
-- Definición de vistas JSP.
-- Definición de fragmentos JSPF reutilizables.
+- Estructura de directorios HTML5/CSS3/JS propuesta.
+- Definición de páginas HTML5.
 - Definición de módulos JavaScript.
 - Organización de estilos CSS3.
 - Organización de recursos visuales.
@@ -720,9 +671,8 @@ Esta separación permitirá desarrollar y probar cada componente de forma indepe
 |---|---|
 | Definición de tecnologías | Completado |
 | Definición de arquitectura | Completado |
-| Organización de directorios JSP | Definido |
-| Definición de vistas JSP | Definido |
-| Definición de fragmentos JSPF | Definido |
+| Organización de directorios HTML5/CSS3/JS | Definido |
+| Definición de páginas HTML5 | Definido |
 | Definición de módulos JavaScript | Definido |
 | Flujo de navegación | Definido |
 | Integración conceptual con API | Definido |
@@ -741,9 +691,9 @@ Una vez aprobada y registrada la estructura del Frontend, el desarrollo continua
 ```mermaid
 %%{init: {'themeVariables': {'textColor':'#111827','primaryTextColor':'#111827','primaryColor':'#eef2f7','primaryBorderColor':'#1f2937','lineColor':'#1f2937','secondaryColor':'#eef2f7','tertiaryColor':'#f3f4f6','edgeLabelBackground':'#ffffff'}}}%%
 flowchart TD
-    S1["1. Estructura del Frontend JSP"] --> S2["2. Desarrollo del Backend FastAPI"]
+    S1["1. Estructura del Frontend HTML5/CSS3/JS"] --> S2["2. Desarrollo del Backend FastAPI"]
     S2 --> S3["3. Implementación de la API REST"]
-    S3 --> S4["4. Desarrollo de las vistas JSP"]
+    S3 --> S4["4. Desarrollo de las páginas HTML5"]
     S4 --> S5["5. Integración Frontend ↔ API REST"]
     S5 --> S6["6. Pruebas funcionales y de usabilidad"]
     S6 --> S7["7. Pruebas de rendimiento y seguridad"]
@@ -759,4 +709,6 @@ La estructura podrá ajustarse durante el desarrollo cuando exista una justifica
 | Versión | Fecha | Descripción | Responsable |
 |---|---|---|---|
 | 1.0 | 2026-08-18 | Creación de la estructura técnica inicial del Frontend con HTML5 + Tailwind CSS + JavaScript Vanilla. | Equipo RuralConecta |
-| 2.0 | 2026-08-19 | Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla. Eliminación de Tailwind CSS. Incorporación de fragmentos JSPF. Actualización de estructura de directorios, diagramas, secciones de tecnologías, estilos, responsive y buenas prácticas. | Equipo RuralConecta |
+| 2.0 | 2026-08-19 | Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla. Eliminación de Tailwind CSS. | Equipo RuralConecta |
+| 3.0 | 2026-08-19 | Migración de backend a FastAPI, Pydantic y SQLAlchemy sobre PostgreSQL. | Equipo RuralConecta |
+| 4.0 | 2026-08-19 | Eliminación de JavaServer Pages (JSP) y simplificación del Frontend a HTML5 semántico, CSS3 y JavaScript Vanilla desacoplado. | Equipo RuralConecta |
