@@ -2,13 +2,15 @@
 
 ## Badges
 
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![JSP](https://img.shields.io/badge/JSP-007396?style=for-the-badge&logo=oracle&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
 ![Django REST Framework](https://img.shields.io/badge/Django_REST_Framework-ff1709?style=for-the-badge&logo=django&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
@@ -26,15 +28,73 @@ En las zonas rurales del departamento de Antioquia, la información sobre servic
 
 ---
 
-## Solución propuesta
+## Objetivo
 
-Desarrollar una plataforma web accesible, ligera y de navegación intuitiva que permita a los ciudadanos consultar de forma rápida los servicios disponibles en su municipio, filtrados por categorías temáticas, proporcionando detalles prácticos como ubicación, horarios de atención, requisitos previos y canales de contacto directo.
+Centralizar y facilitar el acceso a la información de servicios y trámites municipales esenciales para las comunidades rurales de Antioquia mediante una aplicación web ágil, responsiva y fundamentada en una arquitectura API REST desacoplada.
 
 ---
 
-## Objetivo general
+## Tecnologías
 
-Centralizar y facilitar el acceso a la información de servicios y trámites municipales esenciales para las comunidades rurales de Antioquia mediante una aplicación web ágil, responsiva y fundamentada en una arquitectura API REST desacoplada.
+### Frontend
+- **JSP (JavaServer Pages)** — Tecnología principal para la construcción de vistas dinámicas.
+- **HTML5** — Estructura semántica de las páginas.
+- **CSS3** — Estilos visuales, Responsive Design (Flexbox, Grid, variables CSS, media queries).
+- **JavaScript Vanilla** — Interacción del usuario, manipulación del DOM y consumo de la API REST.
+
+### Backend
+- **Python** — Lenguaje de programación base.
+- **Django** — Framework web principal (estructura, enrutamiento, seguridad, panel administrativo).
+- **Django REST Framework (DRF)** — Construcción de la API REST (endpoints, serializadores, validación).
+- **Django ORM** — Acceso seguro y parametrizado a la base de datos.
+
+### Base de Datos
+- **PostgreSQL** — Motor de base de datos relacional principal.
+
+### Control de Versiones
+- **Git + GitHub** — Control de versiones y colaboración.
+
+---
+
+## Arquitectura
+
+El sistema adopta una arquitectura **Full Stack desacoplada basada en API REST**:
+
+```text
+                    RURALCONECTA
+                         │
+                         ▼
+              ┌─────────────────────┐
+              │      FRONTEND       │
+              │                     │
+              │ JSP + HTML5         │
+              │ CSS3 + JavaScript   │
+              └──────────┬──────────┘
+                         │
+                      HTTP/JSON
+                         │
+                         ▼
+              ┌─────────────────────┐
+              │      BACKEND        │
+              │                     │
+              │ Python + Django     │
+              │ Django REST Frm.    │
+              │ API REST            │
+              └──────────┬──────────┘
+                         │
+                         ▼
+              ┌─────────────────────┐
+              │     PostgreSQL      │
+              └─────────────────────┘
+```
+
+Git y GitHub se mantienen como herramientas de control de versiones y colaboración.
+
+---
+
+## Solución propuesta
+
+Desarrollar una plataforma web accesible, ligera y de navegación intuitiva que permita a los ciudadanos consultar de forma rápida los servicios disponibles en su municipio, filtrados por categorías temáticas, proporcionando detalles prácticos como ubicación, horarios de atención, requisitos previos y canales de contacto directo.
 
 ---
 
@@ -66,57 +126,53 @@ Centralizar y facilitar el acceso a la información de servicios y trámites mun
 
 ---
 
-## Arquitectura tecnológica
-
-El sistema adopta una arquitectura **Full Stack desacoplada basada en API REST**:
+## Estructura del proyecto
 
 ```text
-+-----------------------+           JSON / HTTP REST           +------------------------------+
-|       Frontend        | <==================================> |           Backend            |
-| (HTML5 + Tailwind CSS |                                      |  (Python + Django + DRF)     |
-|     + JavaScript)     |                                      +------------------------------+
-+-----------------------+                                                      |
-                                                                               | ORM
-                                                                               v
-                                                               +------------------------------+
-                                                               |        Base de Datos         |
-                                                               |         (PostgreSQL)         |
-                                                               +------------------------------+
+RuralConecta-ProyectoWeb/
+│
+├── README.md
+├── .gitignore
+│
+├── docs/
+│   ├── arquitectura/
+│   │   ├── especificacion-tecnica.md
+│   │   ├── estructura-backend.md
+│   │   └── estructura-frontend.md
+│   ├── base-datos/
+│   │   └── modelo-datos.md
+│   └── api/
+│       └── especificacion-api.md
+│
+├── backend/
+│   (Pendiente de implementación — Django + DRF)
+│
+└── frontend/
+    (Pendiente de implementación — JSP + HTML5 + CSS3 + JavaScript)
 ```
 
 ---
 
-## Stack tecnológico
-
-- **Frontend**: HTML5, Tailwind CSS, JavaScript.
-- **Backend**: Python, Django, Django REST Framework.
-- **Base de datos**: PostgreSQL.
-- **Control de versiones**: Git, GitHub.
-- **Desarrollo**: Antigravity como asistente de desarrollo.
-- **Despliegue**: Infraestructura en la nube (definida posteriormente).
-
----
-
-## Flujo general del sistema
+## Flujo del sistema
 
 ```text
 Usuario
    ↓
-Selecciona municipio
+Selecciona municipio (vista JSP)
    ↓
-Selecciona categoría
+Selecciona categoría (vista JSP)
    ↓
-Consulta servicios
+Consulta servicios (vista JSP)
    ↓
-Frontend consume API REST
+Frontend consume API REST (JavaScript Fetch)
    ↓
-Backend procesa la solicitud
+Backend Django procesa la solicitud
    ↓
 PostgreSQL proporciona los datos
    ↓
-API devuelve información
+API devuelve información JSON
    ↓
-Frontend muestra los resultados
+Frontend muestra los resultados (JSP + JavaScript)
 ```
 
 ---
@@ -143,7 +199,7 @@ Para mantener la consistencia, trazabilidad y rigor técnico en el seguimiento d
 
 ---
 
-## 📊 Estado del proyecto
+## 📊 Tareas y Logros
 
 Este apartado permite realizar un seguimiento estructurado e interactivo del ciclo de vida y desarrollo de **RuralConecta-ProyectoWeb**, dividido por fases y áreas de trabajo:
 
@@ -171,7 +227,9 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - ✅ Definir estructura del backend
 - ✅ Definir estructura del frontend
 - ✅ Documentar endpoints de la API
-- [ ] Revisar arquitectura antes de programar
+- [ ] Adaptar arquitectura a JSP + HTML5 + CSS3
+- [ ] Actualizar documentación tecnológica completa
+- [ ] Validar arquitectura completa antes de programar
 
 ### 🟡 Fase 2 — Desarrollo Backend
 
@@ -188,14 +246,15 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 
 ### 🟣 Fase 3 — Desarrollo Frontend
 
-- [ ] Crear estructura HTML
-- [ ] Configurar Tailwind CSS
-- [ ] Implementar interfaz responsive
-- [ ] Implementar selección de municipio
-- [ ] Implementar selección de categoría
-- [ ] Implementar listado de servicios
+- [ ] Crear estructura JSP (WEB-INF/views/)
+- [ ] Configurar CSS3 (styles.css con variables, Flexbox, Grid)
+- [ ] Implementar fragmentos JSPF (header, navbar, footer)
+- [ ] Implementar interfaz responsive (media queries CSS3)
+- [ ] Implementar vista de selección de municipio
+- [ ] Implementar vista de selección de categoría
+- [ ] Implementar vista de listado de servicios
 - [ ] Implementar ficha detallada del servicio
-- [ ] Integrar frontend con API REST
+- [ ] Integrar frontend con API REST (JavaScript Fetch)
 - [ ] Manejar estados de carga y errores
 
 ### 🟠 Fase 4 — Integración y pruebas
@@ -212,10 +271,10 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 ### ☁️ Fase 5 — Despliegue
 
 - [ ] Preparar variables de entorno
-- [ ] Configurar producción
+- [ ] Configurar producción Django
 - [ ] Configurar PostgreSQL en la nube
-- [ ] Desplegar backend
-- [ ] Desplegar frontend
+- [ ] Desplegar backend Django
+- [ ] Configurar servidor para Frontend JSP (Tomcat o equivalente)
 - [ ] Configurar CORS
 - [ ] Verificar funcionamiento en producción
 - [ ] Documentar proceso de despliegue
@@ -223,7 +282,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 ### 📚 Documentación y presentación
 
 - [ ] Completar documentación técnica
-- [ ] Actualizar README
+- ✅ Actualizar README
 - [ ] Agregar diagrama de arquitectura
 - [ ] Agregar diagrama entidad-relación
 - ✅ Documentar API
@@ -269,60 +328,46 @@ Registrar el avance de acuerdo con el cronograma definido para el taller.
 
 ---
 
-## Estructura del proyecto
+## Requisitos
 
-```text
-RuralConecta-Proyecto/
-│
-├── README.md
-├── .gitignore
-│
-├── docs/
-│   ├── arquitectura/
-│   ├── base-datos/
-│   └── api/
-│
-├── backend/
-│
-└── frontend/
-```
+### Backend
+- Python 3.10+
+- Django 4.x+
+- Django REST Framework
+- PostgreSQL 14+
+- Entorno virtual Python (`venv`)
 
----
+### Frontend
+- Servidor de aplicaciones compatible con JSP (Apache Tomcat u otro servidor Java EE)
+- Navegador web moderno (Chrome, Firefox, Edge)
 
-## Instalación
+### Herramientas
+- Git
+- GitHub
 
-Pendiente de implementación.
+> *La configuración de entornos se documentará al preparar el entorno de desarrollo en la Fase 1.*
 
 ---
 
-## Uso
+## Instalación / Configuración
 
-Pendiente de implementación.
-
----
-
-## API REST
-
-Pendiente de implementación.
-
----
-
-## Base de datos
-
-Pendiente de implementación.
+Pendiente de implementación. Se documentará en la Fase 1 (preparación del entorno de desarrollo).
 
 ---
 
 ## 🔐 Seguridad
 
 Durante el desarrollo del proyecto se contemplarán e implementarán las siguientes medidas de seguridad:
-- Protección contra inyección SQL mediante el uso exclusivo del ORM de Django.
-- Validación y sanitización rigurosa de datos en los serializadores y capas de entrada.
-- Prevención de vulnerabilidades de tipo Cross-Site Scripting (XSS).
+
+- Protección contra inyección SQL mediante el uso exclusivo del ORM de Django (consultas parametrizadas).
+- Validación y sanitización rigurosa de datos en los serializadores de Django REST Framework.
+- Prevención de vulnerabilidades Cross-Site Scripting (XSS): en JSP, evitar insertar contenido no confiable directamente; en JavaScript, usar `textContent` en lugar de `innerHTML` sobre datos no confiables.
 - Configuración estricta de Cross-Origin Resource Sharing (CORS) entre frontend y backend.
 - Uso de variables de entorno para la gestión segura de parámetros de configuración y claves sensibles.
-- Protección y no almacenamiento de credenciales en el repositorio de control de versiones.
+- No almacenar credenciales en el repositorio de control de versiones.
 - Configuración segura para el entorno de producción (`DEBUG=False`, encabezados de seguridad HTTP).
+- Separación estricta entre presentación (JSP/CSS3/JavaScript) y lógica de negocio (Django/DRF).
+- No exponer información sensible en mensajes de error visibles al usuario.
 - Autenticación mediante JWT únicamente si las funcionalidades finales requieren autenticación.
 
 ---
@@ -348,9 +393,15 @@ La documentación técnica del proyecto se organiza dentro del directorio `docs/
 
 ---
 
-## Presentación
+## Buenas Prácticas
 
-Pendiente de implementación.
+- Separación de responsabilidades: JSP (presentación) / CSS3 (estilos) / JavaScript (comportamiento) / Django/DRF (lógica y API) / PostgreSQL (persistencia).
+- Modularidad y reutilización de fragmentos JSP (`.jspf`).
+- Código limpio y nombres descriptivos.
+- No duplicar lógica entre módulos.
+- Commits semánticos y descriptivos.
+- No almacenar secretos en Git.
+- Documentación actualizada antes de avanzar de fase.
 
 ---
 
@@ -360,4 +411,3 @@ Pendiente de implementación.
 |---|---|---|
 | Samuel Arboleda Echeverri | Desarrollador Full Stack | Fundación Universitaria Católica del Norte |
 | Josue Agudelo Gallego | Desarrollador Full Stack | Fundación Universitaria Católica del Norte |
-

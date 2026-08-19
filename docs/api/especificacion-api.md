@@ -23,7 +23,7 @@ La API actúa como el punto de convergencia que resuelve la dispersión de infor
 
 1. **Abstraer la complejidad del almacenamiento**: Oculta la estructura interna de las tablas y consultas de la base de datos relacional (**PostgreSQL**), exponiendo únicamente recursos limpios y normalizados.
 2. **Habilitar el consumo asíncrono y ligero**: Provee datos en formato **JSON** con cargas útiles (*payloads*) optimizadas para conexiones móviles intermitentes o de baja velocidad en zonas rurales.
-3. **Garantizar la interoperabilidad**: Permite que cualquier cliente autorizado (inicialmente el frontend web basado en HTML5/Tailwind CSS/JavaScript y potencialmente futuras aplicaciones móviles o quioscos comunitarios) consuma la misma fuente de verdad sin duplicar lógica de negocio.
+3. **Garantizar la interoperabilidad**: Permite que cualquier cliente autorizado (inicialmente el frontend web basado en JSP/HTML5/CSS3/JavaScript Vanilla y potencialmente futuras aplicaciones móviles o quioscos comunitarios) consuma la misma fuente de verdad sin duplicar lógica de negocio.
 
 ---
 

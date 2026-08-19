@@ -1,5 +1,9 @@
 # Estructura del Frontend — RuralConecta-Proyecto
 
+> **Versión 2.0** — Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla. Eliminación de Tailwind CSS. Mantenimiento de Django, DRF y PostgreSQL como componentes del backend y persistencia.
+
+---
+
 ## 1. Identificación del Documento
 
 | Campo | Detalle |
@@ -7,7 +11,7 @@
 | **Proyecto** | RuralConecta-Proyecto |
 | **Componente** | Frontend |
 | **Tipo de aplicación** | Aplicación web Full Stack — MVP |
-| **Tecnologías principales** | HTML5 + Tailwind CSS + JavaScript Vanilla |
+| **Tecnologías principales** | JSP + HTML5 + CSS3 + JavaScript Vanilla |
 | **Arquitectura** | Frontend desacoplado mediante API REST |
 | **Ubicación** | `frontend/` |
 | **Documento relacionado** | `docs/arquitectura/especificacion-tecnica.md` |
@@ -58,23 +62,29 @@ Diseñar y estructurar una interfaz web responsiva que permita a los usuarios co
 
 ## 4. Tecnologías Seleccionadas
 
-| Tecnología | Uso dentro del Frontend |
+| Tecnología | Rol en el Frontend |
 |---|---|
-| HTML5 | Estructuración semántica de las páginas y contenido. |
-| Tailwind CSS | Diseño visual, estilos utilitarios y Responsive Design. |
-| JavaScript Vanilla | Lógica de interacción, manipulación del DOM y consumo de la API REST. |
-| Fetch API | Comunicación HTTP con el Backend. |
-| JSON | Formato de intercambio de información entre Frontend y Backend. |
-| Git | Control de versiones. |
-| GitHub | Almacenamiento y colaboración sobre el código fuente. |
+| **JSP (JavaServer Pages)** | Tecnología principal para la construcción de vistas dinámicas. Permite presentar información, reutilizar fragmentos (`.jspf`) y separar la presentación de la lógica. |
+| **HTML5** | Estructuración semántica de las páginas y contenido (header, nav, main, section, article, footer, form). |
+| **CSS3** | Diseño visual, Responsive Design y estilos de la interfaz. Tecnología oficial de estilos. Incluye: Flexbox, Grid, variables CSS, media queries, transiciones. |
+| **JavaScript Vanilla** | Lógica de interacción, manipulación del DOM, filtros, validaciones del lado cliente y consumo de la API REST. |
+| **Fetch API** | Comunicación HTTP asíncrona con el Backend. |
+| **JSON** | Formato de intercambio de información entre Frontend y Backend. |
+| **Fragmentos JSPF** | Componentes de presentación reutilizables (header, navbar, footer). Extensión `.jspf`. |
+| **Git** | Control de versiones. |
+| **GitHub** | Almacenamiento y colaboración sobre el código fuente. |
 
-### Justificación tecnológica
+### 4.1. Justificación tecnológica
 
-Se utilizará HTML5, Tailwind CSS y JavaScript Vanilla debido a que estas tecnologías permiten construir un MVP ligero sin introducir la complejidad adicional de frameworks frontend como React, Vue o Angular.
+Se utilizará JSP, HTML5, CSS3 y JavaScript Vanilla porque estas tecnologías permiten construir un MVP ligero sin introducir la complejidad adicional de frameworks frontend como React, Vue o Angular.
 
-La selección busca facilitar el aprendizaje, reducir dependencias innecesarias y mantener una estructura comprensible para el equipo de desarrollo.
+- **JSP** permite generar vistas dinámicas en el servidor, reutilizar fragmentos de presentación y mantener una separación clara entre estructura y lógica.
+- **HTML5** proporciona la base semántica de todas las páginas, mejorando accesibilidad y SEO.
+- **CSS3** permite implementar una interfaz responsiva y organizada mediante Flexbox, Grid, variables CSS y media queries, sin depender de frameworks externos.
+- **JavaScript Vanilla** permite controlar la interacción, manipular el DOM y realizar solicitudes HTTP hacia la API REST sin agregar dependencias innecesarias.
 
-Tailwind CSS permitirá implementar una interfaz responsiva mediante clases utilitarias, mientras que JavaScript Vanilla permitirá controlar la interacción de la aplicación y realizar las solicitudes hacia la API REST.
+> **Tecnologías eliminadas del Frontend:** Tailwind CSS no forma parte de la arquitectura del Frontend.
+> No se utilizarán frameworks frontend (React, Vue, Angular).
 
 ---
 
@@ -88,10 +98,12 @@ flowchart TD
     U["USUARIO"]
     U --> F
 
-    subgraph F["FRONTEND WEB — HTML5 + Tailwind CSS + JavaScript"]
-        UI["Interfaz UI"]
-        JS["Lógica JavaScript"]
+    subgraph F["FRONTEND — JSP + HTML5 + CSS3 + JavaScript"]
+        UI["Vistas JSP"]
+        CSS["CSS3 (Estilos)"]
+        JS["JavaScript Vanilla"]
         UI --> JS
+        UI --> CSS
     end
 
     F -->|"HTTP / JSON"| API
@@ -114,60 +126,70 @@ El Frontend únicamente será responsable de la presentación, interacción y co
 
 ## 6. Estructura de Directorios
 
-La estructura inicial propuesta para el Frontend es:
+La estructura propuesta para el Frontend, adaptada al uso de JSP, es:
 
 ```text
 frontend/
-│
-├── index.html
-│
-├── pages/
-│   ├── municipios.html
-│   ├── categorias.html
-│   ├── servicios.html
-│   └── servicio-detalle.html
-│
-├── css/
-│   └── styles.css
-│
-├── js/
-│   ├── main.js
-│   ├── api.js
-│   ├── municipios.js
-│   ├── categorias.js
-│   ├── servicios.js
-│   └── servicio-detalle.js
-│
-├── components/
-│   ├── header.html
-│   ├── footer.html
-│   ├── navbar.html
-│   ├── service-card.html
-│   └── filters.html
-│
-└── assets/
-    ├── images/
-    └── icons/
+└── src/
+    └── main/
+        └── webapp/
+            ├── WEB-INF/
+            │   └── views/
+            │       ├── index.jsp
+            │       ├── municipios.jsp
+            │       ├── categorias.jsp
+            │       ├── servicios.jsp
+            │       ├── servicio-detalle.jsp
+            │       └── fragments/
+            │           ├── header.jspf
+            │           ├── navbar.jspf
+            │           └── footer.jspf
+            │
+            ├── css/
+            │   └── styles.css
+            │
+            ├── js/
+            │   ├── main.js
+            │   ├── api.js
+            │   ├── municipios.js
+            │   ├── categorias.js
+            │   ├── servicios.js
+            │   └── servicio-detalle.js
+            │
+            └── assets/
+                ├── images/
+                └── icons/
 ```
 
-Esta organización separa las responsabilidades del Frontend en páginas, estilos, lógica JavaScript, componentes reutilizables y recursos visuales.
+> **Nota:** Esta estructura es la propuesta arquitectónica. Si durante la implementación se adopta una organización diferente pero funcionalmente equivalente, la estructura real deberá documentarse en ese momento.
+
+Esta organización separa las responsabilidades del Frontend en:
+
+- **Vistas JSP** (`WEB-INF/views/`) — Páginas de la aplicación y fragmentos reutilizables.
+- **Estilos CSS3** (`css/`) — Hoja de estilos principal.
+- **Lógica JavaScript** (`js/`) — Módulos de interacción y comunicación con la API.
+- **Recursos visuales** (`assets/`) — Imágenes e iconos.
 
 ```mermaid
 %%{init: {'themeVariables': {'textColor':'#111827','primaryTextColor':'#111827','primaryColor':'#eef2f7','primaryBorderColor':'#1f2937','lineColor':'#1f2937','secondaryColor':'#eef2f7','tertiaryColor':'#f3f4f6','edgeLabelBackground':'#ffffff'}}}%%
 flowchart LR
-    R["frontend/"] --> IDX["index.html"]
-    R --> P["pages/"]
-    R --> C["css/"]
+    R["frontend/src/main/webapp/"] --> WEB["WEB-INF/views/"]
+    R --> CSS["css/"]
     R --> J["js/"]
-    R --> COMP["components/"]
     R --> A["assets/"]
 
-    P --> P1["municipios.html"]
-    P --> P2["categorias.html"]
-    P --> P3["servicios.html"]
-    P --> P4["servicio-detalle.html"]
+    WEB --> V1["index.jsp"]
+    WEB --> V2["municipios.jsp"]
+    WEB --> V3["categorias.jsp"]
+    WEB --> V4["servicios.jsp"]
+    WEB --> V5["servicio-detalle.jsp"]
+    WEB --> FR["fragments/"]
 
-    C --> C1["styles.css"]
+    FR --> F1["header.jspf"]
+    FR --> F2["navbar.jspf"]
+    FR --> F3["footer.jspf"]
+
+    CSS --> C1["styles.css"]
 
     J --> J1["main.js"]
     J --> J2["api.js"]
@@ -176,121 +198,173 @@ flowchart LR
     J --> J5["servicios.js"]
     J --> J6["servicio-detalle.js"]
 
-    COMP --> M1["header.html"]
-    COMP --> M2["footer.html"]
-    COMP --> M3["navbar.html"]
-    COMP --> M4["service-card.html"]
-    COMP --> M5["filters.html"]
-
     A --> A1["images/"]
     A --> A2["icons/"]
 ```
 
 ---
 
-## 7. Punto de Entrada — `index.html`
+## 7. JSP — JavaServer Pages
 
-El archivo `index.html` será el punto de entrada principal del Frontend.
+### 7.1. Responsabilidad de JSP en la arquitectura
 
-Su función será presentar inicialmente la plataforma RuralConecta y proporcionar acceso al flujo principal de consulta.
+JSP es la tecnología principal de presentación del Frontend. Sus responsabilidades son:
 
-La página podrá contener posteriormente:
+- Construcción de las vistas de la aplicación.
+- Presentación de información dinámica recibida de la API REST.
+- Reutilización de fragmentos de interfaz mediante archivos `.jspf`.
+- Integración de datos con la capa de presentación.
+- Separación de la estructura de presentación respecto a la lógica de negocio.
 
-- Identidad visual del proyecto.
-- Encabezado y navegación.
-- Presentación breve de RuralConecta.
-- Selector o acceso a municipios.
-- Acceso a las categorías de servicios.
-- Elementos informativos relevantes.
-- Pie de página.
+### 7.2. Páginas principales (`.jsp`)
 
-La implementación visual definitiva será realizada durante la etapa correspondiente al desarrollo del Frontend.
+| Archivo JSP | Responsabilidad |
+|---|---|
+| `index.jsp` | Página de inicio: identidad del proyecto, acceso al flujo de consulta. |
+| `municipios.jsp` | Presentación del catálogo de municipios disponibles. |
+| `categorias.jsp` | Presentación de las categorías temáticas de servicios. |
+| `servicios.jsp` | Listado de servicios con soporte de filtros por municipio y categoría. |
+| `servicio-detalle.jsp` | Ficha técnica completa de un servicio seleccionado. |
 
----
+### 7.3. Fragmentos reutilizables (`.jspf`)
 
-## 8. Páginas del Sistema
+Los fragmentos JSP permiten definir una sola vez los elementos comunes de la interfaz y reutilizarlos en todas las páginas, evitando duplicación de código HTML.
 
-La carpeta `pages/` contendrá las páginas asociadas a los principales procesos de consulta.
+| Fragmento | Contenido |
+|---|---|
+| `header.jspf` | Encabezado general de la aplicación (logo, nombre del proyecto). |
+| `navbar.jspf` | Barra de navegación principal con los accesos del flujo de consulta. |
+| `footer.jspf` | Pie de página con información institucional. |
 
-### 8.1. `municipios.html`
+### 7.4. Buenas prácticas para JSP
 
-Será responsable de presentar los municipios disponibles para consulta.
-
-Posteriormente consumirá:
-
-```
-GET /api/municipios/
-```
-
-Su función será permitir que el usuario seleccione el municipio sobre el cual desea consultar información.
-
-### 8.2. `categorias.html`
-
-Será responsable de presentar las categorías temáticas disponibles.
-
-Las categorías iniciales definidas para el MVP son:
-
-- Salud.
-- Educación.
-- Transporte.
-- Servicios públicos.
-- Apoyos sociales.
-
-Posteriormente consumirá:
-
-```
-GET /api/categorias/
-```
-
-### 8.3. `servicios.html`
-
-Será responsable de presentar el listado de servicios disponibles.
-
-Permitirá posteriormente realizar consultas y filtros utilizando:
-
-```
-GET /api/servicios/
-```
-
-y parámetros de consulta:
-
-```
-/api/servicios/?municipio={id}
-/api/servicios/?categoria={id}
-/api/servicios/?municipio={id}&categoria={id}
-```
-
-### 8.4. `servicio-detalle.html`
-
-Será responsable de mostrar la información completa de un servicio seleccionado.
-
-La información prevista incluye:
-
-- Nombre oficial.
-- Descripción.
-- Municipio.
-- Dirección o ubicación.
-- Horarios.
-- Requisitos.
-- Información de contacto.
-
-Posteriormente consumirá:
-
-```
-GET /api/servicios/{id}/
-```
+- No colocar lógica de negocio compleja dentro de archivos JSP.
+- Utilizar fragmentos `.jspf` para evitar duplicar estructuras HTML.
+- Validar los parámetros recibidos antes de utilizarlos en las vistas.
+- No exponer información sensible en los fragmentos de presentación.
+- Evitar insertar contenido no confiable directamente en el HTML de la vista.
+- Mantener separación estricta entre presentación (JSP) y comportamiento (JavaScript).
 
 ---
 
-## 9. Organización de JavaScript
+## 8. HTML5
 
-La carpeta `js/` contendrá la lógica funcional del Frontend.
+### 8.1. Responsabilidad
+
+HTML5 es la base estructural de todas las vistas JSP. Define la semántica y jerarquía del contenido de cada página.
+
+### 8.2. Elementos semánticos a utilizar
+
+Se priorizará el uso de etiquetas semánticas de HTML5 para mejorar accesibilidad y estructura:
+
+| Elemento | Uso previsto |
+|---|---|
+| `<header>` | Encabezado principal de la aplicación. |
+| `<nav>` | Barra de navegación y menús. |
+| `<main>` | Contenido principal de cada vista. |
+| `<section>` | Secciones temáticas del contenido. |
+| `<article>` | Tarjetas de servicios individuales. |
+| `<footer>` | Pie de página. |
+| `<form>` | Formularios de filtrado. |
+| `<label>` | Etiquetas descriptivas para controles de formulario. |
+| `<button>` | Acciones interactivas. |
+
+### 8.3. Principios
+
+- Una sola etiqueta `<h1>` por página.
+- Jerarquía de encabezados coherente (`h1` → `h2` → `h3`).
+- Uso de atributos `alt` en todas las imágenes.
+- Estructura semántica que facilite la accesibilidad y la lectura por tecnologías asistivas.
+
+---
+
+## 9. CSS3
+
+### 9.1. Responsabilidad
+
+CSS3 es la tecnología oficial de estilos del Frontend. Reemplaza completamente a Tailwind CSS.
+
+La hoja de estilos principal será:
+
+```text
+frontend/.../webapp/css/styles.css
+```
+
+Si el proyecto crece en complejidad, podrá dividirse por responsabilidades (base, layout, componentes, utilities), pero en el MVP se mantendrá un archivo principal.
+
+### 9.2. Técnicas y herramientas CSS3 a utilizar
+
+| Técnica | Propósito |
+|---|---|
+| **Variables CSS** (`--var`) | Definición centralizada de colores, tipografía, espaciados. |
+| **Flexbox** | Distribución de elementos en una dimensión (filas o columnas). |
+| **CSS Grid** | Distribución de layouts en dos dimensiones. |
+| **Media queries** | Adaptación del diseño a diferentes tamaños de pantalla. |
+| **Pseudoclases** | Estados de elementos: `:hover`, `:focus`, `:active`. |
+| **Transiciones ligeras** | Mejoras de experiencia visual cuando sean necesarias. |
+| **Unidades relativas** | `rem`, `em`, `%`, `vw`, `vh` para diseño flexible. |
+
+### 9.3. Principios de organización
+
+- Evitar CSS duplicado.
+- Evitar estilos inline innecesarios.
+- Evitar especificidad excesiva.
+- Mantener nombres de clases descriptivos.
+- Organizar el archivo con comentarios por secciones.
+- Priorizar reutilización de estilos.
+
+### 9.4. Estructura sugerida para styles.css
+
+```css
+/* ===========================
+   VARIABLES Y DISEÑO BASE
+   =========================== */
+
+/* ===========================
+   TIPOGRAFÍA
+   =========================== */
+
+/* ===========================
+   LAYOUT Y GRID
+   =========================== */
+
+/* ===========================
+   COMPONENTES
+   =========================== */
+
+/* ===========================
+   ESTADOS DE INTERFAZ
+   =========================== */
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+```
+
+---
+
+## 10. JavaScript Vanilla
+
+### 10.1. Responsabilidad
+
+JavaScript Vanilla es el lenguaje de comportamiento del Frontend. Se mantendrá sin frameworks adicionales.
+
+Sus responsabilidades serán:
+
+- Interacción del usuario (eventos).
+- Manipulación del DOM.
+- Filtros y validaciones del lado cliente.
+- Estados de interfaz (carga, éxito, error, sin resultados).
+- Solicitudes HTTP hacia la API REST mediante Fetch API.
+- Actualización dinámica del contenido sin recargar la página.
+
+### 10.2. Organización de módulos JavaScript
 
 ```mermaid
 %%{init: {'themeVariables': {'textColor':'#111827','primaryTextColor':'#111827','primaryColor':'#eef2f7','primaryBorderColor':'#1f2937','lineColor':'#1f2937','secondaryColor':'#eef2f7','tertiaryColor':'#f3f4f6','edgeLabelBackground':'#ffffff'}}}%%
 flowchart TD
-    main["main.js<br/>Inicialización general"]
-    api["api.js<br/>Comunicación centralizada con el Backend"]
+    main["main.js — Inicialización general"]
+    api["api.js — Comunicación centralizada con el Backend"]
     mun["municipios.js"]
     cat["categorias.js"]
     serv["servicios.js"]
@@ -306,174 +380,61 @@ flowchart TD
     serv --> api
     det --> api
 
-    api -->|"Fetch API / JSON"| Backend[("API REST — Django")]
+    api -->|"Fetch API / JSON"| Backend[("API REST — Django/DRF")]
 ```
 
-### 9.1. `main.js`
+### 10.3. Descripción de módulos
 
-Contendrá la lógica general de inicialización del Frontend.
-
-Sus responsabilidades podrán incluir:
-
-- Inicialización de la aplicación.
-- Configuración general.
-- Eventos globales.
-- Funciones compartidas.
-
-### 9.2. `api.js`
-
-Será el módulo encargado de centralizar la comunicación con el Backend.
-
-Su objetivo será evitar que cada página implemente directamente sus propias solicitudes HTTP.
-
-Las solicitudes estarán orientadas inicialmente a:
-
-```
-GET /api/municipios/
-GET /api/municipios/{id}/
-GET /api/categorias/
-GET /api/categorias/{id}/
-GET /api/servicios/
-GET /api/servicios/{id}/
-```
-
-La implementación concreta se realizará cuando la API REST esté disponible.
-
-### 9.3. `municipios.js`
-
-Contendrá la lógica relacionada con:
-
-- Carga de municipios.
-- Presentación de municipios.
-- Selección del municipio.
-- Manejo de estados de carga.
-- Manejo de errores.
-
-### 9.4. `categorias.js`
-
-Contendrá la lógica relacionada con:
-
-- Carga de categorías.
-- Presentación de categorías.
-- Selección de categoría.
-- Manejo de estados de carga.
-- Manejo de errores.
-
-### 9.5. `servicios.js`
-
-Contendrá la lógica relacionada con:
-
-- Consulta de servicios.
-- Filtrado por municipio.
-- Filtrado por categoría.
-- Presentación de resultados.
-- Manejo de resultados vacíos.
-- Manejo de errores.
-
-### 9.6. `servicio-detalle.js`
-
-Contendrá la lógica necesaria para:
-
-- Identificar el servicio seleccionado.
-- Solicitar sus datos a la API.
-- Mostrar la información recibida.
-- Manejar errores o servicios inexistentes.
+| Módulo | Responsabilidad |
+|---|---|
+| `main.js` | Inicialización general, configuración global, eventos compartidos. |
+| `api.js` | Centraliza todas las solicitudes HTTP hacia el Backend. Evita que cada módulo implemente sus propias peticiones. |
+| `municipios.js` | Carga y presentación de municipios, selección, manejo de estados. |
+| `categorias.js` | Carga y presentación de categorías, selección, manejo de estados. |
+| `servicios.js` | Consulta de servicios, filtrado por municipio/categoría, presentación de resultados. |
+| `servicio-detalle.js` | Identificación del servicio seleccionado, solicitud a la API, renderización del detalle. |
 
 ---
 
-## 10. Componentes Reutilizables
+## 11. Componentes Reutilizables
 
-La carpeta `components/` permitirá organizar elementos de interfaz que puedan ser utilizados en diferentes páginas.
+Los fragmentos JSPF y los módulos JavaScript permiten organizar elementos de interfaz que se utilizarán en diferentes páginas.
+
+### 11.1. Fragmentos JSP reutilizables
 
 ```text
-components/
-├── header.html
-├── footer.html
-├── navbar.html
-├── service-card.html
-└── filters.html
+fragments/
+├── header.jspf   — Encabezado general de la aplicación
+├── navbar.jspf   — Barra de navegación principal
+└── footer.jspf   — Pie de página con información institucional
 ```
 
-### 10.1. `header.html`
+La inclusión de fragmentos en las vistas se realizará mediante la directiva JSP estándar:
 
-Contendrá el encabezado general de la aplicación.
+```jsp
+<%@ include file="fragments/header.jspf" %>
+<%@ include file="fragments/navbar.jspf" %>
 
-### 10.2. `footer.html`
+<!-- contenido principal -->
 
-Contendrá información común ubicada en la parte inferior de las páginas.
+<%@ include file="fragments/footer.jspf" %>
+```
 
-### 10.3. `navbar.html`
-
-Contendrá los elementos principales de navegación.
-
-### 10.4. `service-card.html`
-
-Representará de forma resumida la información de un servicio.
-
-Podrá mostrar inicialmente:
-
-- Nombre.
-- Categoría.
-- Municipio.
-- Descripción resumida.
-- Acción para consultar detalles.
-
-### 10.5. `filters.html`
-
-Contendrá los elementos destinados a filtrar el catálogo de servicios.
-
-Los filtros principales serán:
-
-- Municipio
-- Categoría
-
----
-
-## 11. Hojas de Estilo
-
-La carpeta `css/` contendrá los estilos específicos que sean necesarios para complementar Tailwind CSS.
-
-El archivo `styles.css` se utilizará únicamente para reglas que no puedan o no deban resolverse mediante las clases utilitarias de Tailwind.
-
-Se evitará utilizar CSS innecesario o duplicado.
-
-Los estilos deberán mantener:
-
-- Consistencia visual.
-- Buena legibilidad.
-- Contraste adecuado.
-- Diseño responsivo.
-- Código organizado.
-
----
-
-## 12. Recursos Visuales
-
-Los recursos gráficos estarán organizados dentro de:
+### 11.2. Recursos visuales
 
 ```text
 assets/
-├── images/
-└── icons/
+├── images/   — Imágenes utilizadas por la aplicación
+└── icons/    — Iconos de categorías, navegación y acciones
 ```
 
-**`images/`** — Contendrá imágenes utilizadas por la aplicación.
-
-**`icons/`** — Contendrá iconos relacionados con:
-
-- Categorías.
-- Navegación.
-- Acciones.
-- Información.
-- Servicios.
-
-Los recursos deberán mantenerse optimizados para reducir el peso de transferencia y mejorar el rendimiento en conexiones de baja velocidad.
+Los recursos deberán mantenerse optimizados para reducir el peso de transferencia.
 
 ---
 
-## 13. Flujo de Navegación
+## 12. Flujo de Navegación
 
-El flujo principal del usuario se define de la siguiente manera. El objetivo es reducir la cantidad de pasos necesarios para localizar información.
+El flujo principal del usuario se define de la siguiente manera:
 
 ```mermaid
 %%{init: {'themeVariables': {'textColor':'#111827','primaryTextColor':'#111827','primaryColor':'#eef2f7','primaryBorderColor':'#1f2937','lineColor':'#1f2937','secondaryColor':'#eef2f7','tertiaryColor':'#f3f4f6','edgeLabelBackground':'#ffffff'}}}%%
@@ -481,41 +442,43 @@ flowchart LR
     A["Municipio"] --> B["Categoría"]
     B --> C["Servicios disponibles"]
     C --> D["Filtrado"]
-    D --> E["Detalle"]
+    D --> E["Detalle del Servicio"]
 ```
 
 Este flujo corresponde a los requisitos funcionales definidos para el MVP.
 
 ---
 
-## 14. Comunicación con la API REST
+## 13. Comunicación con la API REST
 
 La comunicación entre el Frontend y el Backend se realizará mediante el protocolo HTTP/HTTPS.
 
-Los datos serán intercambiados utilizando JSON.
+Los datos serán intercambiados en formato JSON.
 
 ### Recursos principales
 
 | Método | Endpoint | Propósito |
 |---|---|---|
-| GET | `/api/municipios/` | Obtener municipios. |
-| GET | `/api/municipios/{id}/` | Obtener un municipio. |
-| GET | `/api/categorias/` | Obtener categorías. |
-| GET | `/api/categorias/{id}/` | Obtener una categoría. |
-| GET | `/api/servicios/` | Obtener servicios. |
-| GET | `/api/servicios/{id}/` | Obtener detalle de un servicio. |
+| GET | `/api/v1/municipios/` | Obtener municipios. |
+| GET | `/api/v1/municipios/{id}/` | Obtener un municipio. |
+| GET | `/api/v1/categorias/` | Obtener categorías. |
+| GET | `/api/v1/categorias/{id}/` | Obtener una categoría. |
+| GET | `/api/v1/servicios/` | Obtener servicios. |
+| GET | `/api/v1/servicios/{id}/` | Obtener detalle de un servicio. |
 
 Los filtros se realizarán mediante parámetros de consulta:
 
 ```
-/api/servicios/?municipio={id}&categoria={id}
+/api/v1/servicios/?municipio={id}
+/api/v1/servicios/?categoria={id}
+/api/v1/servicios/?municipio={id}&categoria={id}
 ```
 
-El Frontend no deberá realizar consultas SQL ni establecer conexiones directas con PostgreSQL.
+El Frontend no realizará consultas SQL ni establecerá conexiones directas con PostgreSQL.
 
 ---
 
-## 15. Manejo de Estados
+## 14. Estados de Interfaz
 
 La interfaz deberá contemplar diferentes estados durante el consumo de información.
 
@@ -531,29 +494,18 @@ stateDiagram-v2
     Error --> [*]
 ```
 
-### 15.1. Estado de carga
-
-Mientras se obtiene información desde la API deberá mostrarse una indicación visual de carga.
-
-### 15.2. Estado exitoso
-
-Cuando la API responda correctamente, los datos deberán presentarse de manera estructurada.
-
-### 15.3. Estado sin resultados
-
-Cuando una consulta no encuentre servicios, deberá mostrarse un mensaje claro indicando que no existen resultados para los filtros seleccionados.
-
-### 15.4. Estado de error
-
-Si ocurre un problema de comunicación con la API, el usuario deberá recibir un mensaje comprensible sin exponer información técnica sensible.
+| Estado | Descripción | Responsable |
+|---|---|---|
+| **Carga** | Indicación visual mientras se obtiene información de la API. | JavaScript + CSS3 |
+| **Exitoso** | Los datos se presentan de manera estructurada en la vista. | JSP + JavaScript |
+| **Sin resultados** | Mensaje claro indicando que no existen resultados para los filtros seleccionados. | JavaScript |
+| **Error** | Mensaje comprensible para el usuario sin exponer información técnica sensible. | JavaScript |
 
 ---
 
-## 16. Responsive Design
+## 15. Responsive Design
 
-El Frontend será desarrollado utilizando un enfoque Responsive Design.
-
-Se contemplarán como referencia:
+El Frontend se desarrollará con un enfoque Responsive Design implementado mediante CSS3.
 
 | Dispositivo | Resolución |
 |---|---|
@@ -561,134 +513,132 @@ Se contemplarán como referencia:
 | Tablet | 768 px – 1023 px |
 | Escritorio | ≥ 1024 px |
 
-La interfaz deberá mantener:
+### Implementación con CSS3
 
-- Legibilidad.
-- Navegación sencilla.
-- Elementos interactivos accesibles.
-- Distribución adecuada del contenido.
-- Adaptabilidad a diferentes tamaños de pantalla.
+```css
+/* Móvil — base (mobile-first) */
+.contenedor { ... }
 
-La implementación del diseño utilizará principalmente las utilidades responsive proporcionadas por Tailwind CSS.
+/* Tablet */
+@media (min-width: 768px) {
+    .contenedor { ... }
+}
+
+/* Escritorio */
+@media (min-width: 1024px) {
+    .contenedor { ... }
+}
+```
+
+Se utilizarán:
+
+- Flexbox para distribución flexible de elementos.
+- CSS Grid para layouts de dos dimensiones.
+- Media queries para breakpoints.
+- Unidades relativas (`rem`, `%`, `vw`, `vh`).
+- Variables CSS para mantener consistencia visual.
+
+> **Nota:** No se utilizarán clases responsive de Tailwind. El diseño responsive se implementará íntegramente mediante CSS3.
 
 ---
 
-## 17. Consideraciones de Accesibilidad
+## 16. Accesibilidad
 
-La interfaz deberá seguir buenas prácticas básicas de accesibilidad.
-
-Se considerarán:
+La interfaz seguirá buenas prácticas básicas de accesibilidad:
 
 - Uso de HTML semántico.
-- Etiquetas descriptivas para controles.
+- Etiquetas descriptivas para controles (`<label>`, `aria-label`).
 - Contraste suficiente entre texto y fondo.
-- Tamaño adecuado de elementos interactivos.
-- Textos comprensibles.
-- Uso adecuado de atributos alt en imágenes.
-- Navegación coherente.
-- Mensajes de error comprensibles.
+- Tamaño adecuado de elementos interactivos (áreas táctiles mínimas).
+- Textos comprensibles y mensajes de error claros.
+- Uso adecuado de atributos `alt` en imágenes.
+- Navegación coherente y predecible.
 
-Los diagramas y representaciones visuales utilizados en la documentación también deberán mantener un contraste suficiente.
-
-**Criterio visual obligatorio:** los textos incluidos en diagramas y gráficas deberán utilizar negro o un tono suficientemente oscuro. No se utilizará texto gris claro sobre fondos claros.
+**Criterio visual obligatorio:** Los textos incluidos en diagramas y gráficas deberán utilizar negro o un tono suficientemente oscuro. No se utilizará texto gris claro sobre fondos claros.
 
 ---
 
-## 18. Buenas Prácticas de Desarrollo
+## 17. Seguridad en el Frontend
 
-La implementación del Frontend seguirá las siguientes prácticas:
-
-### 18.1. Separación de responsabilidades
-
-- **HTML** → estructura y contenido
-- **Tailwind / CSS** → presentación visual
-- **JavaScript** → comportamiento e interacción
-- **API REST** → suministro de información
-
-### 18.2. Reutilización
-
-Se evitará duplicar código y elementos de interfaz cuando puedan ser reutilizados.
-
-### 18.3. Código legible
-
-Se utilizarán nombres descriptivos para:
-
-- Archivos.
-- Variables.
-- Funciones.
-- Clases.
-- Elementos.
-
-### 18.4. Modularidad
-
-La lógica JavaScript deberá mantenerse separada según la responsabilidad de cada módulo.
-
-### 18.5. Dependencias mínimas
-
-No se incorporarán frameworks o librerías adicionales sin una justificación técnica.
-
-### 18.6. Control de versiones
-
-Cada cambio significativo deberá registrarse mediante commits descriptivos.
-
-Ejemplos:
-
-```
-feat: create frontend structure
-feat: add service listing
-fix: correct service filtering
-docs: update frontend architecture
-style: improve responsive layout
-```
-
-### 18.7. No duplicación de lógica
-
-Las funciones utilizadas por diferentes páginas deberán centralizarse cuando sea apropiado.
-
----
-
-## 19. Seguridad en el Frontend
-
-La seguridad del Frontend se implementará como parte del modelo de seguridad general de la aplicación.
-
-Se contemplarán las siguientes medidas:
-
-- No almacenar credenciales sensibles directamente en archivos públicos.
+- No almacenar credenciales sensibles en archivos públicos.
 - No incluir secretos o claves privadas dentro del código JavaScript.
 - Validar los datos recibidos antes de utilizarlos en la interfaz.
 - Evitar la inserción directa de contenido no confiable mediante `innerHTML`.
-- Preferir métodos seguros de manipulación del DOM cuando corresponda.
+- Preferir `textContent` para renderizar texto dinámico proveniente de la API.
 - Mantener la comunicación mediante HTTPS en producción.
 - Respetar las políticas CORS configuradas en el Backend.
 - No realizar conexiones directas con la base de datos.
 - No exponer información sensible en mensajes de error.
-
-La autenticación y autorización no forman parte del flujo público inicial del MVP. En caso de implementarse posteriormente un módulo administrativo, se evaluará el mecanismo de autenticación definido para dicha funcionalidad.
-
----
-
-## 20. Rendimiento
-
-Debido al contexto de comunidades rurales y posibles limitaciones de conectividad, el Frontend deberá priorizar un bajo consumo de recursos.
-
-Se aplicarán las siguientes prácticas:
-
-- Minimizar archivos innecesarios.
-- Optimizar imágenes.
-- Evitar dependencias pesadas.
-- Mantener respuestas JSON compactas.
-- Cargar únicamente los recursos necesarios.
-- Evitar solicitudes HTTP innecesarias.
-- Utilizar estructuras HTML sencillas.
-- Mantener JavaScript modular y eficiente.
-
-La meta de rendimiento definida para las consultas de la API será:
-
-> **Tiempo de respuesta ≤ 2 segundos** en condiciones normales de conectividad.
+- En JSP: no colocar lógica de negocio compleja directamente en las vistas; validar parámetros recibidos.
 
 ---
 
-## 21. Integración con el Backend
+## 18. Rendimiento
+
+Debido al contexto de comunidades rurales y posibles limitaciones de conectividad, el Frontend priorizará un bajo consumo de recursos:
+
+- CSS3 ligero y bien organizado, sin dependencias externas.
+- JavaScript Vanilla sin frameworks pesados.
+- JSP con estructuras simples y bien definidas.
+- Imágenes optimizadas.
+- Pocas dependencias.
+- Solicitudes HTTP estrictamente necesarias.
+- Respuestas JSON compactas desde el Backend.
+- Cargar únicamente los recursos necesarios por página.
+
+**Meta de rendimiento definida:**
+
+> **Tiempo de respuesta de la API ≤ 2 segundos** en condiciones normales de conectividad.
+
+---
+
+## 19. Buenas Prácticas de Desarrollo
+
+### 19.1. Separación de responsabilidades
+
+| Capa | Tecnología | Responsabilidad |
+|---|---|---|
+| Presentación | JSP + HTML5 | Estructura y visualización de vistas |
+| Estilos | CSS3 | Apariencia visual y diseño responsive |
+| Comportamiento | JavaScript Vanilla | Interacción, DOM, consumo de API |
+| Lógica de negocio | Django + DRF | Validación, procesamiento, API REST |
+| Persistencia | PostgreSQL | Almacenamiento de datos |
+
+### 19.2. Reutilización
+
+Se evitará duplicar código y elementos de interfaz cuando puedan ser reutilizados (fragmentos JSPF, módulos JS).
+
+### 19.3. Código legible
+
+Se utilizarán nombres descriptivos para archivos, variables, funciones, clases CSS y elementos JSP.
+
+### 19.4. Modularidad
+
+La lógica JavaScript se mantendrá separada según la responsabilidad de cada módulo.
+
+### 19.5. Dependencias mínimas
+
+No se incorporarán frameworks o librerías adicionales sin una justificación técnica.
+
+### 19.6. Control de versiones
+
+Cada cambio significativo se registrará mediante commits semánticos descriptivos.
+
+```
+feat: create JSP frontend structure
+feat: add service listing view
+fix: correct service filtering
+docs: update frontend architecture
+style: improve responsive CSS3 layout
+```
+
+### 19.7. No duplicación de lógica
+
+Las funciones utilizadas por diferentes páginas se centralizarán en `api.js` o `main.js` cuando sea apropiado.
+
+---
+
+## 20. Integración con el Backend
 
 El Frontend y Backend mantendrán responsabilidades independientes:
 
@@ -696,9 +646,10 @@ El Frontend y Backend mantendrán responsabilidades independientes:
 %%{init: {'themeVariables': {'textColor':'#111827','primaryTextColor':'#111827','primaryColor':'#eef2f7','primaryBorderColor':'#1f2937','lineColor':'#1f2937','secondaryColor':'#eef2f7','tertiaryColor':'#f3f4f6','edgeLabelBackground':'#ffffff'}}}%%
 flowchart TD
     subgraph FE["FRONTEND"]
-        F1["HTML5"]
-        F2["Tailwind CSS"]
-        F3["JavaScript Vanilla"]
+        F1["JSP — Vistas"]
+        F2["HTML5 — Estructura"]
+        F3["CSS3 — Estilos"]
+        F4["JavaScript Vanilla — Comportamiento"]
     end
 
     FE -->|"HTTP / JSON"| BE
@@ -720,21 +671,33 @@ Esta separación permitirá desarrollar y probar cada componente de forma indepe
 
 ---
 
-## 22. Alcance de la Estructura del Frontend
+## 21. Relación con los Requisitos Funcionales
 
-En esta etapa se contempla únicamente la organización arquitectónica y estructural del Frontend.
+| Requisito | Componente Frontend relacionado |
+|---|---|
+| RF-01 — Consultar municipios | `municipios.jsp` + `municipios.js` |
+| RF-02 — Consultar categorías | `categorias.jsp` + `categorias.js` |
+| RF-03 — Consultar servicios | `servicios.jsp` + `servicios.js` |
+| RF-04 — Filtrar por municipio | `servicios.jsp` + `servicios.js` (filtros en `styles.css`) |
+| RF-05 — Filtrar por categoría | `servicios.jsp` + `servicios.js` (filtros en `styles.css`) |
+| RF-06 — Visualizar detalle | `servicio-detalle.jsp` + `servicio-detalle.js` |
+| RF-07 — Consumo JSON | `api.js` (centraliza peticiones HTTP) |
+
+---
+
+## 22. Alcance de la Estructura del Frontend
 
 ### Incluido
 
-- Estructura de directorios.
-- Definición de páginas.
+- Estructura de directorios JSP propuesta.
+- Definición de vistas JSP.
+- Definición de fragmentos JSPF reutilizables.
 - Definición de módulos JavaScript.
-- Definición de componentes reutilizables.
-- Organización de estilos.
-- Organización de recursos.
+- Organización de estilos CSS3.
+- Organización de recursos visuales.
 - Flujo de navegación.
-- Definición de comunicación con API.
-- Consideraciones Responsive.
+- Definición de comunicación con la API.
+- Consideraciones Responsive Design con CSS3.
 - Buenas prácticas.
 - Consideraciones básicas de seguridad y rendimiento.
 
@@ -748,40 +711,19 @@ En esta etapa se contempla únicamente la organización arquitectónica y estruc
 - Panel administrativo.
 - Geolocalización.
 - Aplicación móvil nativa.
-- Funcionalidades de inteligencia artificial.
-
-Estas funcionalidades se desarrollarán o evaluarán en las fases posteriores según el alcance definido para el MVP.
 
 ---
 
-## 23. Relación con los Requisitos Funcionales
-
-La estructura del Frontend se encuentra directamente relacionada con los requisitos funcionales definidos en la especificación técnica:
-
-| Requisito | Componente Frontend relacionado |
-|---|---|
-| RF-01 — Consultar municipios | `municipios.html` + `municipios.js` |
-| RF-02 — Consultar categorías | `categorias.html` + `categorias.js` |
-| RF-03 — Consultar servicios | `servicios.html` + `servicios.js` |
-| RF-04 — Filtrar por municipio | `filters.html` + `servicios.js` |
-| RF-05 — Filtrar por categoría | `filters.html` + `servicios.js` |
-| RF-06 — Visualizar detalle | `servicio-detalle.html` + `servicio-detalle.js` |
-| RF-07 — Consumo JSON | `api.js` |
-
-Esta relación permitirá mantener trazabilidad entre los requisitos funcionales y los componentes encargados de implementarlos.
-
----
-
-## 24. Estado del Documento
+## 23. Estado del Documento
 
 | Elemento | Estado |
 |---|---|
 | Definición de tecnologías | Completado |
 | Definición de arquitectura | Completado |
-| Organización de directorios | Definido |
-| Definición de páginas | Definido |
+| Organización de directorios JSP | Definido |
+| Definición de vistas JSP | Definido |
+| Definición de fragmentos JSPF | Definido |
 | Definición de módulos JavaScript | Definido |
-| Definición de componentes | Definido |
 | Flujo de navegación | Definido |
 | Integración conceptual con API | Definido |
 | Diseño visual definitivo | Pendiente |
@@ -792,16 +734,16 @@ Esta relación permitirá mantener trazabilidad entre los requisitos funcionales
 
 ---
 
-## 25. Próxima Etapa
+## 24. Próxima Etapa
 
 Una vez aprobada y registrada la estructura del Frontend, el desarrollo continuará con la implementación progresiva de los componentes definidos.
 
 ```mermaid
 %%{init: {'themeVariables': {'textColor':'#111827','primaryTextColor':'#111827','primaryColor':'#eef2f7','primaryBorderColor':'#1f2937','lineColor':'#1f2937','secondaryColor':'#eef2f7','tertiaryColor':'#f3f4f6','edgeLabelBackground':'#ffffff'}}}%%
 flowchart TD
-    S1["1. Estructura del Frontend"] --> S2["2. Desarrollo del Backend"]
+    S1["1. Estructura del Frontend JSP"] --> S2["2. Desarrollo del Backend Django"]
     S2 --> S3["3. Implementación de la API REST"]
-    S3 --> S4["4. Desarrollo de la interfaz Frontend"]
+    S3 --> S4["4. Desarrollo de las vistas JSP"]
     S4 --> S5["5. Integración Frontend ↔ API REST"]
     S5 --> S6["6. Pruebas funcionales y de usabilidad"]
     S6 --> S7["7. Pruebas de rendimiento y seguridad"]
@@ -812,8 +754,9 @@ La estructura podrá ajustarse durante el desarrollo cuando exista una justifica
 
 ---
 
-## 26. Control de Cambios
+## 25. Control de Cambios
 
 | Versión | Fecha | Descripción | Responsable |
 |---|---|---|---|
-| 1.0 | 2026-08-18 | Creación de la estructura técnica inicial del Frontend. | Equipo RuralConecta |
+| 1.0 | 2026-08-18 | Creación de la estructura técnica inicial del Frontend con HTML5 + Tailwind CSS + JavaScript Vanilla. | Equipo RuralConecta |
+| 2.0 | 2026-08-19 | Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla. Eliminación de Tailwind CSS. Incorporación de fragmentos JSPF. Actualización de estructura de directorios, diagramas, secciones de tecnologías, estilos, responsive y buenas prácticas. | Equipo RuralConecta |

@@ -1,5 +1,7 @@
 # Especificación Técnica Base — RuralConecta-Proyecto
 
+> **Versión 2.0** — Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla, manteniendo Django y PostgreSQL como componentes principales del backend y persistencia.
+
 ## 1. Identificación del Proyecto
 
 | Campo | Detalle |
@@ -105,7 +107,7 @@ Centralizar y facilitar el acceso a la información de servicios y trámites mun
 | **RNF-05** | **Mantenibilidad** | Código limpio, modular y estructurado bajo estándares de separación de capas. | Estructura modular independiente para frontend, backend y documentación. |
 | **RNF-06** | **Escalabilidad** | Capacidad arquitectónica para incorporar nuevos municipios, categorías y servicios. | Arquitectura desacoplada basada en API REST y modelo relacional normalizado. |
 | **RNF-07** | **Disponibilidad** | Preparación para despliegue en entornos de ejecución web accesibles de forma continua. | Estructura de configuración externalizada mediante variables de entorno. |
-| **RNF-08** | **Eficiencia en Datos** | Carga ligera de recursos frontend para mitigar limitaciones de conectividad rural. | Uso de estilos utilitarios optimizados y payloads JSON compactos. |
+| **RNF-08** | **Eficiencia en Datos** | Carga ligera de recursos frontend para mitigar limitaciones de conectividad rural. | CSS3 organizado y optimizado, JavaScript Vanilla sin frameworks pesados y payloads JSON compactos. |
 
 ---
 
@@ -113,7 +115,10 @@ Centralizar y facilitar el acceso a la información de servicios y trámites mun
 
 | Componente | Tecnología Seleccionada | Justificación |
 |---|---|---|
-| **Frontend** | HTML5 + Tailwind CSS + JavaScript Vanilla | Proporciona una interfaz extremadamente rápida, ligera, responsiva y sin sobrecarga de frameworks pesados. |
+| **Frontend — Presentación** | JSP (JavaServer Pages) | Tecnología principal para la construcción de vistas dinámicas y reutilizables mediante fragmentos `.jspf`. |
+| **Frontend — Estructura** | HTML5 | Estructuración semántica de las páginas y contenido (header, nav, main, section, article, footer). |
+| **Frontend — Estilos** | CSS3 | Diseño visual, Responsive Design (Flexbox, Grid, variables CSS, media queries). Tecnología oficial de estilos. |
+| **Frontend — Lógica cliente** | JavaScript Vanilla | Interacción del usuario, manipulación del DOM, filtros, validaciones y consumo de la API REST mediante Fetch API. |
 | **Backend** | Python + Django + Django REST Framework | Framework robusto, seguro, con ORM maduro y capacidades nativas para construir APIs REST estructuradas. |
 | **Base de Datos** | PostgreSQL | Motor relacional potente, confiable, con soporte íntegro para consultas estructuradas y relaciones normalizadas. |
 | **Protocolo y Formato** | HTTP / HTTPS con payloads JSON | Estándar universal de comunicación desacoplada y ligera para aplicaciones web. |
@@ -129,8 +134,8 @@ La arquitectura del sistema sigue un patrón multicapa desacoplado:
 ```mermaid
 graph TD
     subgraph "Capa de Presentación (Frontend)"
-        A["Usuario"] -->|"Interactúa con la UI"| B["Navegador Web / Interfaz Responsive"]
-        B -->|"HTML5 + Tailwind CSS + JavaScript"| C["Cliente HTTP / Fetch API"]
+        A["Usuario"] -->|"Interactúa con la UI"| B["Navegador Web / Vistas JSP"]
+        B -->|"JSP + HTML5 + CSS3 + JavaScript"| C["Cliente HTTP / Fetch API"]
     end
 
     subgraph "Capa de Comunicación"
@@ -230,11 +235,12 @@ Durante todas las etapas de diseño e implementación del proyecto se aplicarán
 
 1. **Protección contra Inyección SQL**: Acceso exclusivo a la base de datos a través del ORM de Django, el cual utiliza sentencias preparadas y parametrizadas de manera predeterminada.
 2. **Validación y Sanitización de Entradas**: Validación estricta de tipos de datos y parámetros de consulta en los serializadores de Django REST Framework antes de ejecutar cualquier consulta.
-3. **Mitigación de Cross-Site Scripting (XSS)**: Escapado automático de contenido en la renderización del frontend y sanitización de respuestas JSON.
-4. **Control de Orígenes Cruzados (CORS)**: Configuración restrictiva de encabezados CORS (`django-cors-headers`), autorizando únicamente el origen del cliente web permitido.
-5. **Gestión Segura de Secretos y Configuración**: Uso estricto de variables de entorno (`.env`) para almacenar claves secretas (`SECRET_KEY`), credenciales de base de datos y configuraciones sensibles, evitando su inclusión en el repositorio Git.
-6. **Configuración Segura para Producción**: Parámetros de seguridad en Django (`DEBUG = False`, `ALLOWED_HOSTS` restringidos, cookies seguras `CSRF_COOKIE_SECURE` y `SESSION_COOKIE_SECURE` cuando aplique HTTPS).
-7. **Política de Autenticación**: El MVP se enfocará en consultas públicas y abiertas para los ciudadanos. En caso de requerir módulos de administración o autenticación posterior, se evaluará la implementación de tokens JWT o autenticación basada en sesiones de Django.
+3. **Mitigación de Cross-Site Scripting (XSS)**: En el Frontend JSP, se evitará insertar contenido no confiable directamente en las vistas. En JavaScript, se usará `textContent` en lugar de `innerHTML` sobre datos dinámicos provenientes de la API. Se sanitizarán las respuestas JSON antes de renderizarlas.
+4. **Seguridad en Vistas JSP**: No se colocará lógica de negocio compleja directamente dentro de archivos JSP. Se validarán parámetros recibidos. No se expondrá información sensible en los fragmentos de presentación.
+5. **Control de Orígenes Cruzados (CORS)**: Configuración restrictiva de encabezados CORS (`django-cors-headers`), autorizando únicamente el origen del cliente web permitido.
+6. **Gestión Segura de Secretos y Configuración**: Uso estricto de variables de entorno (`.env`) para almacenar claves secretas (`SECRET_KEY`), credenciales de base de datos y configuraciones sensibles, evitando su inclusión en el repositorio Git.
+7. **Configuración Segura para Producción**: Parámetros de seguridad en Django (`DEBUG = False`, `ALLOWED_HOSTS` restringidos, cookies seguras cuando aplique HTTPS).
+8. **Política de Autenticación**: El MVP se enfocará en consultas públicas y abiertas para los ciudadanos. En caso de requerir módulos de administración o autenticación posterior, se evaluará la implementación de tokens JWT.
 
 ---
 
@@ -306,3 +312,12 @@ El alcance actual está acotado al MVP para garantizar entrega ágil y estabilid
 4. **Sistema de Notificaciones Comunitarias**: Alertas vía SMS o mensajería sobre jornadas especiales (vacunación, brigadas, pagos de subsidios).
 5. **Aplicación Móvil Nativa / PWA**: Capacidad de funcionamiento sin conexión (*offline-first*) para veredas con conectividad nula.
 6. **Módulo de Agendamiento y Trámites en Línea**: Solicitud de turnos y radicación de solicitudes directas cuando las condiciones institucionales lo permitan.
+
+---
+
+## 17. Control de Cambios
+
+| Versión | Fecha | Descripción | Responsable |
+|---|---|---|---|
+| 1.0 | 2026-08-18 | Creación de la especificación técnica inicial del proyecto. | Equipo RuralConecta |
+| 2.0 | 2026-08-19 | Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla. Eliminación de Tailwind CSS. Mantenimiento de Django, DRF y PostgreSQL como componentes principales del backend y persistencia. | Equipo RuralConecta |
