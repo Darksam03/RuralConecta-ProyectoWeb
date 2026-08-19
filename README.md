@@ -227,9 +227,9 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - ✅ Definir estructura del backend
 - ✅ Definir estructura del frontend
 - ✅ Documentar endpoints de la API
-- [ ] Adaptar arquitectura a JSP + HTML5 + CSS3
-- [ ] Actualizar documentación tecnológica completa
-- [ ] Validar arquitectura completa antes de programar
+- ✅ Adaptar arquitectura a JSP + HTML5 + CSS3
+- ✅ Actualizar documentación tecnológica completa
+- ✅ Validar arquitectura completa antes de programar
 
 ### 🟡 Fase 2 — Desarrollo Backend
 
