@@ -1,6 +1,6 @@
 # Estructura del Frontend — RuralConecta-Proyecto
 
-> **Versión 4.0** — Actualización de la arquitectura frontend para utilizar HTML5 semántico, CSS3 y JavaScript Vanilla desacoplado. Eliminación de JavaServer Pages (JSP) y dependencias de servidores Java. Integración directa con la API REST desarrollada en FastAPI.
+> **Versión 5.0** — Actualización de la arquitectura frontend para utilizar HTML5 semántico, CSS3 y JavaScript Vanilla desacoplado. Integración directa con la API REST desarrollada en Django y Django REST Framework (sin JSP, sin FastAPI, sin Pydantic, sin SQLAlchemy).
 
 ---
 
@@ -78,7 +78,7 @@ Se utilizará HTML5, CSS3 y JavaScript Vanilla porque estas tecnologías permite
 
 - **HTML5** proporciona la base semántica de todas las páginas de consulta, garantizando accesibilidad y legibilidad.
 - **CSS3** permite implementar una interfaz responsiva y organizada mediante Flexbox, Grid, variables CSS y media queries.
-- **JavaScript Vanilla** permite controlar la interacción, manipular el DOM y realizar solicitudes HTTP asíncronas hacia la API REST en FastAPI sin dependencias externas.
+- **JavaScript Vanilla** permite controlar la interacción, manipular el DOM y realizar solicitudes HTTP asíncronas hacia la API REST en Django / DRF sin dependencias externas.
 
 > **Tecnologías eliminadas del Frontend:** JavaServer Pages (JSP), fragmentos JSPF, Tailwind CSS y frameworks JS pesados no forman parte de la arquitectura del Frontend.
 
@@ -105,7 +105,7 @@ flowchart TD
     F -->|"HTTP / JSON"| API
 
     subgraph API["API REST"]
-        DRF["FastAPI + Pydantic + SQLAlchemy"]
+        DRF["Django + Django REST Framework + Django ORM"]
     end
 
     API -->|"ORM"| DB[("PostgreSQL")]
@@ -137,7 +137,7 @@ frontend/
 │
 ├── js/
 │   ├── main.js                 # Inicialización general y eventos globales
-│   ├── api.js                  # Cliente Fetch API centralizado (comunicación con FastAPI)
+│   ├── api.js                  # Cliente Fetch API centralizado (comunicación con Django / DRF)
 │   ├── municipios.js           # Lógica y renderizado del catálogo de municipios
 │   ├── categorias.js           # Lógica y renderizado de categorías
 │   ├── servicios.js            # Consulta y filtrado dinámico de servicios
@@ -344,7 +344,7 @@ flowchart TD
     serv --> api
     det --> api
 
-    api -->|"Fetch API / JSON"| Backend[("API REST — FastAPI")]
+    api -->|"Fetch API / JSON"| Backend[("API REST — Django / DRF")]
 ```
 
 ### 10.3. Descripción de módulos
@@ -554,7 +554,7 @@ Debido al contexto de comunidades rurales y posibles limitaciones de conectivida
 | Presentación | HTML5 | Estructura y visualización de vistas semánticas |
 | Estilos | CSS3 | Apariencia visual y diseño responsive |
 | Comportamiento | JavaScript Vanilla | Interacción, DOM, consumo de API |
-| Lógica de negocio | FastAPI + SQLAlchemy | Validación, procesamiento, API REST |
+| Lógica de negocio | Django + Django REST Framework | Validación, procesamiento, API REST |
 | Persistencia | PostgreSQL | Almacenamiento de datos |
 
 ### 19.2. Reutilización
@@ -607,9 +607,9 @@ flowchart TD
     FE -->|"HTTP / JSON"| BE
 
     subgraph BE["BACKEND"]
-        B1["FastAPI"]
-        B2["Pydantic Schemas"]
-        B3["SQLAlchemy ORM"]
+        B1["Django"]
+        B2["Django REST Framework"]
+        B3["Django ORM"]
     end
 
     BE -->|"SQL"| DB[("PostgreSQL")]
@@ -691,7 +691,7 @@ Una vez aprobada y registrada la estructura del Frontend, el desarrollo continua
 ```mermaid
 %%{init: {'themeVariables': {'textColor':'#111827','primaryTextColor':'#111827','primaryColor':'#eef2f7','primaryBorderColor':'#1f2937','lineColor':'#1f2937','secondaryColor':'#eef2f7','tertiaryColor':'#f3f4f6','edgeLabelBackground':'#ffffff'}}}%%
 flowchart TD
-    S1["1. Estructura del Frontend HTML5/CSS3/JS"] --> S2["2. Desarrollo del Backend FastAPI"]
+    S1["1. Estructura del Frontend HTML5/CSS3/JS"] --> S2["2. Desarrollo del Backend Django / DRF"]
     S2 --> S3["3. Implementación de la API REST"]
     S3 --> S4["4. Desarrollo de las páginas HTML5"]
     S4 --> S5["5. Integración Frontend ↔ API REST"]
@@ -712,3 +712,4 @@ La estructura podrá ajustarse durante el desarrollo cuando exista una justifica
 | 2.0 | 2026-08-19 | Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla. Eliminación de Tailwind CSS. | Equipo RuralConecta |
 | 3.0 | 2026-08-19 | Migración de backend a FastAPI, Pydantic y SQLAlchemy sobre PostgreSQL. | Equipo RuralConecta |
 | 4.0 | 2026-08-19 | Eliminación de JavaServer Pages (JSP) y simplificación del Frontend a HTML5 semántico, CSS3 y JavaScript Vanilla desacoplado. | Equipo RuralConecta |
+| 5.0 | 2026-08-19 | Retorno a la arquitectura backend original con Django, Django REST Framework (DRF) y Django ORM sobre PostgreSQL, conservando el frontend desacoplado en HTML5/CSS3/JS Vanilla. | Equipo RuralConecta |

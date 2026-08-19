@@ -39,16 +39,16 @@ flowchart LR
         UI -->|"Acción de búsqueda"| Fetch
     end
 
-    subgraph API ["2. Capa de Servicios y Lógica (API REST FastAPI)"]
-        Router["Enrutador APIRouter (/api/v1/)"]
-        Endpoints["Endpoints Handlers (endpoints/*.py)"]
-        Schemas["Pydantic Schemas (Validación / JSON)"]
+    subgraph API ["2. Capa de Servicios y Lógica (API REST Django / DRF)"]
+        Router["Enrutador DefaultRouter (/api/v1/)"]
+        Endpoints["Vistas / ViewSets (servicios/views.py)"]
+        Schemas["DRF Serializers (Validación / JSON)"]
         Router --> Endpoints
         Endpoints <--> Schemas
     end
 
     subgraph Persistencia ["3. Capa de Datos (Persistencia)"]
-        ORM["SQLAlchemy ORM (Consultas seguras)"]
+        ORM["Django ORM (Consultas seguras)"]
         DB[("PostgreSQL")]
         ORM <-->|"SQL parametrizado"| DB
     end
@@ -68,8 +68,8 @@ flowchart LR
 ```
 
 - **Petición desde el Frontend**: El cliente web emite una solicitud asíncrona mediante el protocolo HTTP (ej. `GET /api/v1/servicios/?municipio=1&categoria=3`).
-- **Procesamiento en el Backend**: El backend procesa la solicitud en FastAPI, valida parámetros y genera estructuras de salida mediante esquemas Pydantic, ejecutando consultas parametrizadas con SQLAlchemy ORM.
-- **Respuesta hacia el Frontend**: El backend transforma los registros relacionales de PostgreSQL en estructuras JSON legibles y las retorna junto a un código de estado HTTP adecuado (`200 OK`, `400 Bad Request`, `404 Not Found`). Documentación interactiva disponible automáticamente en `/docs` (Swagger UI).
+- **Procesamiento en el Backend**: El backend procesa la solicitud en Django REST Framework, valida parámetros y genera estructuras de salida mediante `serializers.ModelSerializer`, ejecutando consultas parametrizadas con Django ORM.
+- **Respuesta hacia el Frontend**: El backend transforma los registros relacionales de PostgreSQL en estructuras JSON legibles y las retorna junto a un código de estado HTTP adecuado (`200 OK`, `400 Bad Request`, `404 Not Found`).
 
 ---
 
@@ -144,7 +144,7 @@ https://ruralconecta.ejemplo.gov.co/api/v1/servicios/
 ### Justificación de la Estrategia:
 1. **Claridad y Simplicidad**: Permite a los desarrolladores identificar de forma inmediata la versión del contrato de datos.
 2. **Compatibilidad hacia atrás**: Si en una etapa posterior se modifica el esquema de respuestas o se introducen cambios disruptivos (*breaking changes*), podrá publicarse `/api/v2/` manteniendo operativa la versión `/api/v1/`.
-3. **Alineación con FastAPI**: Facilita la configuración del enrutamiento modular mediante `APIRouter` en el directorio `app/api/v1/` del backend.
+3. **Alineación con Django y DRF**: Facilita la configuración del enrutamiento modular mediante `DefaultRouter` y `urls.py` en el backend.
 
 ---
 
@@ -521,22 +521,21 @@ En concordancia con los requisitos no funcionales (`RNF-04`) y la especificació
 ```mermaid
 graph TD
     subgraph "Capas de Seguridad de la API"
-        S1["1. Control de CORS (CORSMiddleware)"] -->|"Filtra dominios permitidos"| S2["2. Schemas Pydantic"]
-        S2 -->|"Valida y sanitiza tipos de datos"| S3["3. SQLAlchemy ORM"]
+        S1["1. Control de CORS (django-cors-headers)"] -->|"Filtra dominios permitidos"| S2["2. Serializadores DRF"]
+        S2 -->|"Valida y sanitiza tipos de datos"| S3["3. Django ORM"]
         S3 -->|"Sentencias SQL parametrizadas (Anti-SQLi)"| S4["4. PostgreSQL"]
-        S5["5. Autenticación JWT (Módulo Admin Futuro)"] -.->|"Protege endpoints de mutación"| S2
     end
 
     classDef sec fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#111827;
-    class S1,S2,S3,S4,S5 sec;
+    class S1,S2,S3,S4 sec;
 ```
 
 ### 11.1. Validación Estricta de Datos
-- Todos los parámetros de consulta y cuerpos de petición serán procesados obligatoriamente por los **Esquemas Pydantic** (`schemas/`).
+- Todos los parámetros de consulta y cuerpos de petición serán procesados obligatoriamente por los **Serializadores DRF** (`serializers.py`).
 - Se validarán tipos de datos, rangos numéricos y longitudes máximas para evitar desbordamientos o datos inconsistentes.
 
 ### 11.2. Protección contra Inyección SQL (SQL Injection)
-- El acceso a PostgreSQL se realizará de forma exclusiva a través de **SQLAlchemy ORM**.
+- El acceso a PostgreSQL se realizará de forma exclusiva a través de **Django ORM**.
 - El ORM utiliza consultas preparadas y parametrizadas de manera predeterminada, aislando los valores de entrada de la sintaxis del motor SQL.
 - Queda expresamente prohibido el uso de consultas SQL concatenadas en bruto (`raw SQL`).
 
@@ -545,7 +544,7 @@ graph TD
 - En el cliente web, los valores devueltos por la API se insertarán en el DOM mediante propiedades seguras (`textContent` o vinculación declarativa de datos), evitando el uso de `innerHTML` sobre datos no confiables.
 
 ### 11.4. Configuración Restrictiva de CORS (*Cross-Origin Resource Sharing*)
-- Mediante el middleware `CORSMiddleware` de FastAPI, se limitarán los orígenes autorizados para realizar peticiones HTTP hacia la API.
+- Mediante el middleware `django-cors-headers` de Django, se limitarán los orígenes autorizados para realizar peticiones HTTP hacia la API.
 - En producción, únicamente el dominio asignado al frontend web de RuralConecta tendrá permiso de acceso cruzado, bloqueando peticiones no autorizadas desde dominios de terceros.
 
 ### 11.5. Estrategia de Autenticación mediante JWT (*Funcionalidad Administrativa Futura*)
@@ -564,8 +563,8 @@ A continuación se resume la matriz de estado de los componentes definidos en es
 | **Esquema de URIs y Versionado (`/api/v1/`)** | ✅ **Definido y Documentado** | Etapa 0 (Análisis y Planificación) |
 | **Formato de Respuestas JSON** | ✅ **Definido y Documentado** | Etapa 0 (Análisis y Planificación) |
 | **Estructura de Manejo de Errores** | ✅ **Definido y Documentado** | Etapa 0 (Análisis y Planificación) |
-| **Endpoints `GET` de Municipios, Categorías y Servicios** | ⏳ **Pendiente de Implementación** | Fase 2 (Desarrollo Backend con FastAPI/SQLAlchemy) |
-| **Filtros de Búsqueda Combinados en Servicios** | ⏳ **Pendiente de Implementación** | Fase 2 (Desarrollo Backend con FastAPI/SQLAlchemy) |
+| **Endpoints `GET` de Municipios, Categorías y Servicios** | ⏳ **Pendiente de Implementación** | Fase 2 (Desarrollo Backend con Django/DRF) |
+| **Filtros de Búsqueda Combinados en Servicios** | ⏳ **Pendiente de Implementación** | Fase 2 (Desarrollo Backend con Django/DRF) |
 | **Endpoints Administrativos (`POST`, `PUT`, `DELETE`)** | 💡 **Propuesto (Fuera del MVP inicial)** | Fases posteriores de ampliación |
 | **Autenticación con JWT para Administradores** | 💡 **Propuesto (Fuera del MVP inicial)** | Fases posteriores de ampliación |
 
