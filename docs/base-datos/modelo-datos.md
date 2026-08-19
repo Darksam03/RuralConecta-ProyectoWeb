@@ -4,7 +4,7 @@
 
 El objetivo de este documento es definir el **diseño conceptual y lógico de la base de datos relacional** para el Producto Mínimo Viable (MVP) de **RuralConecta-ProyectoWeb**. 
 
-El modelo de datos está concebido para soportar de forma óptima, escalable y normalizada la centralización, organización y consulta ágil de servicios esenciales y trámites comunitarios dirigidos a las poblaciones rurales del departamento de Antioquia, garantizando la integridad de la información y sirviendo como base directa para la futura implementación con **PostgreSQL** y el **ORM de Django**.
+El modelo de datos está concebido para soportar de forma óptima, escalable y normalizada la centralización, organización y consulta ágil de servicios esenciales y trámites comunitarios dirigidos a las poblaciones rurales del departamento de Antioquia, garantizando la integridad de la información y sirviendo como base directa para la futura implementación con **PostgreSQL** y **SQLAlchemy ORM** en **Python**.
 
 ---
 
@@ -37,7 +37,7 @@ Constituye la entidad nuclear del sistema. Representa cada uno de los trámites,
 
 ## 3. Diccionario de Datos
 
-A continuación se detalla la estructura lógica de cada una de las tablas del modelo, especificando tipos de datos estándar para bases de datos relacionales compatibles con PostgreSQL y el ORM de Django:
+A continuación se detalla la estructura lógica de cada una de las tablas del modelo, especificando tipos de datos estándar para bases de datos relacionales compatibles con PostgreSQL y SQLAlchemy ORM en Python:
 
 ### 3.1. Tabla: `Municipio`
 
@@ -172,21 +172,24 @@ Cuando el diseño se materialice en el motor de base de datos **PostgreSQL**, se
 
 ---
 
-## 9. Consideraciones para Django ORM
+## 9. Consideraciones para SQLAlchemy ORM y Pydantic
 
-En la **Fase 2 (Desarrollo Backend)**, este modelo se implementará en el ORM de Django siguiendo estas directrices conceptuales:
+En la **Fase 2 (Desarrollo Backend)**, este modelo se implementará en Python utilizando **SQLAlchemy 2.0** como ORM y **Pydantic v2** para la capa de esquemas:
 
-- **Modelos de Datos**: Cada entidad (`Municipio`, `Categoria`, `Servicio`) heredará de `django.db.models.Model`.
-- **Claves Primarias**: Django gestionará automáticamente el campo `id` como `BigAutoField` o `AutoField`.
+- **Modelos de Datos**: Cada entidad (`Municipio`, `Categoria`, `Servicio`) heredará de la clase base declarativa `Base = declarative_base()` o `DeclarativeBase`.
+- **Claves Primarias**: Declaración mediante `Column(Integer, primary_key=True, index=True, autoincrement=True)`.
 - **Mapeo de Tipos de Campo**:
-  - Campos cortos mediante `models.CharField(max_length=...)`.
-  - Campos extensos mediante `models.TextField()`.
-- **Mapeo de Relaciones**:
-  - Las relaciones foráneas en el modelo `Servicio` se declararán mediante `models.ForeignKey('Municipio', on_delete=models.PROTECT, related_name='servicios')` y `models.ForeignKey('Categoria', on_delete=models.PROTECT, related_name='servicios')`.
-  - La opción `on_delete=models.PROTECT` impedirá la eliminación accidental de entidades maestras que tengan servicios relacionados.
+  - Campos cortos mediante `Column(String(max_length))`.
+  - Campos extensos mediante `Column(Text)`.
+- **Mapeo de Relaciones e Integridad**:
+  - Las claves foráneas en `Servicio` se declararán mediante `Column(Integer, ForeignKey('municipio.id', ondelete='RESTRICT'), nullable=False)`.
+  - Relaciones bidireccionales ORM mediante `relationship('Servicio', back_populates='municipio')` y `relationship('Servicio', back_populates='categoria')`.
+  - La opción `ondelete='RESTRICT'` impedirá la eliminación accidental de entidades maestras que posean servicios vinculados.
 - **Unicidad y Metadatos**:
-  - Se configurará `unique=True` en los campos `nombre` de `Municipio` y `Categoria`.
-  - Se implementará el método `__str__()` en cada modelo para una representación amigable en el panel administrativo y shells interactivos.
+  - Se configurará `unique=True` en el atributo `nombre` de los modelos `Municipio` y `Categoria`.
+  - Se implementará el método `__repr__()` en cada modelo para facilitar la depuración.
+- **Integración con Pydantic**:
+  - Los esquemas Pydantic incluirán la configuración `model_config = ConfigDict(from_attributes=True)` para permitir la serialización directa de instancias SQLAlchemy a JSON.
 
 ---
 

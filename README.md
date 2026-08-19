@@ -8,8 +8,10 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
-![Django REST Framework](https://img.shields.io/badge/Django_REST_Framework-ff1709?style=for-the-badge&logo=django&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=pydantic&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71E00?style=for-the-badge&logo=sqlalchemy&logoColor=white)
+![Uvicorn](https://img.shields.io/badge/Uvicorn-4053D6?style=for-the-badge&logo=gunicorn&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
@@ -43,10 +45,11 @@ Centralizar y facilitar el acceso a la información de servicios y trámites mun
 - **JavaScript Vanilla** — Interacción del usuario, manipulación del DOM y consumo de la API REST.
 
 ### Backend
-- **Python** — Lenguaje de programación base.
-- **Django** — Framework web principal (estructura, enrutamiento, seguridad, panel administrativo).
-- **Django REST Framework (DRF)** — Construcción de la API REST (endpoints, serializadores, validación).
-- **Django ORM** — Acceso seguro y parametrizado a la base de datos.
+- **Python** — Lenguaje de programación base (versión 3.10+).
+- **FastAPI** — Framework web principal asíncrono y de alto rendimiento.
+- **Pydantic** — Esquemas de validación, serialización y tipado de datos.
+- **SQLAlchemy** — ORM para acceso seguro y parametrizado a la base de datos relacional.
+- **Uvicorn** — Servidor web ASGI de alto rendimiento.
 
 ### Base de Datos
 - **PostgreSQL** — Motor de base de datos relacional principal.
@@ -77,9 +80,9 @@ El sistema adopta una arquitectura **Full Stack desacoplada basada en API REST**
               ┌─────────────────────┐
               │      BACKEND        │
               │                     │
-              │ Python + Django     │
-              │ Django REST Frm.    │
-              │ API REST            │
+              │ Python + FastAPI    │
+              │ Pydantic + SQLAch.  │
+              │ API REST (OpenAPI)  │
               └──────────┬──────────┘
                          │
                          ▼
@@ -145,7 +148,7 @@ RuralConecta-ProyectoWeb/
 │       └── especificacion-api.md
 │
 ├── backend/
-│   (Pendiente de implementación — Django + DRF)
+│   (Pendiente de implementación — FastAPI + Pydantic + SQLAlchemy + Uvicorn)
 │
 └── frontend/
     (Pendiente de implementación — JSP + HTML5 + CSS3 + JavaScript)
@@ -166,9 +169,9 @@ Consulta servicios (vista JSP)
    ↓
 Frontend consume API REST (JavaScript Fetch)
    ↓
-Backend Django procesa la solicitud
+Backend FastAPI procesa la solicitud
    ↓
-PostgreSQL proporciona los datos
+PostgreSQL proporciona los datos mediante SQLAlchemy ORM
    ↓
 API devuelve información JSON
    ↓
@@ -233,16 +236,16 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 
 ### 🟡 Fase 2 — Desarrollo Backend
 
-- [ ] Crear proyecto Django
-- [ ] Configurar Django REST Framework
+- [ ] Crear estructura de proyecto FastAPI (`app/`)
+- [ ] Configurar FastAPI y Uvicorn (ASGI)
+- [ ] Configurar SQLAlchemy y sesión de base de datos
 - [ ] Configurar PostgreSQL
-- [ ] Crear modelos
-- [ ] Crear migraciones
-- [ ] Crear serializers
-- [ ] Crear endpoints
+- [ ] Crear modelos relacionales SQLAlchemy (`models/`)
+- [ ] Crear esquemas de validación Pydantic (`schemas/`)
+- [ ] Crear enrutadores de la API REST (`APIRouter`)
 - [ ] Implementar filtros por municipio
 - [ ] Implementar filtros por categoría
-- [ ] Realizar pruebas de API
+- [ ] Realizar pruebas automatizadas con Pytest
 
 ### 🟣 Fase 3 — Desarrollo Frontend
 
@@ -270,10 +273,10 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 
 ### ☁️ Fase 5 — Despliegue
 
-- [ ] Preparar variables de entorno
-- [ ] Configurar producción Django
+- [ ] Preparar variables de entorno (`pydantic-settings`)
+- [ ] Configurar entorno de producción para FastAPI
 - [ ] Configurar PostgreSQL en la nube
-- [ ] Desplegar backend Django
+- [ ] Desplegar backend FastAPI (Uvicorn / Gunicorn)
 - [ ] Configurar servidor para Frontend JSP (Tomcat o equivalente)
 - [ ] Configurar CORS
 - [ ] Verificar funcionamiento en producción
@@ -332,8 +335,10 @@ Registrar el avance de acuerdo con el cronograma definido para el taller.
 
 ### Backend
 - Python 3.10+
-- Django 4.x+
-- Django REST Framework
+- FastAPI
+- Uvicorn
+- Pydantic v2
+- SQLAlchemy 2.0+
 - PostgreSQL 14+
 - Entorno virtual Python (`venv`)
 
@@ -359,14 +364,14 @@ Pendiente de implementación. Se documentará en la Fase 1 (preparación del ent
 
 Durante el desarrollo del proyecto se contemplarán e implementarán las siguientes medidas de seguridad:
 
-- Protección contra inyección SQL mediante el uso exclusivo del ORM de Django (consultas parametrizadas).
-- Validación y sanitización rigurosa de datos en los serializadores de Django REST Framework.
+- Protección contra inyección SQL mediante el uso exclusivo de SQLAlchemy ORM (consultas parametrizadas).
+- Validación y sanitización rigurosa de datos con esquemas Pydantic.
 - Prevención de vulnerabilidades Cross-Site Scripting (XSS): en JSP, evitar insertar contenido no confiable directamente; en JavaScript, usar `textContent` en lugar de `innerHTML` sobre datos no confiables.
-- Configuración estricta de Cross-Origin Resource Sharing (CORS) entre frontend y backend.
-- Uso de variables de entorno para la gestión segura de parámetros de configuración y claves sensibles.
+- Configuración estricta de Cross-Origin Resource Sharing (CORS) mediante `CORSMiddleware` en FastAPI.
+- Uso de variables de entorno mediante `pydantic-settings` para la gestión segura de parámetros de configuración y claves sensibles.
 - No almacenar credenciales en el repositorio de control de versiones.
-- Configuración segura para el entorno de producción (`DEBUG=False`, encabezados de seguridad HTTP).
-- Separación estricta entre presentación (JSP/CSS3/JavaScript) y lógica de negocio (Django/DRF).
+- Configuración segura para el entorno de producción (deshabilitar OpenAPI docs públicas en producción si se requiere, encabezados de seguridad HTTP).
+- Separación estricta entre presentación (JSP/CSS3/JavaScript) y lógica de negocio (FastAPI/SQLAlchemy).
 - No exponer información sensible en mensajes de error visibles al usuario.
 - Autenticación mediante JWT únicamente si las funcionalidades finales requieren autenticación.
 
@@ -395,7 +400,7 @@ La documentación técnica del proyecto se organiza dentro del directorio `docs/
 
 ## Buenas Prácticas
 
-- Separación de responsabilidades: JSP (presentación) / CSS3 (estilos) / JavaScript (comportamiento) / Django/DRF (lógica y API) / PostgreSQL (persistencia).
+- Separación de responsabilidades: JSP (presentación) / CSS3 (estilos) / JavaScript (comportamiento) / FastAPI+SQLAlchemy (lógica y API) / PostgreSQL (persistencia).
 - Modularidad y reutilización de fragmentos JSP (`.jspf`).
 - Código limpio y nombres descriptivos.
 - No duplicar lógica entre módulos.

@@ -19,10 +19,11 @@ El backend se construirá sobre un ecosistema tecnológico maduro, seguro y alta
 
 | Tecnología | Rol en la Arquitectura | Función Principal |
 |---|---|---|
-| **Python** | Lenguaje de programación base | Proporciona una sintaxis limpia, legible y un ecosistema robusto para el desarrollo web rápido y mantenible. |
-| **Django** | Framework web principal | Provee la estructura general del proyecto, el sistema de enrutamiento, la gestión de configuración, el panel administrativo y los mecanismos de seguridad nativos. |
-| **Django REST Framework (DRF)** | Toolkit para construcción de APIs | Facilita la creación de endpoints RESTful, transformación y validación de tipos de datos mediante serializadores, y estandarización de respuestas en formato JSON. |
-| **Django ORM** | Mapeador Objeto-Relacional | Permite interactuar con la base de datos relacional mediante clases y objetos Python, abstrayendo las sentencias SQL y previniendo inyecciones de código malicioso. |
+| **Python** | Lenguaje de programación base | Proporciona una sintaxis limpia, legible, asíncrona y tipada (Python 3.10+) para el desarrollo web rápido y mantenible. |
+| **FastAPI** | Framework web principal | Provee la estructura asíncrona de alto rendimiento para construir APIs RESTful, enrutamiento modular (`APIRouter`) y documentación interactiva automática (OpenAPI/Swagger). |
+| **Pydantic** | Validación y Serialización | Valida y serializa esquemas de entrada y salida mediante tipos nativos de Python (`BaseModel`), garantizando contratos de datos estrictos en formato JSON. |
+| **SQLAlchemy** | Mapeador Objeto-Relacional (ORM) | Permite interactuar con la base de datos relacional mediante clases y objetos Python (SQLAlchemy 2.0), ejecuciones parametrizadas y abstracción de sentencias SQL. |
+| **Uvicorn** | Servidor ASGI | Servidor de producción y desarrollo asíncrono ultra-rápido para ejecutar la aplicación FastAPI. |
 | **PostgreSQL** | Motor de base de datos relacional | Almacena y persiste de forma confiable, transaccional y normalizada las entidades del sistema (`Municipio`, `Categoria`, `Servicio`). |
 
 ---
@@ -33,15 +34,15 @@ La arquitectura interna del backend sigue un patrón multicapa modular y desacop
 
 ```mermaid
 graph TD
-    A["1. Cliente Web (Frontend / Navegador)"] -->|"Petición HTTP (GET / JSON)"| B["2. Capa de Enrutamiento API REST (urls.py)"]
-    B -->|"Direcciona la URL al controlador"| C["3. Capa de Vistas / Controladores (views.py / ViewSets)"]
-    C -->|"Solicita o transfiere datos estructurados"| D["4. Capa de Serialización y Validación (serializers.py)"]
-    D -->|"Consulta / Mapea objetos de negocio"| E["5. Capa de Abstracción de Datos (Django ORM / models.py)"]
+    A["1. Cliente Web (Frontend / Navegador)"] -->|"Petición HTTP (GET / JSON)"| B["2. Capa de Enrutamiento (FastAPI / APIRouter)"]
+    B -->|"Direcciona la URL al endpoint handler"| C["3. Capa de Controladores / Endpoints (api/v1/endpoints)"]
+    C -->|"Valida entrada con Schemas Pydantic"| D["4. Capa de Esquemas y Validación (schemas/ Pydantic)"]
+    D -->|"Solicita datos a la sesión ORM"| E["5. Capa de Abstracción de Datos (SQLAlchemy ORM / models/)"]
     E -->|"Ejecuta sentencias SQL parametrizadas"| F[("6. Capa de Persistencia (PostgreSQL)")]
     
     F -->|"Conjuntos de registros (Tuplas SQL)"| E
-    E -->|"Instancias de Modelos Python (QuerySets)"| D
-    D -->|"Estructuras de datos nativas (Diccionarios / JSON)"| C
+    E -->|"Instancias de Modelos SQLAlchemy"| D
+    D -->|"Estructura serializada JSON validadas"| C
     C -->|"Respuesta HTTP estructurada (200 OK / JSON)"| A
 
     classDef client fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#111827;
@@ -62,11 +63,11 @@ graph TD
 ### Descripción del Flujo Interno
 
 1. **Cliente**: El navegador o aplicación cliente realiza una solicitud HTTP asíncrona hacia un endpoint público.
-2. **API REST (`urls.py`)**: El sistema de enrutamiento de Django analiza el path de la URL y delega la ejecución a la vista correspondiente.
-3. **Views / ViewSets (`views.py`)**: La vista recibe la solicitud, procesa los parámetros de búsqueda o filtrado (`Query Params`), orquesta la lógica necesaria y solicita la información al ORM.
-4. **Serializers (`serializers.py`)**: Valida los datos recibidos y transforma los objetos del modelo a formato JSON (o viceversa) asegurando el esquema de salida.
-5. **Django ORM (`models.py`)**: Construye y ejecuta consultas seguras y optimizadas contra la base de datos utilizando el modelo de dominio.
-6. **PostgreSQL**: Ejecuta la consulta relacional sobre las tablas correspondientes y retorna los registros al ORM.
+2. **API REST (`APIRouter`)**: El enrutador de FastAPI analiza el path de la URL y mapea la solicitud al controlador correspondiente.
+3. **Endpoints (`api/v1/endpoints/`)**: La función controladora recibe la solicitud, extrae los parámetros de consulta (`Query Params`) inyectados mediante dependencias (`Depends`), y coordina la lógica de negocio.
+4. **Pydantic Schemas (`schemas/`)**: Valida automáticamente los parámetros de entrada y filtra la estructura de salida JSON de acuerdo al `response_model` configurado.
+5. **SQLAlchemy ORM (`models/`)**: Ejecuta consultas relacionales seguras mediante la sesión de base de datos (`SessionLocal`) contra PostgreSQL.
+6. **PostgreSQL**: Ejecuta la consulta SQL parametrizada sobre las tablas correspondientes y retorna las tuplas resultantes.
 
 ---
 
@@ -76,37 +77,48 @@ Para mantener una organización limpia, escalable y adaptada a la simplicidad re
 
 ```text
 backend/
-├── manage.py                   # Script de gestión y utilidades CLI de Django
-├── requirements.txt            # Declaración de dependencias del backend Python
+├── requirements.txt            # Declaración de dependencias Python (fastapi, uvicorn, sqlalchemy, pydantic, psycopg2)
 ├── .env.example                # Plantilla de variables de entorno requeridas
+├── main.py                     # Punto de entrada de la aplicación FastAPI
 │
-├── config/                     # Paquete principal de configuración del proyecto
-│   ├── __init__.py
-│   ├── asgi.py                 # Punto de entrada para servidores ASGI
-│   ├── wsgi.py                 # Punto de entrada para servidores WSGI
-│   ├── urls.py                 # Enrutador principal y prefijo global /api/
-│   └── settings/               # Modularización de configuraciones
-│       ├── __init__.py
-│       ├── base.py             # Configuraciones comunes (apps, middleware, templates)
-│       ├── local.py            # Configuración para entorno de desarrollo local
-│       └── production.py       # Configuración segura para entorno de despliegue
-│
-└── servicios/                  # Aplicación Django principal del MVP
+└── app/                        # Paquete modular de la aplicación
     ├── __init__.py
-    ├── apps.py                 # Metadatos de inicialización de la app
-    ├── models.py               # Definición de entidades (Municipio, Categoria, Servicio)
-    ├── serializers.py          # Serializadores para transformar y validar datos JSON
-    ├── views.py                # Vistas y ViewSets de la API REST
-    ├── urls.py                 # Enrutamiento específico de recursos (/municipios, /categorias, /servicios)
-    ├── admin.py                # Configuración del panel de administración Django
-    └── tests/                  # Directorio modular de pruebas automatizadas
+    ├── main.py                 # Instancia principal de FastAPI, CORS middleware e inclusión de enrutadores
+    ├── core/                   # Configuraciones globales y seguridad
+    │   ├── __init__.py
+    │   └── config.py           # Gestión de settings con Pydantic BaseSettings (.env)
+    ├── db/                     # Gestión de conexión a base de datos
+    │   ├── __init__.py
+    │   ├── session.py          # Conexión SQLAlchemy (engine y SessionLocal)
+    │   └── base.py             # Clase base declarativa para modelos
+    ├── models/                 # Modelos de datos relacionales (SQLAlchemy)
+    │   ├── __init__.py
+    │   ├── municipio.py
+    │   ├── categoria.py
+    │   └── servicio.py
+    ├── schemas/                # Esquemas de validación y serialización (Pydantic)
+    │   ├── __init__.py
+    │   ├── municipio.py
+    │   ├── categoria.py
+    │   └── servicio.py
+    ├── api/                    # Enrutadores y endpoints de la API REST
+    │   ├── __init__.py
+    │   └── v1/
+    │       ├── __init__.py
+    │       ├── router.py       # APIRouter principal para la versión v1
+    │       └── endpoints/
+    │           ├── municipios.py
+    │           ├── categorias.py
+    │           └── servicios.py
+    └── tests/                  # Directorio de pruebas automatizadas con Pytest
         ├── __init__.py
-        ├── test_models.py      # Pruebas unitarias para modelos y restricciones
-        ├── test_serializers.py # Pruebas para validación y serialización
-        └── test_views.py       # Pruebas para endpoints HTTP y filtros de búsqueda
+        ├── conftest.py         # Fixtures de test (TestClient, DB SQLite temporal)
+        ├── test_models.py      # Pruebas unitarias de modelos SQLAlchemy
+        ├── test_schemas.py     # Pruebas de validación de esquemas Pydantic
+        └── test_api.py         # Pruebas de endpoints HTTP y filtros con TestClient
 ```
 
-> **Criterio de Organización**: Se centralizan las tres entidades del MVP (`Municipio`, `Categoria`, `Servicio`) en una aplicación unificada (`servicios`) para evitar sobreingeniería en esta fase inicial, manteniendo al mismo tiempo una separación modular de configuraciones y pruebas.
+> **Criterio de Organización**: La aplicación sigue una arquitectura limpia en FastAPI, separando modelos relacionales (`models/`), esquemas Pydantic de respuesta y validación (`schemas/`), enrutadores (`api/v1/endpoints/`) y configuración centralizada (`core/`).
 
 ---
 
@@ -116,13 +128,13 @@ Cada archivo y módulo dentro del backend cumple una responsabilidad estricta de
 
 | Componente | Archivo / Directorio | Responsabilidad Principal |
 |---|---|---|
-| **Modelos** | `servicios/models.py` | Define la estructura de las entidades relacionales (`Municipio`, `Categoria`, `Servicio`), tipos de datos, restricciones de integridad referencial (`PROTECT`, `NOT NULL`, `UNIQUE`) y métodos del modelo (`__str__`). |
-| **Serializadores** | `servicios/serializers.py` | Convierte instancias de modelos complejos en tipos de datos nativos de Python convertibles a JSON. Aplica validaciones de formato y controla los campos expuestos hacia el cliente. |
-| **Vistas** | `servicios/views.py` | Contiene los controladores que reciben las peticiones HTTP (`GET`), coordinan la consulta con el ORM, aplican lógica de filtrado por parámetros (ej. `?municipio=X&categoria=Y`) y retornan respuestas con códigos de estado HTTP apropiados (`200 OK`, `404 Not Found`). |
-| **Enrutadores** | `servicios/urls.py` y `config/urls.py` | Mapea las URLs solicitadas por el cliente con las vistas correspondientes, asegurando la estructura estandarizada bajo el prefijo `/api/`. |
-| **Pruebas** | `servicios/tests/` | Aloja las suites de pruebas automatizadas unitarias y de integración para validar la integridad de los modelos, la correcta serialización de datos y el comportamiento de los endpoints. |
-| **Configuraciones** | `config/settings/` | Gestiona los parámetros del entorno de ejecución (bases de datos, CORS, aplicaciones instaladas, seguridad, variables de entorno) diferenciando desarrollo local de producción. |
-| **Gestor CLI** | `manage.py` | Utilidad de línea de comandos de Django para ejecutar tareas administrativas como migraciones (`makemigrations`, `migrate`), ejecución de pruebas (`test`) y arranque del servidor local (`runserver`). |
+| **Modelos** | `app/models/` | Define las entidades relacionales de SQLAlchemy (`Municipio`, `Categoria`, `Servicio`), tipos de columnas, restricciones (`NOT NULL`, `UNIQUE`, `ForeignKey`) y relaciones ORM. |
+| **Esquemas Pydantic** | `app/schemas/` | Define la validación de entradas y la estructura JSON de salida (`BaseModel`, `from_attributes=True`), asegurando el tipo de dato y filtrado de atributos. |
+| **Endpoints** | `app/api/v1/endpoints/` | Contiene los controladores que reciben peticiones HTTP (`GET`), coordinan la consulta con la sesión SQLAlchemy, aplican filtros (`?municipio={id}&categoria={id}`) y retornan schemas Pydantic. |
+| **Enrutador Global** | `app/api/v1/router.py` | Agrupa los sub-enrutadores (`APIRouter`) de municipios, categorías y servicios bajo el prefijo `/api/v1/`. |
+| **Base de Datos** | `app/db/session.py` | Configura el motor de SQLAlchemy (`create_engine`) y la fábrica de sesiones (`sessionmaker`) inyectada mediante dependencias de FastAPI (`Depends(get_db)`). |
+| **Configuraciones** | `app/core/config.py` | Gestiona las variables de entorno (`pydantic-settings`) para la conexión a PostgreSQL, CORS y entornos de ejecución. |
+| **Pruebas** | `app/tests/` | Aloja suites de pruebas automatizadas con `pytest` y `TestClient` para validar endpoints, schemas y modelos. |
 
 ---
 
@@ -136,39 +148,36 @@ A continuación se ilustra el ciclo de vida completo paso a paso para una consul
 sequenceDiagram
     autonumber
     actor Cliente as 1. Cliente Web (Navegador)
-    participant ConfigURLs as 2. Enrutador Principal (config/urls.py)
-    participant AppURLs as 3. Enrutador App (servicios/urls.py)
-    participant Views as 4. Vistas (servicios/views.py)
-    participant ORM as 5. Django ORM
+    participant Router as 2. Enrutador FastAPI (api/v1/router.py)
+    participant Endpoint as 3. Endpoint Handler (endpoints/servicios.py)
+    participant Pydantic as 4. Esquemas (schemas/servicio.py)
+    participant ORM as 5. SQLAlchemy ORM
     participant DB as 6. Base de Datos (PostgreSQL)
-    participant Serializer as 7. Serializador (servicios/serializers.py)
 
-    Cliente->>ConfigURLs: Petición HTTP: GET /api/servicios/?municipio=1&categoria=3
-    ConfigURLs->>AppURLs: Detecta prefijo '/api/' y delega en 'servicios.urls'
-    AppURLs->>Views: Enruta 'servicios/' a ServicioViewSet / ServicioListView
-    Views->>ORM: Extrae params y ejecuta Servicio.objects.filter(municipio_id=1, categoria_id=3)
-    ORM->>DB: SELECT * FROM servicios_servicio WHERE municipio_id=1 AND categoria_id=3;
-    DB-->>ORM: Retorna registros / filas coincidentes
-    ORM-->>Views: Retorna QuerySet de instancias del modelo Servicio
-    Views->>Serializer: Pasa QuerySet a ServicioSerializer(many=True)
-    Serializer-->>Views: Retorna datos serializados (lista de diccionarios JSON)
-    Views-->>Cliente: Retorna Response(status=200, data=JSON)
+    Cliente->>Router: Petición HTTP: GET /api/v1/servicios/?municipio=1&categoria=3
+    Router->>Endpoint: Deriva la petición a read_servicios(db, municipio_id=1, categoria_id=3)
+    Endpoint->>ORM: Inyecta DB Session y ejecuta query select(Servicio).where(...)
+    ORM->>DB: SELECT * FROM servicios WHERE municipio_id=1 AND categoria_id=3;
+    DB-->>ORM: Retorna filas / registros relacionales
+    ORM-->>Endpoint: Retorna lista de modelos SQLAlchemy (Servicio)
+    Endpoint->>Pydantic: Serializa y valida lista con list[ServicioSchema] (response_model)
+    Pydantic-->>Endpoint: Genera payload JSON estructurado
+    Endpoint-->>Cliente: Retorna respuesta HTTP 200 OK con JSON
 ```
 
 ### Descripción Paso a Paso del Ciclo de Vida
 
 | Paso | Componente | Acción / Responsabilidad |
 |---|---|---|
-| **1** | **Navegador Web** | El usuario aplica los filtros en la interfaz web; el frontend emite la petición asíncrona: `GET /api/servicios/?municipio=1&categoria=3`. |
-| **2** | **`config/urls.py`** | El enrutador raíz de Django intercepta el prefijo `/api/` y delega la gestión a las rutas de la aplicación `servicios`. |
-| **3** | **`servicios/urls.py`** | Mapea la ruta `servicios/` y deriva la petición hacia el controlador correspondiente (`ServicioViewSet` o `ServicioListView`). |
-| **4** | **`servicios/views.py`** | Extrae y valida los parámetros `municipio_id=1` y `categoria_id=3`. Construye la consulta ORM: `Servicio.objects.filter(municipio_id=1, categoria_id=3)`. |
-| **5** | **Django ORM** | Traduce la consulta de Python a una sentencia SQL segura y parametrizada: `SELECT * FROM servicios_servicio WHERE municipio_id = 1 AND categoria_id = 3;`. |
-| **6** | **PostgreSQL** | Ejecuta la consulta SQL sobre los índices de la base de datos relacional y retorna las tuplas resultantes. |
-| **7** | **Django ORM** | Convierte las filas de la base de datos en un `QuerySet` compuesto por instancias del modelo `Servicio`. |
-| **8** | **`servicios/serializers.py`** | Recibe el `QuerySet` y transforma las instancias del modelo en estructuras nativas de Python (diccionarios) según los campos expuestos. |
-| **9** | **`servicios/views.py`** | Empaqueta los datos serializados en un objeto `Response` con código de estado HTTP `200 OK`. |
-| **10** | **Navegador Web** | Recibe el payload JSON y procede a renderizar dinámicamente las tarjetas de servicios en la interfaz de usuario. |
+| **1** | **Navegador Web** | El usuario aplica los filtros en la interfaz web; el frontend emite la petición asíncrona: `GET /api/v1/servicios/?municipio=1&categoria=3`. |
+| **2** | **`api/v1/router.py`** | El `APIRouter` de FastAPI intercepta el prefijo `/api/v1/servicios/` y deriva la llamada a la función correspondiente en `servicios.py`. |
+| **3** | **`endpoints/servicios.py`** | Inyecta los parámetros de consulta `municipio` y `categoria`, valida tipos de datos y obtiene la sesión de base de datos (`get_db`). |
+| **4** | **SQLAlchemy ORM** | Traduce la consulta a una sentencia SQL parametrizada: `SELECT * FROM servicios WHERE municipio_id = 1 AND categoria_id = 3;`. |
+| **5** | **PostgreSQL** | Ejecuta la consulta SQL sobre los índices relacionales y retorna los datos correspondientes. |
+| **6** | **SQLAlchemy ORM** | Transforma los registros en instancias de modelos Python del dominio (`Servicio`). |
+| **7** | **Pydantic Schemas** | Convierte las instancias del modelo en esquemas Pydantic `ServicioSchema` (mediante `from_attributes = True`), validando los tipos de respuesta. |
+| **8** | **FastAPI** | Empaqueta la respuesta con encabezado `Content-Type: application/json` y código HTTP `200 OK`. |
+| **9** | **Navegador Web** | Recibe el payload JSON y renderiza dinámicamente las tarjetas de servicios. |
 
 ---
 
@@ -176,55 +185,44 @@ sequenceDiagram
 
 Para asegurar un código altamente legible, testeable y mantenible a largo plazo, la arquitectura aplica el principio de **Separación de Responsabilidades (SoC - Separation of Concerns)**:
 
-1. **Desacoplamiento entre Presentación y Persistencia**: Las vistas (`views.py`) no ejecutan sentencias SQL directas ni conocen los detalles internos del motor de base de datos; interactúan exclusivamente a través de la interfaz del ORM (`models.py`).
-2. **Independencia en la Representación de Datos**: La capa de serialización (`serializers.py`) actúa como un contrato explícito de datos entre el backend y el frontend, permitiendo cambiar detalles internos de los modelos sin romper la estructura JSON consumida por el cliente.
-3. **Aislamiento de la Configuración**: La lógica de negocio y las aplicaciones no contienen credenciales fijas (*hardcoded*), dependiendo exclusivamente de la inyección de configuración mediante variables de entorno en `config/settings/`.
-4. **Enrutamiento Jerárquico**: Cada aplicación gestiona sus propias rutas internas (`servicios/urls.py`), manteniendo el enrutador principal (`config/urls.py`) limpio y enfocado en la orquestación global.
+1. **Desacoplamiento entre Presentación y Persistencia**: Los enrutadores y endpoints interactúan exclusivamente con los esquemas Pydantic y sesiones de SQLAlchemy, abstrayendo las consultas SQL directas.
+2. **Independencia en la Representación de Datos**: La capa de esquemas Pydantic (`app/schemas/`) actúa como un contrato explícito de datos entre el backend y el frontend, permitiendo modificar campos internos del ORM sin alterar el formato JSON entregado al cliente.
+3. **Aislamiento de la Configuración**: Las variables de entorno y parámetros de ejecución se gestionan mediante `app/core/config.py` inyectando valores desde archivos `.env`.
+4. **Enrutamiento Modular**: Cada recurso (`municipios`, `categorias`, `servicios`) mantiene su propio `APIRouter` dentro de `app/api/v1/endpoints/`.
 
 ---
 
 ## 8. Seguridad
 
-La arquitectura del backend integra de forma nativa las medidas de seguridad estipuladas en la especificación técnica del proyecto, sin agregar elementos fuera del alcance del MVP:
+La arquitectura del backend integra de forma nativa las siguientes medidas de seguridad en FastAPI:
 
-- **Protección contra Inyección SQL**: El acceso a la base de datos se realiza de forma exclusiva a través del **ORM de Django**, el cual parametriza y escapa automáticamente todas las consultas contra PostgreSQL.
-- **Validación Estricta de Entradas**: Los **Serializadores de DRF** validan tipos de datos, longitudes máximas y obligatoriedad de campos antes de cualquier operación lógica, rechazando parámetros malformados.
-- **Control de Acceso Cruzado (CORS)**: Implementación de `django-cors-headers` en la configuración para autorizar únicamente el origen del cliente web permitido, bloqueando peticiones no autorizadas desde otros dominios.
-- **Gestión de Credenciales mediante Variables de Entorno**: La clave secreta (`SECRET_KEY`), credenciales de base de datos y configuraciones sensibles se leen desde archivos `.env` (no versionados en Git), evitando la exposición accidental de secretos.
-- **Configuración Segura de Django**: Diferenciación de entornos para garantizar que en producción `DEBUG = False`, `ALLOWED_HOSTS` esté estrictamente definido y se activen encabezados de seguridad HTTP estándar.
+- **Protección contra Inyección SQL**: Acceso parametrizado exclusivo mediante el **ORM de SQLAlchemy**.
+- **Validación Estricta de Entradas**: Validación automática de tipos de datos, enteros de IDs y formatos con **Pydantic** antes de procesar la solicitud.
+- **Control de Acceso Cruzado (CORS)**: Implementación de `CORSMiddleware` en FastAPI para restringir los orígenes web autorizados.
+- **Gestión Segura de Credenciales**: Uso de `pydantic-settings` para cargar cadenas de conexión a PostgreSQL y secretos desde el archivo `.env`.
 
 ---
 
 ## 9. Preparación para Pruebas
 
-La arquitectura prevé una infraestructura organizada para la ejecución de pruebas automatizadas durante la fase de desarrollo:
+La infraestructura de pruebas utiliza **Pytest** y **TestClient**:
 
-- **Ubicación**: Las pruebas se alojarán en el subdirectorio `servicios/tests/` para facilitar su categorización.
-- **Pruebas de Modelos (`test_models.py`)**: Verificación de la creación de registros, restricciones `UNIQUE`, obligatoriedad de campos y relaciones de clave foránea con protección contra borrado (`PROTECT`).
-- **Pruebas de Serializadores (`test_serializers.py`)**: Validación de la estructura de los campos serializados y comprobación del correcto rechazo de datos inválidos.
-- **Pruebas de API y Vistas (`test_views.py`)**: Uso de `APITestCase` de Django REST Framework para comprobar:
-  - Códigos de respuesta HTTP (`200 OK`, `404 Not Found`).
-  - Formato y exactitud del payload JSON de retorno.
-  - Funcionamiento correcto de los filtros combinados (`?municipio={id}&categoria={id}`).
-- **Ejecución**: Se utilizará el ejecutor nativo de Django mediante el comando estándar de gestión:
-  $$\texttt{python manage.py test}$$
+- **Ubicación**: Subdirectorio `app/tests/`.
+- **Pruebas de Modelos (`test_models.py`)**: Validación de creación de registros relacionales y restricciones.
+- **Pruebas de Esquemas (`test_schemas.py`)**: Verificación de validación y rechazo de payloads inválidos.
+- **Pruebas de API (`test_api.py`)**: Uso de `TestClient` de FastAPI para verificar respuestas HTTP `200 OK`, `404 Not Found` y filtros combinados.
+- **Ejecución**:
+  $$\texttt{pytest app/tests/}$$
 
 ---
 
 ## 10. Preparación para Despliegue
 
-La estructura propuesta está diseñada para facilitar el despliegue desacoplado en plataformas en la nube (PaaS / IaaS) en fases posteriores:
-
-1. **Modularización de Settings**:
-   - `config/settings/base.py`: Parámetros comunes de la aplicación.
-   - `config/settings/local.py`: Configuración para desarrollo local (base de datos local/SQLite/PostgreSQL de prueba, `DEBUG = True`).
-   - `config/settings/production.py`: Configuración para entorno en la nube (`DEBUG = False`, lectura obligatoria de variables de entorno).
-2. **Externalización Total de la Configuración**:
-   - Soporte para variables como `DATABASE_URL`, `SECRET_KEY`, `ALLOWED_HOSTS` y `CORS_ALLOWED_ORIGINS`.
-3. **Compatibilidad con Servidores de Producción**:
-   - Archivo `wsgi.py` preparado para ser servido por servidores de aplicaciones como **Gunicorn**.
-4. **Gestión de Archivos Estáticos**:
-   - Preparación para servir archivos estáticos del panel de administración mediante librerías como **WhiteNoise** en entornos sin servidor web dedicado.
+1. **Configuración Asíncrona (ASGI)**:
+   - Punto de entrada principal en `main.py`.
+   - Ejecución mediante servidores ASGI de producción como **Uvicorn** (`uvicorn app.main:app --host 0.0.0.0 --port 8000`) o **Gunicorn** utilizando trabajadores Uvicorn (`gunicorn -k uvicorn.workers.UvicornWorker app.main:app`).
+2. **Documentación OpenAPI Automática**:
+   - Acceso nativo a `/docs` (Swagger UI) y `/redoc` (ReDoc) para inspección y pruebas interactivas de la API.
 
 ---
 

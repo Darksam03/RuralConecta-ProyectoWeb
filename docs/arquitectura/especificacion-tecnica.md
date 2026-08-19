@@ -1,6 +1,6 @@
 # Especificación Técnica Base — RuralConecta-Proyecto
 
-> **Versión 2.0** — Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla, manteniendo Django y PostgreSQL como componentes principales del backend y persistencia.
+> **Versión 3.0** — Actualización de la arquitectura backend para utilizar FastAPI (Python 3.10+), Pydantic y SQLAlchemy ORM, manteniendo JSP, HTML5, CSS3 y JavaScript Vanilla en el frontend y PostgreSQL como base de datos relacional.
 
 ## 1. Identificación del Proyecto
 
@@ -119,7 +119,7 @@ Centralizar y facilitar el acceso a la información de servicios y trámites mun
 | **Frontend — Estructura** | HTML5 | Estructuración semántica de las páginas y contenido (header, nav, main, section, article, footer). |
 | **Frontend — Estilos** | CSS3 | Diseño visual, Responsive Design (Flexbox, Grid, variables CSS, media queries). Tecnología oficial de estilos. |
 | **Frontend — Lógica cliente** | JavaScript Vanilla | Interacción del usuario, manipulación del DOM, filtros, validaciones y consumo de la API REST mediante Fetch API. |
-| **Backend** | Python + Django + Django REST Framework | Framework robusto, seguro, con ORM maduro y capacidades nativas para construir APIs REST estructuradas. |
+| **Backend** | Python + FastAPI + Pydantic + SQLAlchemy + Uvicorn | Framework web asíncrono y de alto rendimiento, esquemas tipados con Pydantic, ORM relacional SQLAlchemy y servidor ASGI Uvicorn. |
 | **Base de Datos** | PostgreSQL | Motor relacional potente, confiable, con soporte íntegro para consultas estructuradas y relaciones normalizadas. |
 | **Protocolo y Formato** | HTTP / HTTPS con payloads JSON | Estándar universal de comunicación desacoplada y ligera para aplicaciones web. |
 | **Control de Versiones** | Git + GitHub | Gestión de código fuente, trazabilidad de commits y colaboración organizada. |
@@ -143,10 +143,10 @@ graph TD
         D -->|"Respuestas HTTP (JSON / Status Codes)"| C
     end
 
-    subgraph "Capa de Lógica de Negocio (Backend Django)"
-        D -->|"Enrutamiento de URLs"| E["Django REST Framework Views"]
-        E -->|"Validación y Serialización"| F["Serializers"]
-        F -->|"Consultas y Filtros"| G["Django ORM"]
+    subgraph "Capa de Lógica de Negocio (Backend FastAPI)"
+        D -->|"Enrutamiento APIRouter"| E["FastAPI Endpoints"]
+        E -->|"Validación y Serialización"| F["Pydantic Schemas"]
+        F -->|"Consultas y Filtros"| G["SQLAlchemy ORM"]
     end
 
     subgraph "Capa de Persistencia (Base de Datos)"
@@ -233,13 +233,13 @@ La API REST expondrá recursos bajo el prefijo `/api/`. A continuación se detal
 
 Durante todas las etapas de diseño e implementación del proyecto se aplicarán los siguientes principios y mecanismos de seguridad:
 
-1. **Protección contra Inyección SQL**: Acceso exclusivo a la base de datos a través del ORM de Django, el cual utiliza sentencias preparadas y parametrizadas de manera predeterminada.
-2. **Validación y Sanitización de Entradas**: Validación estricta de tipos de datos y parámetros de consulta en los serializadores de Django REST Framework antes de ejecutar cualquier consulta.
+1. **Protección contra Inyección SQL**: Acceso exclusivo a la base de datos a través de SQLAlchemy ORM con sentencias preparadas y parametrizadas.
+2. **Validación y Sanitización de Entradas**: Validación estricta de tipos de datos y esquemas mediante Pydantic antes de procesar las consultas.
 3. **Mitigación de Cross-Site Scripting (XSS)**: En el Frontend JSP, se evitará insertar contenido no confiable directamente en las vistas. En JavaScript, se usará `textContent` en lugar de `innerHTML` sobre datos dinámicos provenientes de la API. Se sanitizarán las respuestas JSON antes de renderizarlas.
 4. **Seguridad en Vistas JSP**: No se colocará lógica de negocio compleja directamente dentro de archivos JSP. Se validarán parámetros recibidos. No se expondrá información sensible en los fragmentos de presentación.
-5. **Control de Orígenes Cruzados (CORS)**: Configuración restrictiva de encabezados CORS (`django-cors-headers`), autorizando únicamente el origen del cliente web permitido.
-6. **Gestión Segura de Secretos y Configuración**: Uso estricto de variables de entorno (`.env`) para almacenar claves secretas (`SECRET_KEY`), credenciales de base de datos y configuraciones sensibles, evitando su inclusión en el repositorio Git.
-7. **Configuración Segura para Producción**: Parámetros de seguridad en Django (`DEBUG = False`, `ALLOWED_HOSTS` restringidos, cookies seguras cuando aplique HTTPS).
+5. **Control de Orígenes Cruzados (CORS)**: Configuración restrictiva mediante `CORSMiddleware` en FastAPI, autorizando únicamente el origen del cliente web permitido.
+6. **Gestión Segura de Secretos y Configuración**: Uso estricto de variables de entorno mediante `pydantic-settings` (`.env`) para almacenar claves secretas, cadenas de conexión a base de datos y configuraciones sensibles.
+7. **Configuración Segura para Producción**: Deshabilitación de documentación interactiva pública en producción si se requiere y encabezados de seguridad HTTP.
 8. **Política de Autenticación**: El MVP se enfocará en consultas públicas y abiertas para los ciudadanos. En caso de requerir módulos de administración o autenticación posterior, se evaluará la implementación de tokens JWT.
 
 ---
@@ -276,7 +276,7 @@ graph LR
 
 1. **Pruebas de API (Backend)**:
    - Verificación de códigos de estado HTTP (`200 OK`, `400 Bad Request`, `404 Not Found`).
-   - Validación de estructura de respuesta JSON y filtros por municipio y categoría mediante `APITestCase` de Django REST Framework.
+   - Validación de estructura de respuesta JSON y filtros por municipio y categoría mediante `TestClient` de FastAPI y Pytest.
 2. **Pruebas de Integración (Frontend — Backend)**:
    - Comprobación del ciclo completo de petición y renderización de datos dinámicos mediante `fetch`.
    - Manejo adecuado de estados de carga (*loading*) y estados de error/sin resultados.
@@ -294,7 +294,7 @@ graph LR
 
 La solución se diseñará bajo lineamientos de despliegue desacoplado en la nube:
 
-- **Estructura Desacoplada**: Posibilidad de desplegar el backend (API Django) y el frontend (sitio estático/cliente web) de forma conjunta o independiente.
+- **Estructura Desacoplada**: Posibilidad de desplegar el backend (API FastAPI con Uvicorn/Gunicorn) y el frontend (sitio JSP/cliente web) de forma independiente.
 - **Configuración por Entorno**: Parametrización externa de variables (`DATABASE_URL`, `DEBUG`, `ALLOWED_HOSTS`, `CORS_ALLOWED_ORIGINS`).
 - **Base de Datos Gestionada**: Uso de instancia PostgreSQL administrada en la nube para persistencia segura.
 - **Servicio de Archivos Estáticos**: Preparación mediante `WhiteNoise` o almacenamiento de objetos para producción.
@@ -321,3 +321,4 @@ El alcance actual está acotado al MVP para garantizar entrega ágil y estabilid
 |---|---|---|---|
 | 1.0 | 2026-08-18 | Creación de la especificación técnica inicial del proyecto. | Equipo RuralConecta |
 | 2.0 | 2026-08-19 | Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla. Eliminación de Tailwind CSS. Mantenimiento de Django, DRF y PostgreSQL como componentes principales del backend y persistencia. | Equipo RuralConecta |
+| 3.0 | 2026-08-19 | Migración de la arquitectura backend de Django/DRF a FastAPI (Python 3.10+), Pydantic, SQLAlchemy 2.0 y servidor ASGI Uvicorn, conservando el frontend JSP y la base de datos PostgreSQL. | Equipo RuralConecta |

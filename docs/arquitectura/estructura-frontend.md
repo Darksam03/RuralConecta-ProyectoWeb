@@ -1,6 +1,6 @@
 # Estructura del Frontend — RuralConecta-Proyecto
 
-> **Versión 2.0** — Actualización de la arquitectura frontend para utilizar JSP, HTML5, CSS3 y JavaScript Vanilla. Eliminación de Tailwind CSS. Mantenimiento de Django, DRF y PostgreSQL como componentes del backend y persistencia.
+> **Versión 3.0** — Actualización de la arquitectura frontend (JSP, HTML5, CSS3, JS Vanilla) e integración con el backend basado en FastAPI, Pydantic y SQLAlchemy sobre PostgreSQL.
 
 ---
 
@@ -109,7 +109,7 @@ flowchart TD
     F -->|"HTTP / JSON"| API
 
     subgraph API["API REST"]
-        DRF["Django + Django REST Framework"]
+        DRF["FastAPI + Pydantic + SQLAlchemy"]
     end
 
     API -->|"ORM"| DB[("PostgreSQL")]
@@ -380,7 +380,7 @@ flowchart TD
     serv --> api
     det --> api
 
-    api -->|"Fetch API / JSON"| Backend[("API REST — Django/DRF")]
+    api -->|"Fetch API / JSON"| Backend[("API REST — FastAPI")]
 ```
 
 ### 10.3. Descripción de módulos
@@ -601,7 +601,7 @@ Debido al contexto de comunidades rurales y posibles limitaciones de conectivida
 | Presentación | JSP + HTML5 | Estructura y visualización de vistas |
 | Estilos | CSS3 | Apariencia visual y diseño responsive |
 | Comportamiento | JavaScript Vanilla | Interacción, DOM, consumo de API |
-| Lógica de negocio | Django + DRF | Validación, procesamiento, API REST |
+| Lógica de negocio | FastAPI + SQLAlchemy | Validación, procesamiento, API REST |
 | Persistencia | PostgreSQL | Almacenamiento de datos |
 
 ### 19.2. Reutilización
@@ -655,9 +655,9 @@ flowchart TD
     FE -->|"HTTP / JSON"| BE
 
     subgraph BE["BACKEND"]
-        B1["Django"]
-        B2["Django REST Framework"]
-        B3["Django ORM"]
+        B1["FastAPI"]
+        B2["Pydantic Schemas"]
+        B3["SQLAlchemy ORM"]
     end
 
     BE -->|"SQL"| DB[("PostgreSQL")]
@@ -741,7 +741,7 @@ Una vez aprobada y registrada la estructura del Frontend, el desarrollo continua
 ```mermaid
 %%{init: {'themeVariables': {'textColor':'#111827','primaryTextColor':'#111827','primaryColor':'#eef2f7','primaryBorderColor':'#1f2937','lineColor':'#1f2937','secondaryColor':'#eef2f7','tertiaryColor':'#f3f4f6','edgeLabelBackground':'#ffffff'}}}%%
 flowchart TD
-    S1["1. Estructura del Frontend JSP"] --> S2["2. Desarrollo del Backend Django"]
+    S1["1. Estructura del Frontend JSP"] --> S2["2. Desarrollo del Backend FastAPI"]
     S2 --> S3["3. Implementación de la API REST"]
     S3 --> S4["4. Desarrollo de las vistas JSP"]
     S4 --> S5["5. Integración Frontend ↔ API REST"]
