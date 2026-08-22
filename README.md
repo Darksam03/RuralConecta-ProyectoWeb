@@ -188,7 +188,7 @@ Frontend muestra los resultados (HTML5 + JavaScript)
 ## 📈 Progreso general
 
 ```text
-Progreso: ██████░░░░ 61% (48/79 tareas completadas)
+Progreso: ██████░░░░ 62% (49/79 tareas completadas)
 ```
 
 > **Nota:** Este indicador visual representa el avance global del proyecto calculado a partir de las tareas completadas versus el total planificado en el tablero. Debe actualizarse manualmente a medida que se ejecuten y verifiquen nuevas actividades con evidencia respaldada en el repositorio.
@@ -263,7 +263,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - [x] Registro de los modelos `Municipio`, `Categoria` y `Servicio` en `admin.py`
 - [x] Creación y configuración del usuario administrador (superuser)
 - [x] Verificación y validación del panel administrativo de Django
-- [ ] Implementar pruebas unitarias automatizadas con `APITestCase`
+- [x] Implementar pruebas unitarias automatizadas con `APITestCase`
 
 ### 🟣 Fase 3 — Frontend
 
