@@ -216,7 +216,7 @@ La infraestructura de pruebas utiliza el framework de testing nativo de Django y
 ## 11. Estado del Documento
 
 ```text
-Fase: 0 — Análisis y planificación
-Estado: Diseño de arquitectura backend Django/DRF
-Implementación: Pendiente
+Fase: 2 — Backend
+Estado: Backend Django/DRF e integración PostgreSQL implementados y verificados
+Implementación: Completada (Servicios API REST, PostgreSQL, Admin, Seed Data, Filtros)
 ```
