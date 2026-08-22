@@ -1,4 +1,5 @@
 
+# pyrefly: ignore [missing-import]
 from django.core.management.base import BaseCommand
 
 # pyrefly: ignore [missing-import]
