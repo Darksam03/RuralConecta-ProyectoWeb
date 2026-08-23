@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Categorías de trámites y servicios comunitarios en RuralConecta Antioquia.">
+  <title>Categorías de Servicios | RuralConecta</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="categorias">
+
+  <!-- Barra Superior Informativa -->
+  <aside class="top-bar" aria-label="Información institucional">
+    <div class="container">
+      <span>🇨🇴 Plataforma de Consulta de Trámites y Servicios - Departamento de Antioquia</span>
+    </div>
+  </aside>
+
+  <!-- Encabezado Principal y Navegación -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="RuralConecta Inicio">
+        <div class="brand-icon" aria-hidden="true">🌱</div>
+        <div class="brand-text">
+          <span class="brand-name">RuralConecta</span>
+          <span class="brand-tagline">Antioquia Rural</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="main-nav">
+        ☰
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Navegación principal">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="municipios.html" class="nav-link">Municipios</a>
+        <a href="categorias.html" class="nav-link active">Categorías</a>
+        <a href="servicios.html" class="nav-link">Servicios</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main>
+    <div class="container">
+
+      <!-- Miga de Pan (Breadcrumbs) -->
+      <nav class="breadcrumbs" aria-label="Ruta de navegación">
+        <a href="index.html">Inicio</a>
+        <span class="breadcrumbs-separator">/</span>
+        <a href="municipios.html">Municipios</a>
+        <span class="breadcrumbs-separator">/</span>
+        <span class="breadcrumbs-current" aria-current="page">Categorías</span>
+      </nav>
+
+      <!-- Encabezado de la Sección -->
+      <header class="mb-6">
+        <h1>Categorías de Servicios</h1>
+        <p class="mt-4">
+          Selecciona el área temática para acceder a los trámites, requisitos y canales de atención correspondientes.
+        </p>
+
+        <!-- Indicador de Municipio Seleccionado (dinámico o contextual) -->
+        <div class="mt-4" id="municipio-context-banner">
+          <span class="text-muted" style="font-size: var(--font-size-sm);">Municipio activo: </span>
+          <span class="badge badge-green" id="current-municipio-badge">Todos los municipios</span>
+          <a href="municipios.html" class="btn btn-outline btn-sm" style="margin-left: var(--space-2);">Cambiar municipio</a>
+        </div>
+      </header>
+
+      <!-- Contenedor del Catálogo de Categorías -->
+      <section aria-label="Listado de categorías temáticas">
+        <div id="categorias-container" class="grid-cards">
+
+          <!-- Categoría 1: Salud -->
+          <article class="card card-interactive categoria-card">
+            <div class="card-icon" aria-hidden="true">🏥</div>
+            <h2 class="card-title">Salud</h2>
+            <p class="card-body">
+              Atención médica básica, centros y puestos de salud veredales, brigadas de vacunación, afiliación al régimen subsidiado y traslado de pacientes.
+            </p>
+            <div class="card-footer">
+              <span class="badge badge-blue">Servicios Esenciales</span>
+              <a href="servicios.html?categoria=salud" class="btn btn-primary btn-sm">Ver servicios →</a>
+            </div>
+          </article>
+
+          <!-- Categoría 2: Educación -->
+          <article class="card card-interactive categoria-card">
+            <div class="card-icon" aria-hidden="true">🎓</div>
+            <h2 class="card-title">Educación</h2>
+            <p class="card-body">
+              Matrículas en centros educativos rurales, rutas de transporte escolar, Programa de Alimentación Escolar (PAE) y capacitaciones agropecuarias del SENA.
+            </p>
+            <div class="card-footer">
+              <span class="badge badge-blue">Formación y Niñez</span>
+              <a href="servicios.html?categoria=educacion" class="btn btn-primary btn-sm">Ver servicios →</a>
+            </div>
+          </article>
+
+          <!-- Categoría 3: Transporte -->
+          <article class="card card-interactive categoria-card">
+            <div class="card-icon" aria-hidden="true">🚌</div>
+            <h2 class="card-title">Transporte</h2>
+            <p class="card-body">
+              Horarios de chivas y líneas camperas veredales, tarifas oficiales de transporte rural, estado de vías terciarias y permisos de carga agrícola.
+            </p>
+            <div class="card-footer">
+              <span class="badge badge-blue">Movilidad Rural</span>
+              <a href="servicios.html?categoria=transporte" class="btn btn-primary btn-sm">Ver servicios →</a>
+            </div>
+          </article>
+
+          <!-- Categoría 4: Servicios Públicos -->
+          <article class="card card-interactive categoria-card">
+            <div class="card-icon" aria-hidden="true">💧</div>
+            <h2 class="card-title">Servicios Públicos</h2>
+            <p class="card-body">
+              Gestión de acueductos veredales comunitarios, servicio de energía rural, alumbrado público, recolección de basuras y reporte de daños en redes.
+            </p>
+            <div class="card-footer">
+              <span class="badge badge-blue">Servicios Básicos</span>
+              <a href="servicios.html?categoria=servicios-publicos" class="btn btn-primary btn-sm">Ver servicios →</a>
+            </div>
+          </article>
+
+          <!-- Categoría 5: Apoyos Sociales -->
+          <article class="card card-interactive categoria-card">
+            <div class="card-icon" aria-hidden="true">🤝</div>
+            <h2 class="card-title">Apoyos Sociales</h2>
+            <p class="card-body">
+              Inscripción a subsidios campesinos, programas de adulto mayor, asistencia técnica de la Secretaría de Agricultura y subsidios para mejoramiento de vivienda rural.
+            </p>
+            <div class="card-footer">
+              <span class="badge badge-amber">Beneficios Sociales</span>
+              <a href="servicios.html?categoria=apoyos-sociales" class="btn btn-primary btn-sm">Ver servicios →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Pie de Página (Footer) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-brand-title">🌱 RuralConecta</h3>
+          <p class="footer-brand-desc">
+            Iniciativa digital para acercar los servicios institucionales y trámites a los habitantes de las zonas rurales de Antioquia.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer-nav-title">Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="municipios.html">Municipios de Antioquia</a></li>
+            <li><a href="categorias.html">Categorías de Servicios</a></li>
+            <li><a href="servicios.html">Listado de Servicios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-nav-title">Información</h4>
+          <ul class="footer-links">
+            <li><span style="color: #94a3b8;">Departamento de Antioquia</span></li>
+            <li><span style="color: #94a3b8;">Proyecto Web Académico</span></li>
+            <li><span style="color: #94a3b8;">Arquitectura REST Desacoplada</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 RuralConecta. Todos los derechos reservados.</p>
+        <p>Desarrollado para comunidades rurales de Antioquia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

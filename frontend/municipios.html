@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo de municipios rurales de Antioquia en RuralConecta. Encuentra trámites y servicios locales.">
+  <title>Municipios | RuralConecta</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="municipios">
+
+  <!-- Barra Superior Informativa -->
+  <aside class="top-bar" aria-label="Información institucional">
+    <div class="container">
+      <span>🇨🇴 Plataforma de Consulta de Trámites y Servicios - Departamento de Antioquia</span>
+    </div>
+  </aside>
+
+  <!-- Encabezado Principal y Navegación -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="RuralConecta Inicio">
+        <div class="brand-icon" aria-hidden="true">🌱</div>
+        <div class="brand-text">
+          <span class="brand-name">RuralConecta</span>
+          <span class="brand-tagline">Antioquia Rural</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="main-nav">
+        ☰
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Navegación principal">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="municipios.html" class="nav-link active">Municipios</a>
+        <a href="categorias.html" class="nav-link">Categorías</a>
+        <a href="servicios.html" class="nav-link">Servicios</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main>
+    <div class="container">
+
+      <!-- Miga de Pan (Breadcrumbs) -->
+      <nav class="breadcrumbs" aria-label="Ruta de navegación">
+        <a href="index.html">Inicio</a>
+        <span class="breadcrumbs-separator">/</span>
+        <span class="breadcrumbs-current" aria-current="page">Municipios</span>
+      </nav>
+
+      <!-- Encabezado de la Sección -->
+      <header class="mb-6">
+        <h1>Municipios de Antioquia</h1>
+        <p class="mt-4">
+          Selecciona tu municipio para explorar los servicios públicos, asistencias y trámites disponibles en tu comunidad rural.
+        </p>
+      </header>
+
+      <!-- Barra de Búsqueda y Filtro Rápido -->
+      <section class="filter-bar" aria-label="Búsqueda de municipios">
+        <div class="search-group">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input 
+            type="search" 
+            id="search-municipio" 
+            class="search-input" 
+            placeholder="Buscar por nombre de municipio o subregión..."
+            aria-label="Buscar municipio">
+        </div>
+        <div>
+          <span class="badge badge-green" id="municipios-counter">Mostrando municipios de Antioquia</span>
+        </div>
+      </section>
+
+      <!-- Contenedor del Catálogo de Municipios -->
+      <section aria-label="Listado de municipios">
+        <div id="municipios-container" class="grid-cards">
+
+          <!-- Tarjeta Municipio 1 -->
+          <article class="card card-interactive municipio-card" data-name="Santa Fe de Antioquia" data-subregion="Occidente">
+            <div class="card-header">
+              <span class="badge badge-green">Occidente</span>
+              <span style="font-size: 1.25rem;">🏛️</span>
+            </div>
+            <h2 class="card-title">Santa Fe de Antioquia</h2>
+            <p class="card-body">
+              Punto de atención para comunidades ribereñas y veredas de la subregión del Occidente antioqueño.
+            </p>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Trámites activos</span>
+              <a href="categorias.html?municipio_id=1&municipio_nombre=Santa+Fe+de+Antioquia" class="btn btn-primary btn-sm">Seleccionar →</a>
+            </div>
+          </article>
+
+          <!-- Tarjeta Municipio 2 -->
+          <article class="card card-interactive municipio-card" data-name="Jericó" data-subregion="Suroeste">
+            <div class="card-header">
+              <span class="badge badge-green">Suroeste</span>
+              <span style="font-size: 1.25rem;">☕</span>
+            </div>
+            <h2 class="card-title">Jericó</h2>
+            <p class="card-body">
+              Servicios dirigidos a productores cafeteros, veredas de ladera y el casco urbano municipal.
+            </p>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Trámites activos</span>
+              <a href="categorias.html?municipio_id=2&municipio_nombre=Jericó" class="btn btn-primary btn-sm">Seleccionar →</a>
+            </div>
+          </article>
+
+          <!-- Tarjeta Municipio 3 -->
+          <article class="card card-interactive municipio-card" data-name="Sonsón" data-subregion="Oriente">
+            <div class="card-header">
+              <span class="badge badge-green">Oriente</span>
+              <span style="font-size: 1.25rem;">🏔️</span>
+            </div>
+            <h2 class="card-title">Sonsón</h2>
+            <p class="card-body">
+              Atención integral para la vasta zona rural y corregimientos de páramo y vertiente.
+            </p>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Trámites activos</span>
+              <a href="categorias.html?municipio_id=3&municipio_nombre=Sonsón" class="btn btn-primary btn-sm">Seleccionar →</a>
+            </div>
+          </article>
+
+          <!-- Tarjeta Municipio 4 -->
+          <article class="card card-interactive municipio-card" data-name="Jardín" data-subregion="Suroeste">
+            <div class="card-header">
+              <span class="badge badge-green">Suroeste</span>
+              <span style="font-size: 1.25rem;">🌺</span>
+            </div>
+            <h2 class="card-title">Jardín</h2>
+            <p class="card-body">
+              Información de trámites agrarios, resguardos indígenas y servicios asistenciales veredales.
+            </p>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Trámites activos</span>
+              <a href="categorias.html?municipio_id=4&municipio_nombre=Jardín" class="btn btn-primary btn-sm">Seleccionar →</a>
+            </div>
+          </article>
+
+          <!-- Tarjeta Municipio 5 -->
+          <article class="card card-interactive municipio-card" data-name="San Pedro de los Milagros" data-subregion="Norte">
+            <div class="card-header">
+              <span class="badge badge-green">Norte</span>
+              <span style="font-size: 1.25rem;">🥛</span>
+            </div>
+            <h2 class="card-title">San Pedro de los Milagros</h2>
+            <p class="card-body">
+              Programas y servicios para la cuenca lechera, apoyo al productor pecuario y servicios de salud.
+            </p>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Trámites activos</span>
+              <a href="categorias.html?municipio_id=5&municipio_nombre=San+Pedro+de+los+Milagros" class="btn btn-primary btn-sm">Seleccionar →</a>
+            </div>
+          </article>
+
+          <!-- Tarjeta Municipio 6 -->
+          <article class="card card-interactive municipio-card" data-name="Apartadó" data-subregion="Urabá">
+            <div class="card-header">
+              <span class="badge badge-green">Urabá</span>
+              <span style="font-size: 1.25rem;">🌴</span>
+            </div>
+            <h2 class="card-title">Apartadó</h2>
+            <p class="card-body">
+              Gestiones y trámites para comunidades del eje bananero y zonas rurales del Urabá antioqueño.
+            </p>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Trámites activos</span>
+              <a href="categorias.html?municipio_id=6&municipio_nombre=Apartadó" class="btn btn-primary btn-sm">Seleccionar →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Pie de Página (Footer) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-brand-title">🌱 RuralConecta</h3>
+          <p class="footer-brand-desc">
+            Iniciativa digital para acercar los servicios institucionales y trámites a los habitantes de las zonas rurales de Antioquia.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer-nav-title">Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="municipios.html">Municipios de Antioquia</a></li>
+            <li><a href="categorias.html">Categorías de Servicios</a></li>
+            <li><a href="servicios.html">Listado de Servicios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-nav-title">Información</h4>
+          <ul class="footer-links">
+            <li><span style="color: #94a3b8;">Departamento de Antioquia</span></li>
+            <li><span style="color: #94a3b8;">Proyecto Web Académico</span></li>
+            <li><span style="color: #94a3b8;">Arquitectura REST Desacoplada</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 RuralConecta. Todos los derechos reservados.</p>
+        <p>Desarrollado para comunidades rurales de Antioquia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

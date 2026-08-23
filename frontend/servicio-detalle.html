@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detalle del servicio rural, requisitos, horarios de atención, ubicación y canales de contacto.">
+  <title>Detalle del Servicio | RuralConecta</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="servicio-detalle">
+
+  <!-- Barra Superior Informativa -->
+  <aside class="top-bar" aria-label="Información institucional">
+    <div class="container">
+      <span>🇨🇴 Plataforma de Consulta de Trámites y Servicios - Departamento de Antioquia</span>
+    </div>
+  </aside>
+
+  <!-- Encabezado Principal y Navegación -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="RuralConecta Inicio">
+        <div class="brand-icon" aria-hidden="true">🌱</div>
+        <div class="brand-text">
+          <span class="brand-name">RuralConecta</span>
+          <span class="brand-tagline">Antioquia Rural</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="main-nav">
+        ☰
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Navegación principal">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="municipios.html" class="nav-link">Municipios</a>
+        <a href="categorias.html" class="nav-link">Categorías</a>
+        <a href="servicios.html" class="nav-link active">Servicios</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main>
+    <div class="container">
+
+      <!-- Miga de Pan (Breadcrumbs) -->
+      <nav class="breadcrumbs" aria-label="Ruta de navegación">
+        <a href="index.html">Inicio</a>
+        <span class="breadcrumbs-separator">/</span>
+        <a href="servicios.html">Servicios</a>
+        <span class="breadcrumbs-separator">/</span>
+        <span class="breadcrumbs-current" aria-current="page" id="breadcrumb-service-title">Cita Médica en Puesto de Salud Veredal</span>
+      </nav>
+
+      <!-- Estructura de Detalle (Contenido + Barra Lateral) -->
+      <div class="detail-layout">
+
+        <!-- Columna Principal -->
+        <article class="detail-main-card" id="service-detail-container">
+          
+          <header class="detail-header">
+            <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-3); flex-wrap: wrap;">
+              <span class="badge badge-green" id="detail-category-badge">Salud</span>
+              <span class="badge badge-blue" id="detail-municipio-badge">Jericó</span>
+              <span class="badge badge-amber">Trámite Gratuito</span>
+            </div>
+            <h1 class="detail-title" id="detail-title">Cita Médica en Puesto de Salud Veredal</h1>
+            <p class="detail-subtitle" id="detail-entity">
+              Entidad prestadora: <strong>E.S.E. Hospital San Rafael de Jericó</strong>
+            </p>
+          </header>
+
+          <!-- Sección: Descripción -->
+          <section class="detail-section" aria-labelledby="desc-heading">
+            <h2 id="desc-heading" class="detail-section-title">
+              <span>📋</span> Descripción del Servicio
+            </h2>
+            <p id="detail-description">
+              Servicio de atención médica general preventiva y curativa, enfermería básica y control de programas de promoción y prevención (crecimiento y desarrollo, control prenatal, hipertensión y diabetes) directamente en los centros y puestos de salud ubicados en las veredas y corregimientos del municipio.
+            </p>
+          </section>
+
+          <!-- Sección: Requisitos -->
+          <section class="detail-section" aria-labelledby="req-heading">
+            <h2 id="req-heading" class="detail-section-title">
+              <span>📝</span> Requisitos y Documentación Necesaria
+            </h2>
+            <ul class="requirements-list" id="detail-requirements">
+              <li>Documento de identidad original (Cédula de Ciudadanía, Tarjeta de Identidad o Registro Civil).</li>
+              <li>Estar afiliado al Régimen Subsidiado (SISBÉN) o Contributivo en el municipio.</li>
+              <li>Carné de citas o historia clínica previa si asiste por primera vez al puesto de salud veredal.</li>
+              <li>Para menores de edad, asistir en compañía de un adulto responsable o acudiente.</li>
+            </ul>
+          </section>
+
+          <!-- Sección: Pasos para el trámite -->
+          <section class="detail-section" aria-labelledby="steps-heading">
+            <h2 id="steps-heading" class="detail-section-title">
+              <span>🚶</span> Pasos para Realizar el Trámite
+            </h2>
+            <ol class="requirements-list" style="list-style-type: decimal;">
+              <li>Acercarse en el horario de asignación de citas o llamar a la línea veredal del hospital.</li>
+              <li>Presentar el documento de identidad en ventanilla de recepción.</li>
+              <li>Confirmar la cita para el día de visita del médico rural a la vereda.</li>
+              <li>Llegar 15 minutos antes de la hora fijada para el triaje de enfermería.</li>
+            </ol>
+          </section>
+
+          <!-- Sección: Horarios -->
+          <section class="detail-section" aria-labelledby="hours-heading">
+            <h2 id="hours-heading" class="detail-section-title">
+              <span>⏰</span> Horarios y Días de Atención
+            </h2>
+            <p id="detail-hours">
+              <strong>Atención médica presencial:</strong> Martes y Jueves de 8:00 AM a 2:00 PM.<br>
+              <strong>Urgencias y primeros auxilios:</strong> Traslado en ambulancia hacia el hospital central las 24 horas del día.
+            </p>
+          </section>
+
+        </article>
+
+        <!-- Barra Lateral Informativa -->
+        <aside class="detail-sidebar" aria-label="Información complementaria y contacto">
+
+          <!-- Tarjeta: Ubicación -->
+          <div class="sidebar-card">
+            <h2 class="sidebar-card-title">📍 Ubicación Física</h2>
+            <div class="contact-list">
+              <div class="contact-item">
+                <span class="contact-icon" aria-hidden="true">📌</span>
+                <div>
+                  <span class="contact-info-label">Puesto de Salud Veredal</span>
+                  <span class="contact-info-value" id="detail-address">Vereda Castalia, a 200m de la Escuela Rural, Jericó, Antioquia</span>
+                </div>
+              </div>
+              <div class="contact-item">
+                <span class="contact-icon" aria-hidden="true">🗺️</span>
+                <div>
+                  <span class="contact-info-label">Referencia</span>
+                  <span class="contact-info-value">Frente a la caseta comunal veredal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta: Contacto Directo -->
+          <div class="sidebar-card">
+            <h2 class="sidebar-card-title">📞 Canales de Contacto</h2>
+            <div class="contact-list">
+              <div class="contact-item">
+                <span class="contact-icon" aria-hidden="true">📱</span>
+                <div>
+                  <span class="contact-info-label">Teléfono / WhatsApp</span>
+                  <span class="contact-info-value" id="detail-phone">+57 (604) 856-7890 / 311 000 0000</span>
+                </div>
+              </div>
+              <div class="contact-item">
+                <span class="contact-icon" aria-hidden="true">✉️</span>
+                <div>
+                  <span class="contact-info-label">Correo Electrónico</span>
+                  <span class="contact-info-value" id="detail-email">atencion@hospitaljerico.gov.co</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Acciones de Navegación -->
+          <div class="sidebar-card text-center">
+            <a href="servicios.html" class="btn btn-outline" style="width: 100%; margin-bottom: var(--space-3);">
+              ← Volver al listado
+            </a>
+            <a href="municipios.html" class="btn btn-secondary" style="width: 100%;">
+              Cambiar Municipio
+            </a>
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Pie de Página (Footer) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-brand-title">🌱 RuralConecta</h3>
+          <p class="footer-brand-desc">
+            Iniciativa digital para acercar los servicios institucionales y trámites a los habitantes de las zonas rurales de Antioquia.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer-nav-title">Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="municipios.html">Municipios de Antioquia</a></li>
+            <li><a href="categorias.html">Categorías de Servicios</a></li>
+            <li><a href="servicios.html">Listado de Servicios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-nav-title">Información</h4>
+          <ul class="footer-links">
+            <li><span style="color: #94a3b8;">Departamento de Antioquia</span></li>
+            <li><span style="color: #94a3b8;">Proyecto Web Académico</span></li>
+            <li><span style="color: #94a3b8;">Arquitectura REST Desacoplada</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 RuralConecta. Todos los derechos reservados.</p>
+        <p>Desarrollado para comunidades rurales de Antioquia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

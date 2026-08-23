@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Listado de servicios y trámites rurales en municipios de Antioquia. Requisitos, horarios y contacto.">
+  <title>Servicios y Trámites | RuralConecta</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="servicios">
+
+  <!-- Barra Superior Informativa -->
+  <aside class="top-bar" aria-label="Información institucional">
+    <div class="container">
+      <span>🇨🇴 Plataforma de Consulta de Trámites y Servicios - Departamento de Antioquia</span>
+    </div>
+  </aside>
+
+  <!-- Encabezado Principal y Navegación -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="RuralConecta Inicio">
+        <div class="brand-icon" aria-hidden="true">🌱</div>
+        <div class="brand-text">
+          <span class="brand-name">RuralConecta</span>
+          <span class="brand-tagline">Antioquia Rural</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="main-nav">
+        ☰
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Navegación principal">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="municipios.html" class="nav-link">Municipios</a>
+        <a href="categorias.html" class="nav-link">Categorías</a>
+        <a href="servicios.html" class="nav-link active">Servicios</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main>
+    <div class="container">
+
+      <!-- Miga de Pan (Breadcrumbs) -->
+      <nav class="breadcrumbs" aria-label="Ruta de navegación">
+        <a href="index.html">Inicio</a>
+        <span class="breadcrumbs-separator">/</span>
+        <span class="breadcrumbs-current" aria-current="page">Servicios</span>
+      </nav>
+
+      <!-- Encabezado de la Sección -->
+      <header class="mb-6">
+        <h1>Servicios y Trámites Disponibles</h1>
+        <p class="mt-4">
+          Explora la oferta de trámites públicos y asistencias comunitarias disponibles para los habitantes del campo antioqueño.
+        </p>
+      </header>
+
+      <!-- Barra de Filtros y Búsqueda -->
+      <section class="filter-bar" aria-label="Filtros de servicios">
+        <div class="search-group">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input 
+            type="search" 
+            id="search-servicio" 
+            class="search-input" 
+            placeholder="Buscar trámite, servicio o entidad..."
+            aria-label="Buscar servicio">
+        </div>
+
+        <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+          <select id="filter-municipio" class="filter-select" aria-label="Filtrar por municipio">
+            <option value="">Todos los municipios</option>
+            <option value="Santa Fe de Antioquia">Santa Fe de Antioquia</option>
+            <option value="Jericó">Jericó</option>
+            <option value="Sonsón">Sonsón</option>
+            <option value="Jardín">Jardín</option>
+            <option value="San Pedro de los Milagros">San Pedro de los Milagros</option>
+            <option value="Apartadó">Apartadó</option>
+          </select>
+
+          <select id="filter-categoria" class="filter-select" aria-label="Filtrar por categoría">
+            <option value="">Todas las categorías</option>
+            <option value="salud">Salud</option>
+            <option value="educacion">Educación</option>
+            <option value="transporte">Transporte</option>
+            <option value="servicios-publicos">Servicios Públicos</option>
+            <option value="apoyos-sociales">Apoyos Sociales</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Contenedor del Listado de Servicios -->
+      <section aria-label="Catálogo de servicios">
+        <div id="servicios-container" class="grid-cards">
+
+          <!-- Tarjeta de Servicio 1 -->
+          <article class="card servicio-card" data-title="Cita Médica en Puesto de Salud Veredal" data-desc="Asignación de citas de medicina general y odontología para usuarios del régimen subsidiado en veredas." data-municipio="Jericó" data-categoria="salud">
+            <div class="card-header">
+              <span class="badge badge-green">Salud</span>
+              <span class="badge badge-gray">Jericó</span>
+            </div>
+            <h2 class="card-title">Cita Médica en Puesto de Salud Veredal</h2>
+            <p class="card-body">
+              Asignación de citas de medicina general, enfermería y odontología básica para usuarios de las veredas y corregimientos.
+            </p>
+            <div class="card-meta">
+              <div class="card-meta-item">
+                <span>🏛️</span>
+                <span>E.S.E Hospital San Rafael</span>
+              </div>
+              <div class="card-meta-item">
+                <span>⏰</span>
+                <span>Lun a Vie: 7:00 AM - 3:00 PM</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Trámite Gratuito</span>
+              <a href="servicio-detalle.html?id=1" class="btn btn-primary btn-sm">Ver detalles →</a>
+            </div>
+          </article>
+
+          <!-- Tarjeta de Servicio 2 -->
+          <article class="card servicio-card" data-title="Inscripción a Ruta de Transporte Escolar Rural" data-desc="Solicitud de cupo en las líneas de transporte veredal escolar para niños y jóvenes estudiantes." data-municipio="Sonsón" data-categoria="educacion">
+            <div class="card-header">
+              <span class="badge badge-green">Educación</span>
+              <span class="badge badge-gray">Sonsón</span>
+            </div>
+            <h2 class="card-title">Inscripción a Ruta Escolar Rural</h2>
+            <p class="card-body">
+              Solicitud de cupo en las rutas de transporte contratadas para estudiantes matriculados en sedes educativas rurales.
+            </p>
+            <div class="card-meta">
+              <div class="card-meta-item">
+                <span>🏛️</span>
+                <span>Secretaría de Educación Municipal</span>
+              </div>
+              <div class="card-meta-item">
+                <span>⏰</span>
+                <span>Lun a Vie: 8:00 AM - 12:00 M</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Programa Oficial</span>
+              <a href="servicio-detalle.html?id=2" class="btn btn-primary btn-sm">Ver detalles →</a>
+            </div>
+          </article>
+
+          <!-- Tarjeta de Servicio 3 -->
+          <article class="card servicio-card" data-title="Reporte de Daños en Red de Acueducto Veredal" data-desc="Canal de atención para notificar fugas o corte de suministro en acueductos comunitarios." data-municipio="Santa Fe de Antioquia" data-categoria="servicios-publicos">
+            <div class="card-header">
+              <span class="badge badge-green">Servicios Públicos</span>
+              <span class="badge badge-gray">Santa Fe de Antioquia</span>
+            </div>
+            <h2 class="card-title">Reporte de Daños en Acueducto Veredal</h2>
+            <p class="card-body">
+              Canal de notificación inmediata para reportar suspensiones de agua, roturas de tubería o emergencias en la bocatoma veredal.
+            </p>
+            <div class="card-meta">
+              <div class="card-meta-item">
+                <span>🏛️</span>
+                <span>Junta Administradora de Acueducto</span>
+              </div>
+              <div class="card-meta-item">
+                <span>⏰</span>
+                <span>Línea telefónica 24 Horas</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Atención Comunitaria</span>
+              <a href="servicio-detalle.html?id=3" class="btn btn-primary btn-sm">Ver detalles →</a>
+            </div>
+          </article>
+
+          <!-- Tarjeta de Servicio 4 -->
+          <article class="card servicio-card" data-title="Consulta de Horarios de Líneas Camperas" data-desc="Información de frecuencias, paraderos y tarifas de las chivas y camperos interveredales." data-municipio="Jardín" data-categoria="transporte">
+            <div class="card-header">
+              <span class="badge badge-green">Transporte</span>
+              <span class="badge badge-gray">Jardín</span>
+            </div>
+            <h2 class="card-title">Horarios de Líneas Camperas</h2>
+            <p class="card-body">
+              Guía de frecuencias de salida desde el parque principal hacia las diferentes veredas, con tarifas fijadas por la cooperativa.
+            </p>
+            <div class="card-meta">
+              <div class="card-meta-item">
+                <span>🏛️</span>
+                <span>Cooperativa de Transportadores Rurales</span>
+              </div>
+              <div class="card-meta-item">
+                <span>⏰</span>
+                <span>Todos los días: 5:00 AM - 6:00 PM</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Tarifas Reguladas</span>
+              <a href="servicio-detalle.html?id=4" class="btn btn-primary btn-sm">Ver detalles →</a>
+            </div>
+          </article>
+
+          <!-- Tarjeta de Servicio 5 -->
+          <article class="card servicio-card" data-title="Visita de Asistencia Técnica Agropecuaria" data-desc="Acompañamiento agronómico y veterinario en finca para pequeños productores campesinos." data-municipio="San Pedro de los Milagros" data-categoria="apoyos-sociales">
+            <div class="card-header">
+              <span class="badge badge-amber">Apoyos Sociales</span>
+              <span class="badge badge-gray">San Pedro de los Milagros</span>
+            </div>
+            <h2 class="card-title">Asistencia Técnica Agropecuaria</h2>
+            <p class="card-body">
+              Solicitud de visita técnica en predio para asesoría en manejo de praderas, sanidad animal, cultivos sostenibles y buenas prácticas.
+            </p>
+            <div class="card-meta">
+              <div class="card-meta-item">
+                <span>🏛️</span>
+                <span>UMATA / Secretaría de Agricultura</span>
+              </div>
+              <div class="card-meta-item">
+                <span>⏰</span>
+                <span>Lun a Jue: 7:30 AM - 4:30 PM</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Servicio Municipal</span>
+              <a href="servicio-detalle.html?id=5" class="btn btn-primary btn-sm">Ver detalles →</a>
+            </div>
+          </article>
+
+          <!-- Tarjeta de Servicio 6 -->
+          <article class="card servicio-card" data-title="Jornada Móvil de Vacunación Rural" data-desc="Programación de brigadas de vacunación infantil y esquema regular en caseríos veredales." data-municipio="Apartadó" data-categoria="salud">
+            <div class="card-header">
+              <span class="badge badge-green">Salud</span>
+              <span class="badge badge-gray">Apartadó</span>
+            </div>
+            <h2 class="card-title">Jornada Móvil de Vacunación Rural</h2>
+            <p class="card-body">
+              Cronograma de llegada del equipo móvil de salud para aplicación del esquema nacional de vacunas a niños, adultos mayores y gestantes.
+            </p>
+            <div class="card-meta">
+              <div class="card-meta-item">
+                <span>🏛️</span>
+                <span>Hospital Antonio Roldán Betancur</span>
+              </div>
+              <div class="card-meta-item">
+                <span>⏰</span>
+                <span>Sábados: 8:00 AM - 1:00 PM</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="text-muted" style="font-size: var(--font-size-xs);">Acceso Gratuito</span>
+              <a href="servicio-detalle.html?id=6" class="btn btn-primary btn-sm">Ver detalles →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Pie de Página (Footer) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-brand-title">🌱 RuralConecta</h3>
+          <p class="footer-brand-desc">
+            Iniciativa digital para acercar los servicios institucionales y trámites a los habitantes de las zonas rurales de Antioquia.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer-nav-title">Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="municipios.html">Municipios de Antioquia</a></li>
+            <li><a href="categorias.html">Categorías de Servicios</a></li>
+            <li><a href="servicios.html">Listado de Servicios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-nav-title">Información</h4>
+          <ul class="footer-links">
+            <li><span style="color: #94a3b8;">Departamento de Antioquia</span></li>
+            <li><span style="color: #94a3b8;">Proyecto Web Académico</span></li>
+            <li><span style="color: #94a3b8;">Arquitectura REST Desacoplada</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 RuralConecta. Todos los derechos reservados.</p>
+        <p>Desarrollado para comunidades rurales de Antioquia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
