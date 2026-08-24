@@ -3,173 +3,437 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="RuralConecta - Centraliza y facilita la consulta de trámites y servicios en municipios rurales de Antioquia.">
-  <title>RuralConecta | Trámites y Servicios Rurales de Antioquia</title>
+  <meta name="description" content="RuralConecta — Plataforma web para la consulta centralizada de servicios esenciales y trámites en comunidades rurales de Antioquia, Colombia.">
+  <meta name="keywords" content="RuralConecta, Antioquia, servicios rurales, trámites, salud rural, educación rural, transporte veredal, servicios públicos">
+  <meta name="author" content="Equipo RuralConecta">
+  <title>RuralConecta | Servicios y Trámites para Comunidades Rurales</title>
+
+  <!-- Hoja de estilos principal -->
   <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Script de interacción principal -->
+  <script src="js/main.js" defer></script>
 </head>
-<body data-page="home">
+<body>
 
-  <!-- Barra Superior Informativa -->
-  <aside class="top-bar" aria-label="Información institucional">
-    <div class="container">
-      <span>🇨🇴 Plataforma de Consulta de Trámites y Servicios - Departamento de Antioquia</span>
-    </div>
-  </aside>
-
-  <!-- Encabezado Principal y Navegación -->
-  <header class="site-header">
+  <!-- ======================================================================
+       ENCABEZADO Y NAVEGACIÓN PRINCIPAL
+       ====================================================================== -->
+  <header class="site-header" id="header">
     <div class="container nav-container">
-      <a href="index.html" class="brand-logo" aria-label="RuralConecta Inicio">
-        <div class="brand-icon" aria-hidden="true">🌱</div>
-        <div class="brand-text">
-          <span class="brand-name">RuralConecta</span>
-          <span class="brand-tagline">Antioquia Rural</span>
+      
+      <!-- Logotipo y Nombre del Proyecto -->
+      <a href="index.html" class="site-logo" aria-label="RuralConecta - Ir a la página de inicio">
+        <div class="logo-icon-wrapper" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            <path d="M12 2v4"></path>
+          </svg>
+        </div>
+        <div class="logo-text-group">
+          <span class="logo-brand-name">Rural<span>Conecta</span></span>
+          <span class="logo-tagline">Antioquia Rural</span>
         </div>
       </a>
 
-      <!-- Botón Menú Móvil -->
-      <button class="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="main-nav">
-        ☰
+      <!-- Botón Hamburguesa para Móviles -->
+      <button 
+        id="menu-toggle" 
+        class="menu-toggle" 
+        aria-label="Abrir menú de navegación principal" 
+        aria-expanded="false" 
+        aria-controls="site-nav"
+      >
+        <svg class="menu-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
       </button>
 
       <!-- Menú de Navegación -->
-      <nav id="main-nav" class="main-nav" aria-label="Navegación principal">
-        <a href="index.html" class="nav-link active">Inicio</a>
-        <a href="municipios.html" class="nav-link">Municipios</a>
-        <a href="categorias.html" class="nav-link">Categorías</a>
-        <a href="servicios.html" class="nav-link">Servicios</a>
+      <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link active" aria-current="page">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a href="municipios.html" class="nav-link">Municipios</a>
+          </li>
+          <li class="nav-item">
+            <a href="categorias.html" class="nav-link">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a href="servicios.html" class="nav-link">Servicios</a>
+          </li>
+        </ul>
       </nav>
+
     </div>
   </header>
 
-  <!-- Contenido Principal -->
-  <main>
-    <div class="container">
-      
-      <!-- Sección Hero -->
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="container">
-          <div class="hero-content">
-            <h1 id="hero-title" class="hero-title">Información de trámites y servicios para el campo antioqueño</h1>
-            <p class="hero-subtitle">
-              Consulta de forma rápida requisitos, horarios de atención, ubicaciones y canales de contacto de los servicios públicos y comunitarios disponibles en tu municipio.
-            </p>
-            <div class="hero-actions">
-              <a href="municipios.html" class="btn btn-primary btn-lg">Explorar Municipios</a>
-              <a href="servicios.html" class="btn btn-outline btn-lg" style="color: #ffffff; border-color: rgba(255,255,255,0.4);">Ver Todos los Servicios</a>
+  <!-- ======================================================================
+       CONTENIDO PRINCIPAL
+       ====================================================================== -->
+  <main id="main-content">
+
+    <!-- 1. HERO PRINCIPAL -->
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-content">
+          
+          <div class="hero-badge">
+            <span class="hero-badge-dot" aria-hidden="true"></span>
+            <span>Plataforma Ciudadana · Antioquia Rural</span>
+          </div>
+
+          <h1 id="hero-title" class="hero-title">
+            Servicios y trámites esenciales al alcance de las <span class="hero-title-highlight">comunidades rurales</span>
+          </h1>
+
+          <p class="hero-description">
+            Centralizamos la información de salud, educación, transporte, servicios públicos y programas sociales en los municipios rurales de Antioquia para que encuentres lo que necesitas sin desplazamientos innecesarios.
+          </p>
+
+          <div class="hero-actions">
+            <a href="municipios.html" class="btn btn-primary" id="btn-comenzar-consulta">
+              <span>Comenzar consulta</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#como-funciona" class="btn btn-secondary">
+              <span>Cómo funciona</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SECCIÓN INFORMATIVA — ¿CÓMO FUNCIONA? -->
+    <section id="como-funciona" class="section section-alt" aria-labelledby="steps-title">
+      <div class="container">
+        
+        <header class="section-header">
+          <span class="section-badge">Flujo de Consulta</span>
+          <h2 id="steps-title" class="section-title">¿Cómo funciona RuralConecta?</h2>
+          <p class="section-subtitle">
+            Encuentra información verídica y estructurada sobre los servicios de tu localidad en tres sencillos pasos.
+          </p>
+        </header>
+
+        <div class="steps-grid">
+          
+          <!-- Paso 1 -->
+          <article class="step-card">
+            <div class="step-header">
+              <div class="step-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <span class="step-number" aria-label="Paso 1">01</span>
             </div>
+            <h3 class="step-title">Selecciona tu municipio</h3>
+            <p class="step-description">
+              Explora el catálogo de municipios de Antioquia y elige tu localidad para consultar la oferta disponible en tu zona.
+            </p>
+            <span class="step-tag" aria-hidden="true">
+              Paso 1 del flujo →
+            </span>
+          </article>
+
+          <!-- Paso 2 -->
+          <article class="step-card">
+            <div class="step-header">
+              <div class="step-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+              </div>
+              <span class="step-number" aria-label="Paso 2">02</span>
+            </div>
+            <h3 class="step-title">Elige una categoría</h3>
+            <p class="step-description">
+              Filtra entre salud, educación, transporte, servicios públicos o apoyos sociales según la necesidad que requieras resolver.
+            </p>
+            <span class="step-tag" aria-hidden="true">
+              Paso 2 del flujo →
+            </span>
+          </article>
+
+          <!-- Paso 3 -->
+          <article class="step-card">
+            <div class="step-header">
+              <div class="step-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </div>
+              <span class="step-number" aria-label="Paso 3">03</span>
+            </div>
+            <h3 class="step-title">Consulta los servicios</h3>
+            <p class="step-description">
+              Accede a la ficha con dirección física, horarios de atención, requisitos previos necesarios y canales de contacto directo.
+            </p>
+            <span class="step-tag" aria-hidden="true">
+              Paso 3 del flujo →
+            </span>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. SECCIÓN DE CATEGORÍAS DISPONIBLES -->
+    <section class="section" aria-labelledby="categories-title">
+      <div class="container">
+        
+        <header class="section-header">
+          <span class="section-badge">Cobertura</span>
+          <h2 id="categories-title" class="section-title">Categorías de servicios esenciales</h2>
+          <p class="section-subtitle">
+            Información clasificada para responder de forma ágil a las principales necesidades ciudadanas.
+          </p>
+        </header>
+
+        <div class="categories-grid">
+          
+          <!-- Categoría 1: Salud -->
+          <div class="category-card">
+            <div class="category-icon-wrapper" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+              </svg>
+            </div>
+            <h3 class="category-title">Salud</h3>
+            <p class="category-desc">Puestos de salud, jornadas de vacunación, brigadas médicas y dispensarios comunitarios.</p>
           </div>
-        </div>
-      </section>
 
-      <!-- Sección Flujo de Consulta (Paso a Paso) -->
-      <section class="mb-10" aria-labelledby="steps-title">
-        <h2 id="steps-title" class="text-center mb-6">¿Cómo consultar tu trámite o servicio?</h2>
-        <div class="flow-steps">
-          <article class="step-card">
-            <div class="step-number" aria-hidden="true">1</div>
-            <h3 class="step-title">Selecciona tu Municipio</h3>
-            <p class="step-desc">Elige el municipio de Antioquia donde te encuentras o donde requieres realizar la gestión.</p>
-            <a href="municipios.html" class="btn btn-outline btn-sm mt-4">Ver municipios →</a>
-          </article>
-
-          <article class="step-card">
-            <div class="step-number" aria-hidden="true">2</div>
-            <h3 class="step-title">Elige la Categoría</h3>
-            <p class="step-desc">Filtra por Salud, Educación, Transporte, Servicios Públicos o Apoyos Sociales.</p>
-            <a href="categorias.html" class="btn btn-outline btn-sm mt-4">Ver categorías →</a>
-          </article>
-
-          <article class="step-card">
-            <div class="step-number" aria-hidden="true">3</div>
-            <h3 class="step-title">Revisa los Detalles</h3>
-            <p class="step-desc">Conoce requisitos previos, horarios, ubicación exacta y teléfonos de contacto antes de desplazarte.</p>
-            <a href="servicios.html" class="btn btn-outline btn-sm mt-4">Ver servicios →</a>
-          </article>
-        </div>
-      </section>
-
-      <!-- Sección Categorías Destacadas -->
-      <section class="mb-10" aria-labelledby="cat-title">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-6);">
-          <div>
-            <h2 id="cat-title">Categorías de Servicios</h2>
-            <p>Accede directamente al tipo de atención que necesitas</p>
+          <!-- Categoría 2: Educación -->
+          <div class="category-card">
+            <div class="category-icon-wrapper" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+            </div>
+            <h3 class="category-title">Educación</h3>
+            <p class="category-desc">Sedes rurales, programas de formación campesina, bibliotecas y alfabetización.</p>
           </div>
-          <a href="categorias.html" class="btn btn-outline btn-sm">Ver todas las categorías</a>
+
+          <!-- Categoría 3: Transporte -->
+          <div class="category-card">
+            <div class="category-icon-wrapper" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <h3 class="category-title">Transporte</h3>
+            <p class="category-desc">Rutas de transporte veredal, frecuencias de chivas/escaleras y cooperativas locales.</p>
+          </div>
+
+          <!-- Categoría 4: Servicios Públicos -->
+          <div class="category-card">
+            <div class="category-icon-wrapper" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="category-title">Servicios Públicos</h3>
+            <p class="category-desc">Puntos de atención de acueducto, energía, gas rural y reporte de fallas.</p>
+          </div>
+
+          <!-- Categoría 5: Apoyos Sociales -->
+          <div class="category-card">
+            <div class="category-icon-wrapper" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </div>
+            <h3 class="category-title">Apoyos Sociales</h3>
+            <p class="category-desc">Subsidios, asistencia agropecuaria, programas del adulto mayor y transferencias.</p>
+          </div>
+
         </div>
 
-        <div class="grid-cards">
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">🏥</div>
-            <h3 class="card-title">Salud</h3>
-            <p class="card-body">Centros de salud rural, brigadas médicas, vacunación y citas de atención prioritaria.</p>
-            <a href="servicios.html?categoria=salud" class="btn btn-outline btn-sm">Consultar trámites</a>
+      </div>
+    </section>
+
+    <!-- 4. SECCIÓN DE BENEFICIOS -->
+    <section class="section section-alt" aria-labelledby="benefits-title">
+      <div class="container">
+        
+        <header class="section-header">
+          <span class="section-badge">Ventajas</span>
+          <h2 id="benefits-title" class="section-title">Beneficios de la plataforma</h2>
+          <p class="section-subtitle">
+            Diseñada pensando en la realidad, accesibilidad y necesidades de conectividad del campo.
+          </p>
+        </header>
+
+        <div class="benefits-grid">
+          
+          <article class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+            <div class="benefit-content">
+              <h3 class="benefit-title">Información organizada</h3>
+              <p class="benefit-description">
+                Consulta los servicios y trámites agrupados en una sola plataforma, evitando la pérdida de información dispersa en carteleras o redes no oficiales.
+              </p>
+            </div>
           </article>
 
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">🎓</div>
-            <h3 class="card-title">Educación</h3>
-            <p class="card-body">Matrículas escolares, transporte estudiantil, programas de formación campesina y becas.</p>
-            <a href="servicios.html?categoria=educacion" class="btn btn-outline btn-sm">Consultar trámites</a>
+          <article class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+            <div class="benefit-content">
+              <h3 class="benefit-title">Consulta sencilla</h3>
+              <p class="benefit-description">
+                Navegación clara e intuitiva para que cualquier persona, sin importar su experiencia digital, encuentre rápidamente los requisitos y horarios que busca.
+              </p>
+            </div>
           </article>
 
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">🚌</div>
-            <h3 class="card-title">Transporte</h3>
-            <p class="card-body">Rutas veredales, horarios de chivas y camperos, estado de vías rurales y permisos.</p>
-            <a href="servicios.html?categoria=transporte" class="btn btn-outline btn-sm">Consultar trámites</a>
+          <article class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
+            </div>
+            <div class="benefit-content">
+              <h3 class="benefit-title">Acceso desde dispositivos móviles</h3>
+              <p class="benefit-description">
+                Diseño optimizado y liviano que consume pocos datos y se adapta perfectamente a teléfonos móviles y tabletas de cualquier gama.
+              </p>
+            </div>
           </article>
 
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">💧</div>
-            <h3 class="card-title">Servicios Públicos</h3>
-            <p class="card-body">Acueductos veredales, energía, recolección de residuos y reporte de averías.</p>
-            <a href="servicios.html?categoria=servicios-publicos" class="btn btn-outline btn-sm">Consultar trámites</a>
+          <article class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div class="benefit-content">
+              <h3 class="benefit-title">Información de servicios locales</h3>
+              <p class="benefit-description">
+                Detalles precisos sobre direcciones en cabeceras o veredas, números telefónicos directos y horarios reales de atención al ciudadano.
+              </p>
+            </div>
           </article>
+
         </div>
-      </section>
 
-    </div>
+      </div>
+    </section>
+
+    <!-- 5. LLAMADA A LA ACCIÓN FINAL -->
+    <section class="cta-section" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta-box">
+          <h2 id="cta-title" class="cta-title">¿Listo para consultar los servicios en tu municipio?</h2>
+          <p class="cta-description">
+            Explora el catálogo de municipios de Antioquia y consulta los requisitos previos antes de desplazarte.
+          </p>
+          <a href="municipios.html" class="btn btn-primary">
+            <span>Explorar municipios</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Pie de Página (Footer) -->
+  <!-- ======================================================================
+       PIE DE PÁGINA (FOOTER)
+       ====================================================================== -->
   <footer class="site-footer">
     <div class="container">
+      
       <div class="footer-grid">
-        <div>
-          <h3 class="footer-brand-title">🌱 RuralConecta</h3>
-          <p class="footer-brand-desc">
-            Iniciativa digital para acercar los servicios institucionales y trámites a los habitantes de las zonas rurales de Antioquia.
+        
+        <!-- Identidad Institucional -->
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <div class="footer-logo-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 1.25rem; height: 1.25rem;">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <span>RuralConecta</span>
+          </a>
+          <p class="footer-description">
+            Plataforma web para centralizar y facilitar el acceso a la información sobre servicios esenciales y trámites en comunidades rurales de Antioquia, Colombia.
           </p>
+          <div class="footer-badge">
+            <span>Proyecto Académico · MVP</span>
+          </div>
         </div>
-        <div>
-          <h4 class="footer-nav-title">Navegación</h4>
+
+        <!-- Enlaces Rápidos -->
+        <div class="footer-column">
+          <h3 class="footer-column-title">Navegación</h3>
           <ul class="footer-links">
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="municipios.html">Municipios de Antioquia</a></li>
-            <li><a href="categorias.html">Categorías de Servicios</a></li>
-            <li><a href="servicios.html">Listado de Servicios</a></li>
+            <li><a href="index.html" class="footer-link">Inicio</a></li>
+            <li><a href="municipios.html" class="footer-link">Municipios</a></li>
+            <li><a href="categorias.html" class="footer-link">Categorías</a></li>
+            <li><a href="servicios.html" class="footer-link">Servicios</a></li>
           </ul>
         </div>
-        <div>
-          <h4 class="footer-nav-title">Información</h4>
+
+        <!-- Categorías -->
+        <div class="footer-column">
+          <h3 class="footer-column-title">Categorías</h3>
           <ul class="footer-links">
-            <li><span style="color: #94a3b8;">Departamento de Antioquia</span></li>
-            <li><span style="color: #94a3b8;">Proyecto Web Académico</span></li>
-            <li><span style="color: #94a3b8;">Arquitectura REST Desacoplada</span></li>
+            <li><a href="servicios.html" class="footer-link">Salud</a></li>
+            <li><a href="servicios.html" class="footer-link">Educación</a></li>
+            <li><a href="servicios.html" class="footer-link">Transporte</a></li>
+            <li><a href="servicios.html" class="footer-link">Servicios Públicos</a></li>
+            <li><a href="servicios.html" class="footer-link">Apoyos Sociales</a></li>
           </ul>
         </div>
+
       </div>
 
+      <!-- Barra inferior de copyright -->
       <div class="footer-bottom">
-        <p>&copy; 2026 RuralConecta. Todos los derechos reservados.</p>
-        <p>Desarrollado para comunidades rurales de Antioquia.</p>
+        <p>&copy; 2026 RuralConecta. Proyecto Web con Arquitectura Desacoplada.</p>
+        <p>Desarrollado con HTML5, CSS3 y JavaScript Vanilla.</p>
       </div>
+
     </div>
   </footer>
 
-  <!-- Script Principal -->
-  <script src="js/main.js"></script>
 </body>
 </html>
