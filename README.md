@@ -161,7 +161,8 @@ RuralConecta-ProyectoWeb/
     ├── js/
     │   └── main.js             # Lógica de navegación móvil y UI compartida
     ├── index.html              # Vista principal (Página de inicio)
-    └── municipios.html         # Vista del catálogo de municipios (Paso 3)
+    ├── municipios.html         # Vista del catálogo de municipios (Paso 3)
+    └── categorias.html         # Vista del catálogo de categorías (Paso 4)
 ```
 
 ---
@@ -193,7 +194,7 @@ Frontend muestra los resultados (HTML5 + JavaScript)
 ## 📈 Progreso general
 
 ```text
-Progreso: ███████░░░ 66% (52/79 tareas completadas)
+Progreso: ███████░░░ 67% (53/79 tareas completadas)
 ```
 
 > **Nota:** Este indicador visual representa el avance global del proyecto calculado a partir de las tareas completadas versus el total planificado en el tablero. Debe actualizarse manualmente a medida que se ejecuten y verifiquen nuevas actividades con evidencia respaldada en el repositorio.
@@ -275,7 +276,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - [x] Crear estructura HTML5 base del cliente web y diseño de `index.html` (Pasos 1 y 2)
 - [x] Configurar CSS3 modular (`styles.css` con variables, Flexbox, Grid, header, tarjetas y utilidades)
 - [x] Implementar vista de selección de municipio (`municipios.html`) (Paso 3)
-- [ ] Implementar vista de selección de categoría (`categorias.html`)
+- [x] Implementar vista de selección de categoría (`categorias.html`) (Paso 4)
 - [ ] Implementar vista de listado de servicios (`servicios.html`)
 - [ ] Implementar ficha detallada del servicio (`servicio-detalle.html`)
 - [ ] Implementar responsive completo
@@ -289,7 +290,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 | 1 | Estructura HTML5/CSS/JS base | ✅ |
 | 2 | Diseño de `index.html` | ✅ |
 | 3 | Vista `municipios.html` | ✅ |
-| 4 | Vista `categorias.html` | ⏳ |
+| 4 | Vista `categorias.html` | ✅ |
 | 5 | Vista `servicios.html` | ⏳ |
 | 6 | Vista `servicio-detalle.html` | ⏳ |
 | 7 | Responsive completo | ⏳ |
@@ -297,25 +298,31 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 | 9 | Estados de carga/éxito/sin resultados/error | ⏳ |
 | 10 | Pruebas e integración final | ⏳ |
 
-#### Documentación de la Vista de Municipios (`municipios.html`)
+#### Documentación de Vistas del Frontend
 
-- **Archivo creado**: [`frontend/municipios.html`](frontend/municipios.html).
+##### 1. Vista de Municipios (`municipios.html`)
+- **Archivo**: [`frontend/municipios.html`](frontend/municipios.html).
+- **Estructura semántica**: Header institucional, encabezado de página (`.page-header`), contenedor `#municipios-container` con cuadrícula flexible (`.municipios-grid`), 5 tarjetas demostrativas (*Jardín*, *Andes*, *Támesis*, *Jericó*, *Urrao*), cuadro de cobertura territorial y footer.
+- **Componentes reutilizados**: Header, menú móvil accesible (`main.js`), tokens de diseño CSS (`styles.css`), botones (`.btn`), footer.
+
+##### 2. Vista de Categorías (`categorias.html`)
+- **Archivo**: [`frontend/categorias.html`](frontend/categorias.html).
 - **Estructura semántica**: 
-  - `<header class="site-header">` con logotipo corporativo y menú de navegación accesible con estado activo (`.nav-link.active` en Municipios).
-  - `<main id="main-content">` que contiene el encabezado de vista (`.page-header`) con título "Municipios" y descripción de alcance, junto con la sección del catálogo territorial (`.municipios-section`).
-  - Contenedor dedicado `#municipios-container` con disposición en `.municipios-grid` flexible.
-  - Tarjetas demostrativas (`.municipio-card`) para los 5 municipios piloto (*Jardín*, *Andes*, *Támesis*, *Jericó*, *Urrao*), incluyendo icono, badge de subregión (*Suroeste*), resumen descriptivo y botón de acción hacia `servicios.html`.
-  - Cuadro informativo de cobertura territorial (`.municipios-info-box`) para guiar al usuario.
+  - `<header class="site-header">` con logotipo y menú de navegación accesible con estado activo (`.nav-link.active` en Categorías).
+  - `<main id="main-content">` que contiene el encabezado de vista (`.page-header`) con título "Categorías", badge temático *"Áreas de Servicio"* y descripción de alcance.
+  - Barra de herramientas (`.section-toolbar`) y contenedor dedicado `#categorias-container` con disposición en `.categorias-catalog-grid` flexible.
+  - Tarjetas demostrativas (`.categoria-card`) para las 5 categorías oficiales (*Salud*, *Educación*, *Transporte*, *Servicios públicos*, *Apoyos sociales*), incluyendo icono temático SVG, badge de área, descripción oficial del modelo y botón de acción hacia `servicios.html`.
+  - Cuadro informativo de orientación (`.categorias-info-box`) para guiar la consulta por municipio o servicios generales.
   - `<footer class="site-footer">` idéntico y consistente con el pie de página institucional.
-- **Componentes reutilizados**: Header institucional, menú móvil accesible (`main.js`), tokens de variables CSS (`styles.css`), botones y enlaces (`.btn`, `.btn-outline-primary`), footer y layout de rejilla.
-- **Preparación para datos dinámicos**: El elemento `#municipios-container` está listo para que el futuro script `municipios.js` inyecte dinámicamente las tarjetas a partir de las respuestas JSON.
-- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/municipios/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
+- **Componentes reutilizados**: Header institucional, menú móvil accesible (`main.js`), tokens de variables CSS (`styles.css`), botones y enlaces (`.btn`, `.btn-outline-primary`), footer y layout de cuadrícula.
+- **Preparación para datos dinámicos**: El elemento `#categorias-container` está formalmente identificado para permitir la futura inyección dinámica desde JavaScript (`categorias.js`).
+- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/categorias/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
 
 #### Archivos creados / modificados en este paso
 
-- `frontend/municipios.html` (Creado): Vista del catálogo de municipios con HTML5 semántico.
-- `frontend/css/styles.css` (Modificado): Incorporación de estilos modulares para `.page-header`, `.municipios-grid`, `.municipio-card`, `.municipios-info-box` y reglas responsive.
-- `README.md` (Modificado): Documentación del progreso de la Fase 3, estado del Paso 3 y especificación de la vista construida.
+- `frontend/categorias.html` (Creado): Vista del catálogo de categorías con HTML5 semántico.
+- `frontend/css/styles.css` (Modificado): Incorporación de estilos modulares para `.categorias-catalog-grid`, `.categoria-card`, `.categoria-icon-box`, `.categorias-info-box` y reglas responsive.
+- `README.md` (Modificado): Documentación del progreso de la Fase 3, estado del Paso 4 y especificación de la vista de categorías.
 
 ### 🟠 Fase 4 — Integración y pruebas
 
