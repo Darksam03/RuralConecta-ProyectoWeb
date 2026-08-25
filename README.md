@@ -162,7 +162,8 @@ RuralConecta-ProyectoWeb/
     │   └── main.js             # Lógica de navegación móvil y UI compartida
     ├── index.html              # Vista principal (Página de inicio)
     ├── municipios.html         # Vista del catálogo de municipios (Paso 3)
-    └── categorias.html         # Vista del catálogo de categorías (Paso 4)
+    ├── categorias.html         # Vista del catálogo de categorías (Paso 4)
+    └── servicios.html          # Vista del catálogo de servicios (Paso 5)
 ```
 
 ---
@@ -194,7 +195,7 @@ Frontend muestra los resultados (HTML5 + JavaScript)
 ## 📈 Progreso general
 
 ```text
-Progreso: ███████░░░ 67% (53/79 tareas completadas)
+Progreso: ███████░░░ 68% (54/79 tareas completadas)
 ```
 
 > **Nota:** Este indicador visual representa el avance global del proyecto calculado a partir de las tareas completadas versus el total planificado en el tablero. Debe actualizarse manualmente a medida que se ejecuten y verifiquen nuevas actividades con evidencia respaldada en el repositorio.
@@ -277,7 +278,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - [x] Configurar CSS3 modular (`styles.css` con variables, Flexbox, Grid, header, tarjetas y utilidades)
 - [x] Implementar vista de selección de municipio (`municipios.html`) (Paso 3)
 - [x] Implementar vista de selección de categoría (`categorias.html`) (Paso 4)
-- [ ] Implementar vista de listado de servicios (`servicios.html`)
+- [x] Implementar vista de listado de servicios (`servicios.html`) (Paso 5)
 - [ ] Implementar ficha detallada del servicio (`servicio-detalle.html`)
 - [ ] Implementar responsive completo
 - [ ] Integrar frontend con API REST (JavaScript Fetch API)
@@ -291,7 +292,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 | 2 | Diseño de `index.html` | ✅ |
 | 3 | Vista `municipios.html` | ✅ |
 | 4 | Vista `categorias.html` | ✅ |
-| 5 | Vista `servicios.html` | ⏳ |
+| 5 | Vista `servicios.html` | ✅ |
 | 6 | Vista `servicio-detalle.html` | ⏳ |
 | 7 | Responsive completo | ⏳ |
 | 8 | Integración Fetch API | ⏳ |
@@ -318,11 +319,28 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - **Preparación para datos dinámicos**: El elemento `#categorias-container` está formalmente identificado para permitir la futura inyección dinámica desde JavaScript (`categorias.js`).
 - **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/categorias/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
 
+##### 3. Vista de Servicios (`servicios.html`)
+- **Archivo**: [`frontend/servicios.html`](frontend/servicios.html).
+- **Estructura semántica**:
+  - `<header class="site-header">` con logotipo y menú de navegación accesible con estado activo (`.nav-link.active` en Servicios).
+  - `<main id="main-content">` que contiene el encabezado de vista (`.page-header`) con título "Servicios", badge temático *"Catálogo de Servicios"* y descripción introductoria clara de la oferta comunitaria.
+  - Barra de herramientas (`.section-toolbar`) y contenedor dedicado `#servicios-container` con disposición en `.servicios-grid` flexible y adaptada.
+  - Tarjetas demostrativas (`.servicio-card`) para los 5 servicios oficiales alineados al modelo real del proyecto (*Puesto de Salud Rural*, *Institución Educativa Rural*, *Servicio de Transporte Rural*, *Atención de Servicios Públicos*, *Programa de Apoyo Social*). Cada tarjeta incluye:
+    - Encabezado con icono temático SVG de la categoría y badges identificadores de categoría y municipio (`.servicio-badge-categoria`, `.servicio-badge-municipio`).
+    - Cuerpo con título del servicio, descripción del alcance y lista de metadatos rápidos (`.servicio-meta-list`: dirección/ubicación, horario de atención y canal de contacto con iconos SVG accesibles).
+    - Pie de tarjeta con botón de acción accesible preparado para el enlace hacia `servicio-detalle.html`.
+  - Cuadro informativo de orientación (`.servicios-info-box`) para guiar la navegación complementaria hacia `municipios.html` y `categorias.html`.
+  - `<footer class="site-footer">` idéntico y consistente con el pie de página institucional.
+- **Componentes reutilizados**: Header institucional, menú móvil accesible (`main.js`), tokens de variables CSS (`styles.css`), botones y enlaces (`.btn`, `.btn-outline-primary`), footer y layout de cuadrícula flexible.
+- **Preparación para datos dinámicos**: El elemento `#servicios-container` está formalmente identificado y estructurado para permitir la futura inyección dinámica desde JavaScript (`servicios.js` / Fetch API).
+- **Preparación para el detalle de servicio**: Cada tarjeta cuenta con su acción/enlace visualmente preparado hacia `servicio-detalle.html` (sin crear todavía la vista ni implementar parámetros dinámicos en este paso).
+- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/servicios/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
+
 #### Archivos creados / modificados en este paso
 
-- `frontend/categorias.html` (Creado): Vista del catálogo de categorías con HTML5 semántico.
-- `frontend/css/styles.css` (Modificado): Incorporación de estilos modulares para `.categorias-catalog-grid`, `.categoria-card`, `.categoria-icon-box`, `.categorias-info-box` y reglas responsive.
-- `README.md` (Modificado): Documentación del progreso de la Fase 3, estado del Paso 4 y especificación de la vista de categorías.
+- `frontend/servicios.html` (Creado): Vista del catálogo de servicios con HTML5 semántico.
+- `frontend/css/styles.css` (Modificado): Incorporación de estilos modulares para `.servicios-grid`, `.servicio-card`, `.servicio-icon-box`, `.servicio-badges`, `.servicio-meta-list`, `.servicios-info-box` y reglas responsive.
+- `README.md` (Modificado): Documentación del progreso de la Fase 3, estado del Paso 5 y especificación de la vista de servicios.
 
 ### 🟠 Fase 4 — Integración y pruebas
 
