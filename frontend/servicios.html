@@ -13,6 +13,7 @@
 
   <!-- Script de interacción principal -->
   <script src="js/main.js" defer></script>
+  <script src="js/servicios.js" defer></script>
 </head>
 <body>
 
@@ -88,10 +89,10 @@
             <span>Catálogo de Servicios</span>
           </div>
 
-          <h1 id="page-title" class="page-title">Servicios</h1>
+          <h1 id="page-title" class="page-title">Servicios por Municipio</h1>
 
           <p class="page-description">
-            Explora los servicios esenciales y trámites comunitarios disponibles en los municipios rurales de Antioquia. Consulta ubicaciones, horarios de atención y requisitos para acceder a cada uno.
+            Explora los servicios esenciales y trámites comunitarios disponibles en los municipios rurales de Antioquia. Selecciona cualquier municipio para consultar la totalidad de sus servicios agrupados por categoría.
           </p>
 
         </div>
@@ -107,331 +108,29 @@
           <div>
             <h2 id="servicios-heading" class="section-title">Servicios disponibles</h2>
             <p class="section-subtitle">
-              Listado de servicios registrados en los municipios rurales de Antioquia.
+              Selecciona un municipio para consultar todos sus servicios agrupados por categoría.
             </p>
+
+            <!-- Selector dinámico de Municipio -->
+            <div class="municipio-select-container">
+              <label for="select-municipio" class="municipio-select-label">Municipio seleccionado:</label>
+              <select id="select-municipio" class="municipio-select" aria-label="Seleccionar municipio para consultar servicios">
+                <option value="">Cargando municipios...</option>
+              </select>
+            </div>
           </div>
-          <div class="toolbar-badge" aria-label="Total de servicios demostrativos">
-            <span>5 servicios registrados</span>
+          <div class="toolbar-badge" id="servicios-total-badge" aria-label="Total de servicios registrados">
+            <span>Cargando servicios...</span>
           </div>
         </div>
 
-        <!-- Contenedor del listado de servicios (Preparado para renderizado dinámico vía Fetch API) -->
-        <div id="servicios-container" class="servicios-grid" role="list">
-
-          <!-- Tarjeta demostrativa 1: Salud en Jardín -->
-          <article class="servicio-card" role="listitem">
-            <div class="servicio-card-header">
-              <div class="servicio-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                </svg>
-              </div>
-              <div class="servicio-badges">
-                <span class="servicio-badge servicio-badge-categoria">Salud</span>
-                <span class="servicio-badge servicio-badge-municipio">Jardín</span>
-              </div>
-            </div>
-
-            <div class="servicio-card-body">
-              <h3 class="servicio-name">Puesto de Salud Rural</h3>
-              <p class="servicio-description">
-                Servicio de atención primaria para habitantes de las zonas rurales.
-              </p>
-
-              <!-- Metadatos clave del servicio -->
-              <ul class="servicio-meta-list" aria-label="Detalles rápidos del servicio">
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                      <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Zona rural de Jardín, Antioquia</span>
-                </li>
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Lunes a viernes, 8:00 a. m. - 4:00 p. m.</span>
-                </li>
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Centro de atención municipal</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="servicio-card-footer">
-              <a href="servicio-detalle.html" class="btn btn-outline-primary servicio-btn" aria-label="Ver detalle del servicio Puesto de Salud Rural">
-                <span>Ver detalle</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 2: Educación en Andes -->
-          <article class="servicio-card" role="listitem">
-            <div class="servicio-card-header">
-              <div class="servicio-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                </svg>
-              </div>
-              <div class="servicio-badges">
-                <span class="servicio-badge servicio-badge-categoria">Educación</span>
-                <span class="servicio-badge servicio-badge-municipio">Andes</span>
-              </div>
-            </div>
-
-            <div class="servicio-card-body">
-              <h3 class="servicio-name">Institución Educativa Rural</h3>
-              <p class="servicio-description">
-                Institución educativa destinada a la atención de población estudiantil rural.
-              </p>
-
-              <!-- Metadatos clave del servicio -->
-              <ul class="servicio-meta-list" aria-label="Detalles rápidos del servicio">
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                      <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Zona rural de Andes, Antioquia</span>
-                </li>
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Lunes a viernes, 7:00 a. m. - 3:00 p. m.</span>
-                </li>
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Secretaría de Educación Municipal</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="servicio-card-footer">
-              <a href="servicio-detalle.html" class="btn btn-outline-primary servicio-btn" aria-label="Ver detalle del servicio Institución Educativa Rural">
-                <span>Ver detalle</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 3: Transporte en Támesis -->
-          <article class="servicio-card" role="listitem">
-            <div class="servicio-card-header">
-              <div class="servicio-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="1" y="3" width="15" height="13"></rect>
-                  <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
-                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                </svg>
-              </div>
-              <div class="servicio-badges">
-                <span class="servicio-badge servicio-badge-categoria">Transporte</span>
-                <span class="servicio-badge servicio-badge-municipio">Támesis</span>
-              </div>
-            </div>
-
-            <div class="servicio-card-body">
-              <h3 class="servicio-name">Servicio de Transporte Rural</h3>
-              <p class="servicio-description">
-                Información sobre rutas de transporte entre las zonas rurales y la cabecera municipal.
-              </p>
-
-              <!-- Metadatos clave del servicio -->
-              <ul class="servicio-meta-list" aria-label="Detalles rápidos del servicio">
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                      <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Terminal municipal de Támesis</span>
-                </li>
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Consultar horarios según la ruta</span>
-                </li>
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Oficina de transporte municipal</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="servicio-card-footer">
-              <a href="servicio-detalle.html" class="btn btn-outline-primary servicio-btn" aria-label="Ver detalle del servicio Servicio de Transporte Rural">
-                <span>Ver detalle</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 4: Servicios Públicos en Jericó -->
-          <article class="servicio-card" role="listitem">
-            <div class="servicio-card-header">
-              <div class="servicio-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                </svg>
-              </div>
-              <div class="servicio-badges">
-                <span class="servicio-badge servicio-badge-categoria">Servicios públicos</span>
-                <span class="servicio-badge servicio-badge-municipio">Jericó</span>
-              </div>
-            </div>
-
-            <div class="servicio-card-body">
-              <h3 class="servicio-name">Atención de Servicios Públicos</h3>
-              <p class="servicio-description">
-                Punto de orientación para consultas y reportes relacionados con servicios públicos.
-              </p>
-
-              <!-- Metadatos clave del servicio -->
-              <ul class="servicio-meta-list" aria-label="Detalles rápidos del servicio">
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                      <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Zona urbana de Jericó, Antioquia</span>
-                </li>
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Lunes a viernes, 8:00 a. m. - 5:00 p. m.</span>
-                </li>
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Oficina de Servicios Públicos</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="servicio-card-footer">
-              <a href="servicio-detalle.html" class="btn btn-outline-primary servicio-btn" aria-label="Ver detalle del servicio Atención de Servicios Públicos">
-                <span>Ver detalle</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 5: Apoyos Sociales en Urrao -->
-          <article class="servicio-card" role="listitem">
-            <div class="servicio-card-header">
-              <div class="servicio-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-              </div>
-              <div class="servicio-badges">
-                <span class="servicio-badge servicio-badge-categoria">Apoyos sociales</span>
-                <span class="servicio-badge servicio-badge-municipio">Urrao</span>
-              </div>
-            </div>
-
-            <div class="servicio-card-body">
-              <h3 class="servicio-name">Programa de Apoyo Social</h3>
-              <p class="servicio-description">
-                Orientación sobre programas y ayudas sociales disponibles para la población.
-              </p>
-
-              <!-- Metadatos clave del servicio -->
-              <ul class="servicio-meta-list" aria-label="Detalles rápidos del servicio">
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                      <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Alcaldía Municipal de Urrao</span>
-                </li>
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Lunes a viernes, 8:00 a. m. - 4:00 p. m.</span>
-                </li>
-                <li class="servicio-meta-item">
-                  <span class="servicio-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                  </span>
-                  <span class="servicio-meta-text">Secretaría de Desarrollo Social</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="servicio-card-footer">
-              <a href="servicio-detalle.html" class="btn btn-outline-primary servicio-btn" aria-label="Ver detalle del servicio Programa de Apoyo Social">
-                <span>Ver detalle</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
+        <!-- Contenedor del listado de servicios (Renderizado dinámico agrupado por categorías vía Fetch API) -->
+        <div id="servicios-container">
+          <div class="empty-state">
+            <div class="empty-state-icon">⏳</div>
+            <h3 class="empty-state-title">Cargando información...</h3>
+            <p class="empty-state-desc">Obteniendo servicios desde el servidor REST de RuralConecta.</p>
+          </div>
         </div>
 
         <!-- Cuadro de Información y Orientación al Ciudadano -->

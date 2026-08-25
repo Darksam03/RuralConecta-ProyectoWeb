@@ -13,6 +13,7 @@
 
   <!-- Script de interacción principal -->
   <script src="js/main.js" defer></script>
+  <script src="js/municipios.js" defer></script>
 </head>
 <body>
 
@@ -110,164 +111,18 @@
               Selecciona un municipio para conocer la oferta de salud, educación, transporte y programas sociales.
             </p>
           </div>
-          <div class="toolbar-badge" aria-label="Total de municipios demostrativos">
-            <span>5 municipios registrados</span>
+          <div class="toolbar-badge" id="municipios-total-badge" aria-label="Total de municipios">
+            <span>Cargando municipios...</span>
           </div>
         </div>
 
-        <!-- Contenedor del listado de municipios (Preparado para renderizado dinámico vía Fetch API) -->
+        <!-- Contenedor del listado de municipios (Renderizado dinámico vía Fetch API) -->
         <div id="municipios-container" class="municipios-grid" role="list">
-
-          <!-- Tarjeta demostrativa 1: Jardín -->
-          <article class="municipio-card" role="listitem">
-            <div class="municipio-card-header">
-              <div class="municipio-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <span class="municipio-subregion">Subregión Suroeste</span>
-            </div>
-
-            <div class="municipio-card-body">
-              <h3 class="municipio-name">Jardín</h3>
-              <p class="municipio-description">
-                Puestos de salud rural, rutas veredales de transporte, programas agropecuarios y atención comunitaria.
-              </p>
-            </div>
-
-            <div class="municipio-card-footer">
-              <a href="servicios.html" class="btn btn-outline-primary municipio-btn" aria-label="Consultar servicios disponibles en Jardín">
-                <span>Consultar servicios</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 2: Andes -->
-          <article class="municipio-card" role="listitem">
-            <div class="municipio-card-header">
-              <div class="municipio-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <span class="municipio-subregion">Subregión Suroeste</span>
-            </div>
-
-            <div class="municipio-card-body">
-              <h3 class="municipio-name">Andes</h3>
-              <p class="municipio-description">
-                Hospital y centros médicos, instituciones educativas veredales, cooperativas de transporte y acueducto rural.
-              </p>
-            </div>
-
-            <div class="municipio-card-footer">
-              <a href="servicios.html" class="btn btn-outline-primary municipio-btn" aria-label="Consultar servicios disponibles en Andes">
-                <span>Consultar servicios</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 3: Támesis -->
-          <article class="municipio-card" role="listitem">
-            <div class="municipio-card-header">
-              <div class="municipio-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <span class="municipio-subregion">Subregión Suroeste</span>
-            </div>
-
-            <div class="municipio-card-body">
-              <h3 class="municipio-name">Támesis</h3>
-              <p class="municipio-description">
-                Dispensarios comunitarios, escuelas rurales, frecuencias de transporte veredal y subsidios al adulto mayor.
-              </p>
-            </div>
-
-            <div class="municipio-card-footer">
-              <a href="servicios.html" class="btn btn-outline-primary municipio-btn" aria-label="Consultar servicios disponibles en Támesis">
-                <span>Consultar servicios</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 4: Jericó -->
-          <article class="municipio-card" role="listitem">
-            <div class="municipio-card-header">
-              <div class="municipio-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <span class="municipio-subregion">Subregión Suroeste</span>
-            </div>
-
-            <div class="municipio-card-body">
-              <h3 class="municipio-name">Jericó</h3>
-              <p class="municipio-description">
-                Brigadas de salud, sedes educativas campestres, servicios de energía y gas rural, y trámites de alcaldía.
-              </p>
-            </div>
-
-            <div class="municipio-card-footer">
-              <a href="servicios.html" class="btn btn-outline-primary municipio-btn" aria-label="Consultar servicios disponibles en Jericó">
-                <span>Consultar servicios</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 5: Urrao -->
-          <article class="municipio-card" role="listitem">
-            <div class="municipio-card-header">
-              <div class="municipio-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <span class="municipio-subregion">Subregión Suroeste</span>
-            </div>
-
-            <div class="municipio-card-body">
-              <h3 class="municipio-name">Urrao</h3>
-              <p class="municipio-description">
-                Puntos de atención médica veredal, líneas de transporte chiva/escalera, asistencia agropecuaria y servicios básicos.
-              </p>
-            </div>
-
-            <div class="municipio-card-footer">
-              <a href="servicios.html" class="btn btn-outline-primary municipio-btn" aria-label="Consultar servicios disponibles en Urrao">
-                <span>Consultar servicios</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <div class="empty-state-icon">⏳</div>
+            <h3 class="empty-state-title">Cargando municipios...</h3>
+            <p class="empty-state-desc">Obteniendo lista territorial desde el servidor REST.</p>
+          </div>
         </div>
 
         <!-- Cuadro informativo adicional de cobertura territorial -->
