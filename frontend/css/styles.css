@@ -1441,7 +1441,259 @@ button {
 }
 
 /* ==========================================================================
-   16. RESPONSIVE DESIGN & MEDIA QUERIES
+   16. VISTA DETALLE DE SERVICIO (servicio-detalle.html)
+   ========================================================================== */
+.detalle-section {
+  padding: var(--spacing-12) 0 var(--spacing-16) 0;
+}
+
+/* Migas de pan (Breadcrumbs) */
+.page-breadcrumbs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  color: #e2e8f0;
+  margin-bottom: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.page-breadcrumbs a {
+  color: #86efac;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.page-breadcrumbs a:hover {
+  color: #bbf7d0;
+  text-decoration: underline;
+}
+
+.page-breadcrumbs-separator {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Barra superior de retorno */
+.detalle-top-bar {
+  margin-bottom: var(--spacing-6);
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  text-decoration: none;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.btn-back svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  transition: transform var(--transition-fast);
+}
+
+.btn-back:hover {
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-subtle);
+  transform: translateX(-3px);
+}
+
+/* Contenedor central del detalle */
+.servicio-detalle-wrapper {
+  max-width: 900px;
+  margin: 0 auto var(--spacing-12) auto;
+}
+
+/* Tarjeta principal de la Ficha de Detalle */
+.servicio-detalle-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-8);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+/* Encabezado de la Ficha */
+.detalle-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-6);
+  padding-bottom: var(--spacing-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.detalle-icon-box {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: var(--radius-xl);
+  background-color: var(--color-primary-subtle);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-primary-border);
+  flex-shrink: 0;
+}
+
+.detalle-icon-box svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.detalle-header-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.detalle-nombre {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-dark);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.02em;
+}
+
+.detalle-badges {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.servicio-badge-subregion {
+  color: var(--color-secondary);
+  background-color: var(--color-secondary-subtle);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+/* Bloque de Descripción */
+.detalle-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.detalle-block-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-main);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.detalle-title-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.detalle-title-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.detalle-description-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Cuadrícula de Información Operativa (Campos del Modelo) */
+.detalle-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-5);
+}
+
+.detalle-info-card {
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.detalle-info-card:hover {
+  border-color: var(--color-primary-border);
+  transform: translateY(-2px);
+}
+
+.detalle-info-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  color: var(--color-primary-dark);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+}
+
+.detalle-info-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-subtle);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--color-primary-border);
+}
+
+.detalle-info-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.detalle-info-label {
+  flex: 1;
+}
+
+.detalle-info-value {
+  font-size: var(--font-size-base);
+  color: var(--color-text-main);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-medium);
+  padding-left: calc(2rem + var(--spacing-3));
+}
+
+/* Pie de la Ficha y Acciones */
+.detalle-card-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.detalle-card-actions .btn {
+  font-size: var(--font-size-sm);
+  padding: 0.75rem 1.25rem;
+}
+
+/* ==========================================================================
+   17. RESPONSIVE DESIGN & MEDIA QUERIES
    ========================================================================== */
 
 /* Tablets (pantallas menores a 1024px) */
@@ -1632,6 +1884,36 @@ button {
   .servicios-info-box {
     flex-direction: column;
     padding: var(--spacing-5);
+  }
+
+  /* Detalle de servicio en móvil */
+  .detalle-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-4);
+  }
+
+  .servicio-detalle-card {
+    padding: var(--spacing-5);
+    gap: var(--spacing-6);
+  }
+
+  .detalle-info-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+  }
+
+  .detalle-info-value {
+    padding-left: 0;
+  }
+
+  .detalle-card-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .detalle-card-actions .btn {
+    width: 100%;
   }
 
   /* Footer en móviles */

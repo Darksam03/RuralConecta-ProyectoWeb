@@ -163,7 +163,8 @@ RuralConecta-ProyectoWeb/
     ├── index.html              # Vista principal (Página de inicio)
     ├── municipios.html         # Vista del catálogo de municipios (Paso 3)
     ├── categorias.html         # Vista del catálogo de categorías (Paso 4)
-    └── servicios.html          # Vista del catálogo de servicios (Paso 5)
+    ├── servicios.html          # Vista del catálogo de servicios (Paso 5)
+    └── servicio-detalle.html   # Vista de ficha y detalle de servicio (Paso 6)
 ```
 
 ---
@@ -178,6 +179,8 @@ Selecciona municipio (vista HTML5)
 Selecciona categoría (vista HTML5)
    ↓
 Consulta servicios (vista HTML5)
+   ↓
+Consulta detalle de servicio (vista HTML5)
    ↓
 Frontend consume API REST (JavaScript Fetch API)
    ↓
@@ -195,7 +198,7 @@ Frontend muestra los resultados (HTML5 + JavaScript)
 ## 📈 Progreso general
 
 ```text
-Progreso: ███████░░░ 68% (54/79 tareas completadas)
+Progreso: ███████░░░ 70% (55/79 tareas completadas)
 ```
 
 > **Nota:** Este indicador visual representa el avance global del proyecto calculado a partir de las tareas completadas versus el total planificado en el tablero. Debe actualizarse manualmente a medida que se ejecuten y verifiquen nuevas actividades con evidencia respaldada en el repositorio.
@@ -279,7 +282,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - [x] Implementar vista de selección de municipio (`municipios.html`) (Paso 3)
 - [x] Implementar vista de selección de categoría (`categorias.html`) (Paso 4)
 - [x] Implementar vista de listado de servicios (`servicios.html`) (Paso 5)
-- [ ] Implementar ficha detallada del servicio (`servicio-detalle.html`)
+- [x] Implementar ficha detallada del servicio (`servicio-detalle.html`) (Paso 6)
 - [ ] Implementar responsive completo
 - [ ] Integrar frontend con API REST (JavaScript Fetch API)
 - [ ] Manejar estados de carga, éxito, sin resultados y errores en el cliente
@@ -293,7 +296,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 | 3 | Vista `municipios.html` | ✅ |
 | 4 | Vista `categorias.html` | ✅ |
 | 5 | Vista `servicios.html` | ✅ |
-| 6 | Vista `servicio-detalle.html` | ⏳ |
+| 6 | Vista `servicio-detalle.html` | ✅ |
 | 7 | Responsive completo | ⏳ |
 | 8 | Integración Fetch API | ⏳ |
 | 9 | Estados de carga/éxito/sin resultados/error | ⏳ |
@@ -336,11 +339,30 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - **Preparación para el detalle de servicio**: Cada tarjeta cuenta con su acción/enlace visualmente preparado hacia `servicio-detalle.html` (sin crear todavía la vista ni implementar parámetros dinámicos en este paso).
 - **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/servicios/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
 
+##### 4. Vista de Detalle de Servicio (`servicio-detalle.html`)
+- **Archivo**: [`frontend/servicio-detalle.html`](frontend/servicio-detalle.html).
+- **Estructura semántica**:
+  - `<header class="site-header">` con menú de navegación accesible y logotipo oficial.
+  - `<main id="main-content">` que incorpora:
+    - Encabezado de página (`.page-header`) con barra de migas de pan (`.page-breadcrumbs`: *Inicio / Servicios / Detalle del Servicio*), badge *"Ficha Informativa"*, título y descripción.
+    - Botón de retorno rápido (`.btn-back`) hacia `servicios.html`.
+    - Contenedor principal `#servicio-detalle-container` con tarjeta estructurada (`.servicio-detalle-card`):
+      - Encabezado con icono temático SVG (`#servicio-icono-box`), nombre del servicio (`#servicio-nombre`), badge de categoría (`#servicio-categoria`), badge de municipio (`#servicio-municipio`) y subregión (`#servicio-subregion`).
+      - Bloque de descripción general del servicio (`#servicio-descripcion`).
+      - Cuadrícula de datos operativos (`.detalle-info-grid`) con los 4 campos exactos del modelo backend de Django: Ubicación/Dirección (`#servicio-direccion`), Horarios de atención (`#servicio-horarios`), Requisitos previos (`#servicio-requisitos`) y Contacto/Orientación (`#servicio-contacto`).
+      - Barra de acciones de navegación inferior (`.detalle-card-actions`) con botón principal *"Volver al Catálogo de Servicios"* y enlaces secundarios a municipios y categorías.
+    - Cuadro informativo complementario con recomendaciones al ciudadano antes de desplazarse (`.servicios-info-box`).
+  - `<footer class="site-footer">` idéntico y consistente con el pie de página institucional.
+- **Componentes reutilizados**: Header institucional, menú móvil accesible (`main.js`), tokens de diseño CSS (`styles.css`), botones (`.btn`, `.btn-primary`, `.btn-outline-primary`), footer y cuadro informativo.
+- **Navegación**: Permite regresar ágilmente a `servicios.html` mediante migas de pan, botón superior (`.btn-back`) y acción principal del pie de la ficha, además de mantener enlaces hacia `municipios.html`, `categorias.html` e `index.html`.
+- **Preparación para datos dinámicos**: Los elementos del contenedor `#servicio-detalle-container` poseen selectores e identificadores específicos (`#servicio-nombre`, `#servicio-categoria`, `#servicio-municipio`, `#servicio-descripcion`, `#servicio-direccion`, `#servicio-horarios`, `#servicio-requisitos`, `#servicio-contacto`) preparados para la inyección de datos desde JavaScript en el Paso 8.
+- **Estado de Fetch API**: Fetch API y la lectura de parámetros URL dinámicos (`?id=ID` / `GET /api/servicios/{id}/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
+
 #### Archivos creados / modificados en este paso
 
-- `frontend/servicios.html` (Creado): Vista del catálogo de servicios con HTML5 semántico.
-- `frontend/css/styles.css` (Modificado): Incorporación de estilos modulares para `.servicios-grid`, `.servicio-card`, `.servicio-icon-box`, `.servicio-badges`, `.servicio-meta-list`, `.servicios-info-box` y reglas responsive.
-- `README.md` (Modificado): Documentación del progreso de la Fase 3, estado del Paso 5 y especificación de la vista de servicios.
+- `frontend/servicio-detalle.html` (Creado): Vista de ficha detallada del servicio con HTML5 semántico.
+- `frontend/css/styles.css` (Modificado): Incorporación de estilos modulares para `.page-breadcrumbs`, `.btn-back`, `.servicio-detalle-wrapper`, `.servicio-detalle-card`, `.detalle-card-header`, `.detalle-info-grid`, `.detalle-info-card`, `.detalle-card-actions` y reglas responsive.
+- `README.md` (Modificado): Documentación del progreso de la Fase 3, estado del Paso 6 y especificación de la vista de detalle de servicio.
 
 ### 🟠 Fase 4 — Integración y pruebas
 
