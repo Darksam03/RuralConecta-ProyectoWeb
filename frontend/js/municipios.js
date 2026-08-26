@@ -12,8 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 const API_BASE_URL = getApiBaseUrl();
 
 function getApiBaseUrl() {
-  const host = window.location.hostname || '127.0.0.1';
-  return `${window.location.protocol}//${host}:8000/api`;
+  const host = (window.location.hostname && window.location.hostname !== '') ? window.location.hostname : '127.0.0.1';
+  const protocol = (window.location.protocol === 'https:') ? 'https:' : 'http:';
+  return `${protocol}//${host}:8000/api`;
 }
 
 async function initMunicipiosApp() {
@@ -87,6 +88,18 @@ async function initMunicipiosApp() {
 
   } catch (error) {
     console.error('Error al cargar la lista de municipios:', error);
+    if (municipiosBadge) {
+      municipiosBadge.textContent = 'Error de conexión';
+    }
+    if (municipiosContainer) {
+      municipiosContainer.innerHTML = `
+        <div class="empty-state" style="grid-column: 1 / -1;">
+          <div class="empty-state-icon">⚠️</div>
+          <h3 class="empty-state-title">No fue posible cargar los municipios</h3>
+          <p class="empty-state-desc">Ocurrió un error al conectar con el servidor REST (${API_BASE_URL}). Por favor verifica que el backend de Django esté en ejecución.</p>
+        </div>
+      `;
+    }
   }
 }
 

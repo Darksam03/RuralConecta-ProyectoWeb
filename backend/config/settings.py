@@ -37,15 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    "corsheaders",
     'rest_framework',
-    'django_filters',
-    'corsheaders',
+    'django_filters',   
     'apps.services',
 ]
 
-MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+MIDDLEWARE = [ 
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -154,4 +153,8 @@ REST_FRAMEWORK = {
 # CORS — En desarrollo se permiten todos los orígenes.
 # En producción cambiar a CORS_ALLOWED_ORIGINS con el dominio del frontend.
 
-CORS_ALLOWED_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+]
+

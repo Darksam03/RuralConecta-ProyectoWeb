@@ -13,6 +13,7 @@
 
   <!-- Script de interacción principal -->
   <script src="js/main.js" defer></script>
+  <script src="js/categorias.js" defer></script>
 </head>
 <body>
 
@@ -110,163 +111,18 @@
               Selecciona una categoría para conocer los servicios, sedes, horarios y requisitos asociados.
             </p>
           </div>
-          <div class="toolbar-badge" aria-label="Total de categorías registradas">
-            <span>5 categorías registradas</span>
+          <div class="toolbar-badge" id="categorias-total-badge" aria-label="Total de categorías registradas">
+            <span>Cargando categorías...</span>
           </div>
         </div>
 
-        <!-- Contenedor del listado de categorías (Preparado para renderizado dinámico vía Fetch API) -->
+        <!-- Contenedor del listado de categorías (Renderizado dinámico vía Fetch API) -->
         <div id="categorias-container" class="categorias-catalog-grid" role="list">
-
-          <!-- Tarjeta demostrativa 1: Salud -->
-          <article class="categoria-card" role="listitem">
-            <div class="categoria-card-header">
-              <div class="categoria-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                </svg>
-              </div>
-              <span class="categoria-badge">Atención Primaria</span>
-            </div>
-
-            <div class="categoria-card-body">
-              <h3 class="categoria-name">Salud</h3>
-              <p class="categoria-description">
-                Servicios de salud, atención primaria, jornadas de vacunación, brigadas médicas y programas de prevención.
-              </p>
-            </div>
-
-            <div class="categoria-card-footer">
-              <a href="servicios.html" class="btn btn-outline-primary categoria-btn" aria-label="Consultar servicios de Salud">
-                <span>Consultar servicios</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 2: Educación -->
-          <article class="categoria-card" role="listitem">
-            <div class="categoria-card-header">
-              <div class="categoria-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                </svg>
-              </div>
-              <span class="categoria-badge">Formación Rural</span>
-            </div>
-
-            <div class="categoria-card-body">
-              <h3 class="categoria-name">Educación</h3>
-              <p class="categoria-description">
-                Instituciones educativas, sedes veredales, programas de formación campesina, bibliotecas y oportunidades de capacitación.
-              </p>
-            </div>
-
-            <div class="categoria-card-footer">
-              <a href="servicios.html" class="btn btn-outline-primary categoria-btn" aria-label="Consultar servicios de Educación">
-                <span>Consultar servicios</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 3: Transporte -->
-          <article class="categoria-card" role="listitem">
-            <div class="categoria-card-header">
-              <div class="categoria-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="1" y="3" width="15" height="13"></rect>
-                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                </svg>
-              </div>
-              <span class="categoria-badge">Movilidad Veredal</span>
-            </div>
-
-            <div class="categoria-card-body">
-              <h3 class="categoria-name">Transporte</h3>
-              <p class="categoria-description">
-                Información sobre rutas veredales, frecuencias de transporte en chivas/escaleras, cooperativas locales y horarios.
-              </p>
-            </div>
-
-            <div class="categoria-card-footer">
-              <a href="servicios.html" class="btn btn-outline-primary categoria-btn" aria-label="Consultar servicios de Transporte">
-                <span>Consultar servicios</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 4: Servicios Públicos -->
-          <article class="categoria-card" role="listitem">
-            <div class="categoria-card-header">
-              <div class="categoria-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                </svg>
-              </div>
-              <span class="categoria-badge">Infraestructura Básica</span>
-            </div>
-
-            <div class="categoria-card-body">
-              <h3 class="categoria-name">Servicios públicos</h3>
-              <p class="categoria-description">
-                Información relacionada con acueducto veredal, energía eléctrica, gas rural, recolección de residuos y reporte de fallas.
-              </p>
-            </div>
-
-            <div class="categoria-card-footer">
-              <a href="servicios.html" class="btn btn-outline-primary categoria-btn" aria-label="Consultar servicios de Servicios públicos">
-                <span>Consultar servicios</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta demostrativa 5: Apoyos Sociales -->
-          <article class="categoria-card" role="listitem">
-            <div class="categoria-card-header">
-              <div class="categoria-icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-              </div>
-              <span class="categoria-badge">Bienestar Comunitario</span>
-            </div>
-
-            <div class="categoria-card-body">
-              <h3 class="categoria-name">Apoyos sociales</h3>
-              <p class="categoria-description">
-                Programas sociales, subsidios, asistencia agropecuaria, ayudas al adulto mayor y transferencias para la comunidad.
-              </p>
-            </div>
-
-            <div class="categoria-card-footer">
-              <a href="servicios.html" class="btn btn-outline-primary categoria-btn" aria-label="Consultar servicios de Apoyos sociales">
-                <span>Consultar servicios</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </article>
-
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <div class="empty-state-icon">⏳</div>
+            <h3 class="empty-state-title">Cargando categorías...</h3>
+            <p class="empty-state-desc">Obteniendo categorías desde el servidor REST.</p>
+          </div>
         </div>
 
         <!-- Cuadro informativo adicional de orientación -->

@@ -13,8 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
 const API_BASE_URL = getApiBaseUrl();
 
 function getApiBaseUrl() {
-  const host = window.location.hostname || '127.0.0.1';
-  return `${window.location.protocol}//${host}:8000/api`;
+  const host = (window.location.hostname && window.location.hostname !== '') ? window.location.hostname : '127.0.0.1';
+  const protocol = (window.location.protocol === 'https:') ? 'https:' : 'http:';
+  return `${protocol}//${host}:8000/api`;
 }
 
 async function initServiciosApp() {
@@ -54,6 +55,7 @@ async function initServiciosApp() {
     // 3. Determinar el municipio a seleccionar inicialmente (por parámetro URL ?municipio= o primer municipio)
     const urlParams = new URLSearchParams(window.location.search);
     const municipioParam = urlParams.get('municipio');
+    const categoriaParam = urlParams.get('categoria');
 
     let initialMunicipio = null;
     if (municipioParam) {
@@ -70,7 +72,7 @@ async function initServiciosApp() {
     selectMunicipio.value = initialMunicipio.id;
 
     // 4. Cargar y renderizar los servicios del municipio seleccionado
-    await cargarServiciosPorMunicipio(initialMunicipio.id, initialMunicipio.nombre);
+    await cargarServiciosPorMunicipio(initialMunicipio.id, initialMunicipio.nombre, categoriaParam);
 
     // 5. Escuchar cambios en el selector para actualizar dinámicamente
     selectMunicipio.addEventListener('change', async (e) => {
@@ -83,18 +85,21 @@ async function initServiciosApp() {
       newUrl.searchParams.set('municipio', selectedId);
       window.history.pushState({ municipioId: selectedId }, '', newUrl);
 
-      await cargarServiciosPorMunicipio(selectedId, selectedNombre);
+      const currentParams = new URLSearchParams(window.location.search);
+      const activeCat = currentParams.get('categoria');
+      await cargarServiciosPorMunicipio(selectedId, selectedNombre, activeCat);
     });
 
     // Escuchar el evento popstate para soportar navegación adelante/atrás en el navegador
     window.addEventListener('popstate', async () => {
       const currentUrlParams = new URLSearchParams(window.location.search);
       const currentMunicipioParam = currentUrlParams.get('municipio');
+      const activeCat = currentUrlParams.get('categoria');
       if (currentMunicipioParam) {
         const found = municipiosList.find(m => String(m.id) === String(currentMunicipioParam));
         if (found) {
           selectMunicipio.value = found.id;
-          await cargarServiciosPorMunicipio(found.id, found.nombre);
+          await cargarServiciosPorMunicipio(found.id, found.nombre, activeCat);
         }
       }
     });
@@ -112,8 +117,9 @@ async function initServiciosApp() {
  * Consulta la API para obtener TODOS los servicios de un municipio específico y los renderiza agrupados por categoría.
  * @param {number|string} municipioId 
  * @param {string} municipioNombre 
+ * @param {string|number} [categoriaIdParam]
  */
-async function cargarServiciosPorMunicipio(municipioId, municipioNombre) {
+async function cargarServiciosPorMunicipio(municipioId, municipioNombre, categoriaIdParam) {
   const serviciosContainer = document.getElementById('servicios-container');
   const serviciosHeading = document.getElementById('servicios-heading');
   const totalBadge = document.getElementById('servicios-total-badge');
@@ -123,12 +129,17 @@ async function cargarServiciosPorMunicipio(municipioId, municipioNombre) {
     <div class="empty-state">
       <div class="empty-state-icon">⏳</div>
       <h3 class="empty-state-title">Cargando servicios...</h3>
-      <p class="empty-state-desc">Consultando la oferta de servicios para ${municipioNombre || 'el municipio seleccionado'}.</p>
+      <p class="empty-state-desc">Consultando la oferta de servicios para ${escapeHtml(municipioNombre) || 'el municipio seleccionado'}.</p>
     </div>
   `;
 
   try {
-    const response = await fetch(`${API_BASE_URL}/servicios/?municipio=${municipioId}`);
+    let url = `${API_BASE_URL}/servicios/?municipio=${municipioId}`;
+    if (categoriaIdParam) {
+      url += `&categoria=${categoriaIdParam}`;
+    }
+
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Error en API servicios: ${response.status}`);
     }
@@ -207,7 +218,7 @@ async function cargarServiciosPorMunicipio(municipioId, municipioNombre) {
     console.error('Error al cargar servicios del municipio:', error);
     renderEmptyState(
       serviciosContainer,
-      'Ocurrió un error al consultar los servicios del municipio seleccionado.'
+      'Ocurrió un error al consultar los servicios del municipio seleccionado. Verifica que el servidor backend esté en ejecución.'
     );
   }
 }
