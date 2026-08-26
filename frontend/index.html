@@ -78,9 +78,29 @@
        ====================================================================== -->
   <main id="main-content">
 
-    <!-- 1. HERO PRINCIPAL -->
+    <!-- 1. HERO PRINCIPAL Y BANNER -->
     <section class="hero-section" aria-labelledby="hero-title">
-      <div class="container">
+      <div class="container hero-container">
+        
+        <!-- Banner Principal Destacado (Imagen Antioquia Rural) -->
+        <div class="hero-banner-wrapper">
+          <img 
+            src="img/banner-rural.jpg" 
+            alt="Pueblo rural tradicional de Antioquia con arquitectura colonial colorida y chiva de transporte veredal" 
+            class="hero-banner-img"
+            loading="eager"
+          >
+          <div class="hero-banner-overlay"></div>
+          <div class="hero-banner-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Antioquia Rural · Territorio y Comunidad</span>
+          </div>
+        </div>
+
+        <!-- Mensaje de Bienvenida -->
         <div class="hero-content">
           
           <div class="hero-badge">
@@ -96,6 +116,7 @@
             Centralizamos la información de salud, educación, transporte, servicios públicos y programas sociales en los municipios rurales de Antioquia para que encuentres lo que necesitas sin desplazamientos innecesarios.
           </p>
 
+          <!-- Acción Principal -->
           <div class="hero-actions">
             <a href="municipios.html" class="btn btn-primary" id="btn-comenzar-consulta">
               <span>Comenzar consulta</span>
@@ -110,6 +131,7 @@
           </div>
 
         </div>
+
       </div>
     </section>
 

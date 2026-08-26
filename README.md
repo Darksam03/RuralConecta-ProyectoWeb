@@ -158,9 +158,11 @@ RuralConecta-ProyectoWeb/
 └── frontend/
     ├── css/
     │   └── styles.css          # Hoja de estilos CSS3 modular y responsive
+    ├── img/
+    │   └── banner-rural.jpg    # Banner visual de la identidad rural de Antioquia
     ├── js/
     │   └── main.js             # Lógica de navegación móvil y UI compartida
-    ├── index.html              # Vista principal (Página de inicio)
+    ├── index.html              # Vista principal (Página de inicio refinada)
     ├── municipios.html         # Vista del catálogo de municipios (Paso 3)
     ├── categorias.html         # Vista del catálogo de categorías (Paso 4)
     ├── servicios.html          # Vista del catálogo de servicios (Paso 5)
@@ -303,6 +305,17 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 | 10 | Pruebas e integración final | ⏳ |
 
 #### Documentación de Vistas del Frontend
+
+##### 0. Vista Principal y Página de Inicio (`index.html`)
+- **Archivo**: [`frontend/index.html`](frontend/index.html).
+- **Banner Integrado**: [`frontend/img/banner-rural.jpg`](frontend/img/banner-rural.jpg) (Fotografía de pueblo rural tradicional antioqueño con arquitectura colonial colorida y transporte en chiva veredal).
+- **Estructura visual y composición semántica**:
+  - Encabezado (`.site-header`) con isotipo, nombre de marca *RuralConecta*, lema institucional y menú navegable accesible.
+  - Banner principal destacado (`.hero-banner-wrapper`) configurado con `object-fit: cover`, relación de aspecto responsive, bordes redondeados (`var(--radius-xl)`), sombra de elevación profunda y tag flotante territorial *"Antioquia Rural · Territorio y Comunidad"*.
+  - Sección de Bienvenida (`.hero-content`) estructurada en secuencia limpia: Badge con indicador visual en vivo, título jerárquico de alto contraste con resalte (*"comunidades rurales"*), párrafo descriptivo que explica la centralización de trámites y servicios sin desplazamientos innecesarios.
+  - Acciones principales (`.hero-actions`) con botón CTA primario terracota hacia `municipios.html` y botón secundario hacia la guía explicativa (`#como-funciona`).
+  - Secciones complementarias: Flujo interactivo en 3 pasos (`¿Cómo funciona?`), catálogo temático de 5 áreas esenciales, cuadrícula de 4 beneficios para el ciudadano rural y banner final de llamada a la acción.
+- **Garantías de Diseño**: Reutilización estricta de la paleta de colores, tipografías y tokens de diseño existentes en `styles.css`. Totalmente responsive comprobado en resoluciones desde 360px hasta 1440px sin desbordamientos horizontales.
 
 ##### 1. Vista de Municipios (`municipios.html`)
 - **Archivo**: [`frontend/municipios.html`](frontend/municipios.html).
