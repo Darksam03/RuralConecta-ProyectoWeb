@@ -200,7 +200,7 @@ Frontend muestra los resultados (HTML5 + JavaScript)
 ## 📈 Progreso general
 
 ```text
-Progreso: ███████░░░ 70% (55/79 tareas completadas)
+Progreso: ████████░░ 81% (64/79 tareas completadas)
 ```
 
 > **Nota:** Este indicador visual representa el avance global del proyecto calculado a partir de las tareas completadas versus el total planificado en el tablero. Debe actualizarse manualmente a medida que se ejecuten y verifiquen nuevas actividades con evidencia respaldada en el repositorio.
@@ -285,9 +285,9 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - [x] Implementar vista de selección de categoría (`categorias.html`) (Paso 4)
 - [x] Implementar vista de listado de servicios (`servicios.html`) (Paso 5)
 - [x] Implementar ficha detallada del servicio (`servicio-detalle.html`) (Paso 6)
-- [ ] Implementar responsive completo
-- [ ] Integrar frontend con API REST (JavaScript Fetch API)
-- [ ] Manejar estados de carga, éxito, sin resultados y errores en el cliente
+- [x] Implementar responsive completo
+- [x] Integrar frontend con API REST (JavaScript Fetch API)
+- [x] Manejar estados de carga, éxito, sin resultados y errores en el cliente
 
 #### Estado actual de Fase 3
 
@@ -299,10 +299,10 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 | 4 | Vista `categorias.html` | ✅ |
 | 5 | Vista `servicios.html` | ✅ |
 | 6 | Vista `servicio-detalle.html` | ✅ |
-| 7 | Responsive completo | ⏳ |
-| 8 | Integración Fetch API | ⏳ |
-| 9 | Estados de carga/éxito/sin resultados/error | ⏳ |
-| 10 | Pruebas e integración final | ⏳ |
+| 7 | Responsive completo | ✅ |
+| 8 | Integración Fetch API | ✅ |
+| 9 | Estados de carga/éxito/sin resultados/error | ✅ |
+| 10 | Pruebas e integración final | ✅ |
 
 #### Documentación de Vistas del Frontend
 
@@ -379,14 +379,14 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 
 ### 🟠 Fase 4 — Integración y pruebas
 
-- [ ] Probar integración frontend-backend
-- [ ] Validar respuestas JSON en el cliente web
-- [ ] Validar filtros dinámicos desde la interfaz
-- [ ] Realizar pruebas responsive en múltiples dispositivos y resoluciones
+- [x] Probar integración frontend-backend
+- [x] Validar respuestas JSON en el cliente web
+- [x] Validar filtros dinámicos desde la interfaz
+- [x] Realizar pruebas responsive en múltiples dispositivos y resoluciones
 - [ ] Realizar pruebas de usabilidad con usuarios finales
 - [ ] Medir tiempo de respuesta de la API REST
-- [ ] Corregir errores encontrados durante las pruebas de integración
-- [ ] Verificar cumplimiento total de los requisitos funcionales del MVP
+- [x] Corregir errores encontrados durante las pruebas de integración
+- [x] Verificar cumplimiento total de los requisitos funcionales del MVP
 
 ### ☁️ Fase 5 — Despliegue
 
@@ -427,8 +427,8 @@ Registro de hitos consolidados a lo largo del ciclo del proyecto:
 - ✅ Carga de datos iniciales mediante comando `seed_data` ejecutada y verificada.
 - ✅ Verificación funcional de la API mediante Django Shell y pruebas de consulta HTTP (listados, detalles, filtros por municipio, categoría y combinados).
 - ✅ Panel administrativo Django Admin configurado con búsqueda, filtros y superusuario funcional.
-- ⬜ Frontend HTML5/CSS3/JavaScript Vanilla desarrollado e integrado.
-- ⬜ Pruebas de integración frontend-backend completadas.
+- ✅ Frontend HTML5/CSS3/JavaScript Vanilla desarrollado e integrado.
+- ✅ Pruebas de integración frontend-backend completadas.
 - ⬜ Aplicación desplegada en la nube.
 
 ---

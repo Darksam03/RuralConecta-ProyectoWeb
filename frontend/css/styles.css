@@ -2018,6 +2018,52 @@ button {
     align-items: flex-start;
     text-align: left;
   }
+
+  /* Selector de municipio adaptativo */
+  .municipio-select-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+    width: 100%;
+  }
+
+  .municipio-select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Encabezados de categorías dinámicas en listado de servicios */
+  .categoria-group-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+  }
+
+  .categoria-group-title-wrapper {
+    width: 100%;
+  }
+
+  .categoria-group-title {
+    font-size: var(--font-size-xl);
+  }
+
+  .categoria-group-section {
+    padding: var(--spacing-4);
+  }
+
+  /* Ajustes para logotipos en pantallas muy pequeñas (360px o inferiores) */
+  @media (max-width: 360px) {
+    .logo-brand-name {
+      font-size: var(--font-size-base);
+    }
+    .logo-tagline {
+      font-size: 0.65rem;
+    }
+    .logo-icon-wrapper {
+      width: 2.25rem;
+      height: 2.25rem;
+    }
+  }
 }
 
 /* ==========================================================================
