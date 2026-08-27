@@ -321,6 +321,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - **Archivo**: [`frontend/municipios.html`](frontend/municipios.html).
 - **Estructura semántica**: Header institucional, encabezado de página (`.page-header`), contenedor `#municipios-container` con cuadrícula flexible (`.municipios-grid`), 5 tarjetas demostrativas (*Jardín*, *Andes*, *Támesis*, *Jericó*, *Urrao*), cuadro de cobertura territorial y footer.
 - **Componentes reutilizados**: Header, menú móvil accesible (`main.js`), tokens de diseño CSS (`styles.css`), botones (`.btn`), footer.
+- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/municipios/`) están plenamente integradas y funcionales a través de `js/municipios.js`.
 
 ##### 2. Vista de Categorías (`categorias.html`)
 - **Archivo**: [`frontend/categorias.html`](frontend/categorias.html).
@@ -332,8 +333,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
   - Cuadro informativo de orientación (`.categorias-info-box`) para guiar la consulta por municipio o servicios generales.
   - `<footer class="site-footer">` idéntico y consistente con el pie de página institucional.
 - **Componentes reutilizados**: Header institucional, menú móvil accesible (`main.js`), tokens de variables CSS (`styles.css`), botones y enlaces (`.btn`, `.btn-outline-primary`), footer y layout de cuadrícula.
-- **Preparación para datos dinámicos**: El elemento `#categorias-container` está formalmente identificado para permitir la futura inyección dinámica desde JavaScript (`categorias.js`).
-- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/categorias/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
+- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/categorias/`) están plenamente integradas y funcionales a través de `js/categorias.js`.
 
 ##### 3. Vista de Servicios (`servicios.html`)
 - **Archivo**: [`frontend/servicios.html`](frontend/servicios.html).
@@ -348,9 +348,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
   - Cuadro informativo de orientación (`.servicios-info-box`) para guiar la navegación complementaria hacia `municipios.html` y `categorias.html`.
   - `<footer class="site-footer">` idéntico y consistente con el pie de página institucional.
 - **Componentes reutilizados**: Header institucional, menú móvil accesible (`main.js`), tokens de variables CSS (`styles.css`), botones y enlaces (`.btn`, `.btn-outline-primary`), footer y layout de cuadrícula flexible.
-- **Preparación para datos dinámicos**: El elemento `#servicios-container` está formalmente identificado y estructurado para permitir la futura inyección dinámica desde JavaScript (`servicios.js` / Fetch API).
-- **Preparación para el detalle de servicio**: Cada tarjeta cuenta con su acción/enlace visualmente preparado hacia `servicio-detalle.html` (sin crear todavía la vista ni implementar parámetros dinámicos en este paso).
-- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/servicios/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
+- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/servicios/`) están plenamente integradas y funcionales a través de `js/servicios.js`, con soporte para agrupación por categorías y filtros dinámicos.
 
 ##### 4. Vista de Detalle de Servicio (`servicio-detalle.html`)
 - **Archivo**: [`frontend/servicio-detalle.html`](frontend/servicio-detalle.html).
@@ -368,8 +366,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
   - `<footer class="site-footer">` idéntico y consistente con el pie de página institucional.
 - **Componentes reutilizados**: Header institucional, menú móvil accesible (`main.js`), tokens de diseño CSS (`styles.css`), botones (`.btn`, `.btn-primary`, `.btn-outline-primary`), footer y cuadro informativo.
 - **Navegación**: Permite regresar ágilmente a `servicios.html` mediante migas de pan, botón superior (`.btn-back`) y acción principal del pie de la ficha, además de mantener enlaces hacia `municipios.html`, `categorias.html` e `index.html`.
-- **Preparación para datos dinámicos**: Los elementos del contenedor `#servicio-detalle-container` poseen selectores e identificadores específicos (`#servicio-nombre`, `#servicio-categoria`, `#servicio-municipio`, `#servicio-descripcion`, `#servicio-direccion`, `#servicio-horarios`, `#servicio-requisitos`, `#servicio-contacto`) preparados para la inyección de datos desde JavaScript en el Paso 8.
-- **Estado de Fetch API**: Fetch API y la lectura de parámetros URL dinámicos (`?id=ID` / `GET /api/servicios/{id}/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
+- **Estado de Fetch API**: Fetch API y la lectura de parámetros URL dinámicos (`?id=ID` / `GET /api/servicios/{id}/`) están plenamente integradas y funcionales a través de `js/servicio-detalle.js`.
 
 #### Archivos creados / modificados en este paso
 
