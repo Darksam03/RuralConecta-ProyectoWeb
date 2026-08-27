@@ -200,7 +200,7 @@ Frontend muestra los resultados (HTML5 + JavaScript)
 ## 📈 Progreso general
 
 ```text
-Progreso: ████████░░ 81% (64/79 tareas completadas)
+Progreso: ███████░░░ 70% (55/79 tareas completadas)
 ```
 
 > **Nota:** Este indicador visual representa el avance global del proyecto calculado a partir de las tareas completadas versus el total planificado en el tablero. Debe actualizarse manualmente a medida que se ejecuten y verifiquen nuevas actividades con evidencia respaldada en el repositorio.
@@ -285,9 +285,9 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - [x] Implementar vista de selección de categoría (`categorias.html`) (Paso 4)
 - [x] Implementar vista de listado de servicios (`servicios.html`) (Paso 5)
 - [x] Implementar ficha detallada del servicio (`servicio-detalle.html`) (Paso 6)
-- [x] Implementar responsive completo
-- [x] Integrar frontend con API REST (JavaScript Fetch API)
-- [x] Manejar estados de carga, éxito, sin resultados y errores en el cliente
+- [ ] Implementar responsive completo
+- [ ] Integrar frontend con API REST (JavaScript Fetch API)
+- [ ] Manejar estados de carga, éxito, sin resultados y errores en el cliente
 
 #### Estado actual de Fase 3
 
@@ -299,10 +299,10 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 | 4 | Vista `categorias.html` | ✅ |
 | 5 | Vista `servicios.html` | ✅ |
 | 6 | Vista `servicio-detalle.html` | ✅ |
-| 7 | Responsive completo | ✅ |
-| 8 | Integración Fetch API | ✅ |
-| 9 | Estados de carga/éxito/sin resultados/error | ✅ |
-| 10 | Pruebas e integración final | ✅ |
+| 7 | Responsive completo | ⏳ |
+| 8 | Integración Fetch API | ⏳ |
+| 9 | Estados de carga/éxito/sin resultados/error | ⏳ |
+| 10 | Pruebas e integración final | ⏳ |
 
 #### Documentación de Vistas del Frontend
 
@@ -321,7 +321,6 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - **Archivo**: [`frontend/municipios.html`](frontend/municipios.html).
 - **Estructura semántica**: Header institucional, encabezado de página (`.page-header`), contenedor `#municipios-container` con cuadrícula flexible (`.municipios-grid`), 5 tarjetas demostrativas (*Jardín*, *Andes*, *Támesis*, *Jericó*, *Urrao*), cuadro de cobertura territorial y footer.
 - **Componentes reutilizados**: Header, menú móvil accesible (`main.js`), tokens de diseño CSS (`styles.css`), botones (`.btn`), footer.
-- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/municipios/`) están plenamente integradas y funcionales a través de `js/municipios.js`.
 
 ##### 2. Vista de Categorías (`categorias.html`)
 - **Archivo**: [`frontend/categorias.html`](frontend/categorias.html).
@@ -333,7 +332,8 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
   - Cuadro informativo de orientación (`.categorias-info-box`) para guiar la consulta por municipio o servicios generales.
   - `<footer class="site-footer">` idéntico y consistente con el pie de página institucional.
 - **Componentes reutilizados**: Header institucional, menú móvil accesible (`main.js`), tokens de variables CSS (`styles.css`), botones y enlaces (`.btn`, `.btn-outline-primary`), footer y layout de cuadrícula.
-- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/categorias/`) están plenamente integradas y funcionales a través de `js/categorias.js`.
+- **Preparación para datos dinámicos**: El elemento `#categorias-container` está formalmente identificado para permitir la futura inyección dinámica desde JavaScript (`categorias.js`).
+- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/categorias/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
 
 ##### 3. Vista de Servicios (`servicios.html`)
 - **Archivo**: [`frontend/servicios.html`](frontend/servicios.html).
@@ -348,7 +348,9 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
   - Cuadro informativo de orientación (`.servicios-info-box`) para guiar la navegación complementaria hacia `municipios.html` y `categorias.html`.
   - `<footer class="site-footer">` idéntico y consistente con el pie de página institucional.
 - **Componentes reutilizados**: Header institucional, menú móvil accesible (`main.js`), tokens de variables CSS (`styles.css`), botones y enlaces (`.btn`, `.btn-outline-primary`), footer y layout de cuadrícula flexible.
-- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/servicios/`) están plenamente integradas y funcionales a través de `js/servicios.js`, con soporte para agrupación por categorías y filtros dinámicos.
+- **Preparación para datos dinámicos**: El elemento `#servicios-container` está formalmente identificado y estructurado para permitir la futura inyección dinámica desde JavaScript (`servicios.js` / Fetch API).
+- **Preparación para el detalle de servicio**: Cada tarjeta cuenta con su acción/enlace visualmente preparado hacia `servicio-detalle.html` (sin crear todavía la vista ni implementar parámetros dinámicos en este paso).
+- **Estado de Fetch API**: Fetch API y la conexión con los endpoints HTTP (`GET /api/servicios/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
 
 ##### 4. Vista de Detalle de Servicio (`servicio-detalle.html`)
 - **Archivo**: [`frontend/servicio-detalle.html`](frontend/servicio-detalle.html).
@@ -366,7 +368,8 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
   - `<footer class="site-footer">` idéntico y consistente con el pie de página institucional.
 - **Componentes reutilizados**: Header institucional, menú móvil accesible (`main.js`), tokens de diseño CSS (`styles.css`), botones (`.btn`, `.btn-primary`, `.btn-outline-primary`), footer y cuadro informativo.
 - **Navegación**: Permite regresar ágilmente a `servicios.html` mediante migas de pan, botón superior (`.btn-back`) y acción principal del pie de la ficha, además de mantener enlaces hacia `municipios.html`, `categorias.html` e `index.html`.
-- **Estado de Fetch API**: Fetch API y la lectura de parámetros URL dinámicos (`?id=ID` / `GET /api/servicios/{id}/`) están plenamente integradas y funcionales a través de `js/servicio-detalle.js`.
+- **Preparación para datos dinámicos**: Los elementos del contenedor `#servicio-detalle-container` poseen selectores e identificadores específicos (`#servicio-nombre`, `#servicio-categoria`, `#servicio-municipio`, `#servicio-descripcion`, `#servicio-direccion`, `#servicio-horarios`, `#servicio-requisitos`, `#servicio-contacto`) preparados para la inyección de datos desde JavaScript en el Paso 8.
+- **Estado de Fetch API**: Fetch API y la lectura de parámetros URL dinámicos (`?id=ID` / `GET /api/servicios/{id}/`) **todavía NO están integradas**. Se implementarán en el Paso 8 de esta fase.
 
 #### Archivos creados / modificados en este paso
 
@@ -376,14 +379,14 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 
 ### 🟠 Fase 4 — Integración y pruebas
 
-- [x] Probar integración frontend-backend
-- [x] Validar respuestas JSON en el cliente web
-- [x] Validar filtros dinámicos desde la interfaz
-- [x] Realizar pruebas responsive en múltiples dispositivos y resoluciones
+- [ ] Probar integración frontend-backend
+- [ ] Validar respuestas JSON en el cliente web
+- [ ] Validar filtros dinámicos desde la interfaz
+- [ ] Realizar pruebas responsive en múltiples dispositivos y resoluciones
 - [ ] Realizar pruebas de usabilidad con usuarios finales
 - [ ] Medir tiempo de respuesta de la API REST
-- [x] Corregir errores encontrados durante las pruebas de integración
-- [x] Verificar cumplimiento total de los requisitos funcionales del MVP
+- [ ] Corregir errores encontrados durante las pruebas de integración
+- [ ] Verificar cumplimiento total de los requisitos funcionales del MVP
 
 ### ☁️ Fase 5 — Despliegue
 
@@ -424,8 +427,8 @@ Registro de hitos consolidados a lo largo del ciclo del proyecto:
 - ✅ Carga de datos iniciales mediante comando `seed_data` ejecutada y verificada.
 - ✅ Verificación funcional de la API mediante Django Shell y pruebas de consulta HTTP (listados, detalles, filtros por municipio, categoría y combinados).
 - ✅ Panel administrativo Django Admin configurado con búsqueda, filtros y superusuario funcional.
-- ✅ Frontend HTML5/CSS3/JavaScript Vanilla desarrollado e integrado.
-- ✅ Pruebas de integración frontend-backend completadas.
+- ⬜ Frontend HTML5/CSS3/JavaScript Vanilla desarrollado e integrado.
+- ⬜ Pruebas de integración frontend-backend completadas.
 - ⬜ Aplicación desplegada en la nube.
 
 ---
