@@ -300,9 +300,9 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 | 5 | Vista `servicios.html` | ✅ |
 | 6 | Vista `servicio-detalle.html` | ✅ |
 | 7 | Responsive completo | ✅ |
-| 8 | Integración Fetch API | ⏳ |
-| 9 | Estados de carga/éxito/sin resultados/error | ⏳ |
-| 10 | Pruebas e integración final | ⏳ |
+| 8 | Integración Fetch API | ✅ |
+| 9 | Estados de carga/éxito/sin resultados/error | ✅ |
+| 10 | Pruebas e integración final | ✅ |
 
 #### Documentación de Vistas del Frontend
 
