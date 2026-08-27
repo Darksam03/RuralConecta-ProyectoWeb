@@ -277,7 +277,7 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 - [x] Verificación y validación del panel administrativo de Django
 - [x] Implementar pruebas unitarias automatizadas con `APITestCase`
 
-### 🟣 Fase 3 — Frontend (En desarrollo)
+### 🟣 Fase 3 — Frontend
 
 - [x] Crear estructura HTML5 base del cliente web y diseño de `index.html` (Pasos 1 y 2)
 - [x] Configurar CSS3 modular (`styles.css` con variables, Flexbox, Grid, header, tarjetas y utilidades)
@@ -293,14 +293,16 @@ Este apartado permite realizar un seguimiento estructurado e interactivo del cic
 
 ### 🟠 Fase 4 — Integración y pruebas
 
-- [ ] Probar integración frontend-backend
-- [ ] Validar respuestas JSON en el cliente web
-- [ ] Validar filtros dinámicos desde la interfaz
-- [ ] Realizar pruebas responsive en múltiples dispositivos y resoluciones
-- [ ] Realizar pruebas de usabilidad con usuarios finales
-- [ ] Medir tiempo de respuesta de la API REST
-- [ ] Corregir errores encontrados durante las pruebas de integración
-- [ ] Verificar cumplimiento total de los requisitos funcionales del MVP
+- [x] Probar integración frontend-backend
+- [x] Validar respuestas JSON en el cliente web
+- [x] Validar filtros dinámicos desde la interfaz
+- [x] Realizar pruebas responsive en múltiples dispositivos y resoluciones
+- [x] Realizar pruebas de usabilidad con usuarios finales
+- [x] Medir tiempo de respuesta de la API REST
+- [x] Corregir errores encontrados durante las pruebas de integración
+- [x] Verificar cumplimiento total de los requisitos funcionales del MVP
+
+📄 **[Ver Informe Detallado de Integración y Pruebas](docs/fase4-integracion-pruebas.md)**
 
 ### ☁️ Fase 5 — Despliegue
 
