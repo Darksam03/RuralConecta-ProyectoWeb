@@ -12,10 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const API_BASE_URL = getApiBaseUrl();
 
+
 function getApiBaseUrl() {
-  const host = (window.location.hostname && window.location.hostname !== '') ? window.location.hostname : '127.0.0.1';
-  const protocol = (window.location.protocol === 'https:') ? 'https:' : 'http:';
-  return `${protocol}//${host}:8000/api`;
+  return 'https://ruralconecta-backend.onrender.com/api';
 }
 
 async function initServiciosApp() {
