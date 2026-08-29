@@ -155,12 +155,9 @@ REST_FRAMEWORK = {
 # CORS — En desarrollo se permiten todos los orígenes.
 # En producción cambiar a CORS_ALLOWED_ORIGINS con el dominio del frontend.
 CORS_ALLOWED_ORIGINS = [
-    origin.strip()
-    for origin in os.getenv(
-        'CORS_ALLOWED_ORIGINS',
-        'http://localhost:5500,http://127.0.0.1:5500'
-    ).split(',')
-    if origin.strip()
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "https://ruralconecta-frontend.onrender.com",
 ]
 
 
