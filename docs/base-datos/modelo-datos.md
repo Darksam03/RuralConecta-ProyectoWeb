@@ -121,28 +121,28 @@ erDiagram
     CATEGORIA ||--o{ SERVICIO : "clasifica / agrupa"
 
     MUNICIPIO {
-        int id PK "Identificador único"
-        varchar nombre "Nombre del municipio (Único)"
-        varchar subregion "Subregión geográfica"
+        bigint id PK "BigAutoField"
+        varchar(100) nombre "CharField(max_length=100, unique=True)"
+        varchar(100) subregion "CharField(max_length=100)"
     }
 
     CATEGORIA {
-        int id PK "Identificador único"
-        varchar nombre "Nombre de la categoría (Único)"
-        text descripcion "Descripción del área"
-        varchar icono "Icono o clase visual"
+        bigint id PK "BigAutoField"
+        varchar(100) nombre "CharField(max_length=100, unique=True)"
+        text descripcion "TextField(blank=True)"
+        varchar(100) icono "CharField(max_length=100, blank=True)"
     }
 
     SERVICIO {
-        int id PK "Identificador único"
-        int municipio_id FK "Referencia a MUNICIPIO(id)"
-        int categoria_id FK "Referencia a CATEGORIA(id)"
-        varchar nombre "Nombre oficial del servicio"
-        text descripcion "Descripción detallada"
-        varchar direccion "Ubicación o sede física"
-        varchar horarios "Días y franjas de atención"
-        text requisitos "Requisitos y documentación"
-        varchar contacto "Teléfonos, correo y canales"
+        bigint id PK "BigAutoField"
+        bigint municipio_id FK "ForeignKey(Municipio)"
+        bigint categoria_id FK "ForeignKey(Categoria)"
+        varchar(200) nombre "CharField(max_length=200)"
+        text descripcion "TextField()"
+        varchar(255) direccion "CharField(max_length=255)"
+        text horarios "TextField()"
+        text requisitos "TextField()"
+        varchar(255) contacto "CharField(max_length=255)"
     }
 ```
 

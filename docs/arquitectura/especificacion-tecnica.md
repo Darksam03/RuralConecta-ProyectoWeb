@@ -133,24 +133,24 @@ La arquitectura del sistema sigue un patrón multicapa desacoplado:
 
 ```mermaid
 graph TD
-    subgraph "Capa de Presentación (Frontend)"
-        A["Usuario"] -->|"Interactúa con la UI"| B["Navegador Web / Cliente HTML5"]
-        B -->|"HTML5 + CSS3 + JavaScript"| C["Cliente HTTP / Fetch API"]
+    subgraph "Frontend (Render Static Site)"
+        A["Navegador Web"] -->|"Interactúa con la UI"| B["UI HTML5 + CSS3"]
+        B -->|"JavaScript Vanilla"| C["Fetch API"]
     end
 
-    subgraph "Capa de Comunicación"
-        C -->|"Peticiones HTTP (GET / JSON)"| D["Endpoints API REST"]
-        D -->|"Respuestas HTTP (JSON / Status Codes)"| C
+    subgraph "Comunicación"
+        C -->|"Peticiones HTTP (GET / JSON)"| D["Endpoints API REST (/api/)"]
+        D -->|"Respuestas HTTP (JSON)"| C
     end
 
-    subgraph "Capa de Lógica de Negocio (Backend Django / DRF)"
-        D -->|"Enrutamiento urls.py"| E["Django REST Framework Views"]
+    subgraph "Backend (Django / DRF en Render Web Service)"
+        D -->|"Enrutamiento (urls.py)"| E["Django REST Framework ViewSets"]
         E -->|"Validación y Serialización"| F["DRF Serializers"]
         F -->|"Consultas y Filtros"| G["Django ORM"]
     end
 
-    subgraph "Capa de Persistencia (Base de Datos)"
-        G -->|"Consultas SQL Seguras"| H[("PostgreSQL")]
+    subgraph "Base de Datos (Render Managed)"
+        G -->|"Consultas SQL (psycopg)"| H[("PostgreSQL")]
         H -->|"Resultados de Consulta"| G
     end
 

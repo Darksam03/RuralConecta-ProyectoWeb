@@ -540,7 +540,7 @@ Las evidencias visuales del funcionamiento del proyecto (capturas de pantalla de
 - ☑️ Documentar especificación técnica de la API REST
 - ☑️ Documentar modelo de datos y arquitectura backend
 - ☑️ Completar documentación técnica final
-- [ ] Agregar diagramas de arquitectura y entidad-relación actualizados
+- ☑️ Agregar diagramas de arquitectura y entidad-relación actualizados
 - [ ] Preparar presentación del proyecto
 - [ ] Exportar presentación a PDF y adjuntar al repositorio
 - [ ] Realizar revisión final del repositorio antes de la entrega
