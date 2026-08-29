@@ -444,9 +444,9 @@ El proyecto está desplegado en **Render**:
 
 ## 📸 Evidencias
 
-Las evidencias visuales del funcionamiento del proyecto (capturas de pantalla de la API, frontend, responsive, panel administrativo y despliegue en Render) deben incorporarse como archivos de imagen dentro de `docs/evidencias/` y enlazarse desde esta sección.
+Las evidencias visuales del funcionamiento del proyecto (capturas de pantalla de la API, frontend, responsive, panel administrativo y despliegue en Render) han sido incorporadas y documentadas exhaustivamente.
 
-> **Nota**: Las capturas de pantalla deben ser agregadas manualmente al repositorio una vez tomadas del entorno de producción.
+> Para visualizar todas las capturas de pantalla del sistema en producción, consultar [`docs/evidencias/evidencias.md`](docs/evidencias/evidencias.md).
 
 ---
 
@@ -543,7 +543,7 @@ Las evidencias visuales del funcionamiento del proyecto (capturas de pantalla de
 - ☑️ Agregar diagramas de arquitectura y entidad-relación actualizados
 - ☑️ Preparar presentación del proyecto
 - ☑️ Exportar presentación a PDF y adjuntar al repositorio
-- [ ] Realizar revisión final del repositorio antes de la entrega
+- ☑️ Realizar revisión final del repositorio antes de la entrega
 
 ---
 
@@ -563,6 +563,7 @@ La documentación técnica detallada del proyecto se organiza dentro del directo
 | Backend | [`docs/backend/backend.md`](docs/backend/backend.md) | Implementación real del backend |
 | Pruebas | [`docs/pruebas/pruebas.md`](docs/pruebas/pruebas.md) | Registro de pruebas realizadas |
 | Integración y pruebas | [`docs/Integracion-pruebas.md`](docs/Integracion-pruebas.md) | Informe de la Fase 4 |
+| Evidencias Visuales | [`docs/evidencias/evidencias.md`](docs/evidencias/evidencias.md) | Capturas de pantalla de la aplicación en producción |
 
 ---
 
