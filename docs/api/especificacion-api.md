@@ -555,18 +555,30 @@ graph TD
 
 ## 12. Estado de Implementación y Trazabilidad
 
-A continuación se resume la matriz de estado de los componentes definidos en este documento, conforme a las directrices de la **Etapa 0**:
+A continuación se resume la matriz de estado actualizada de los componentes definidos en este documento:
 
-| Componente / Característica | Estado en Etapa 0 | Fase de Implementación Prevista |
+| Componente / Característica | Estado Actual | Fase de Implementación |
 |---|---|---|
-| **Diseño y Contrato de la API REST** | ✅ **Definido y Documentado** | Etapa 0 (Análisis y Planificación) |
-| **Esquema de URIs y Versionado (`/api/v1/`)** | ✅ **Definido y Documentado** | Etapa 0 (Análisis y Planificación) |
-| **Formato de Respuestas JSON** | ✅ **Definido y Documentado** | Etapa 0 (Análisis y Planificación) |
-| **Estructura de Manejo de Errores** | ✅ **Definido y Documentado** | Etapa 0 (Análisis y Planificación) |
-| **Endpoints `GET` de Municipios, Categorías y Servicios** | ⏳ **Pendiente de Implementación** | Fase 2 (Desarrollo Backend con Django/DRF) |
-| **Filtros de Búsqueda Combinados en Servicios** | ⏳ **Pendiente de Implementación** | Fase 2 (Desarrollo Backend con Django/DRF) |
-| **Endpoints Administrativos (`POST`, `PUT`, `DELETE`)** | 💡 **Propuesto (Fuera del MVP inicial)** | Fases posteriores de ampliación |
+| **Diseño y Contrato de la API REST** | ✅ **Definido, Documentado e Implementado** | Etapa 0 + Fase 2 |
+| **Esquema de URIs (`/api/`)** | ✅ **Implementado** | Fase 2 |
+| **Formato de Respuestas JSON** | ✅ **Implementado y Verificado** | Fase 2 |
+| **Estructura de Manejo de Errores** | ✅ **Implementado** | Fase 2 |
+| **Endpoints `GET` de Municipios, Categorías y Servicios** | ✅ **Implementado y Verificado** | Fase 2 |
+| **Filtros de Búsqueda Combinados en Servicios** | ✅ **Implementado y Verificado** | Fase 2 |
+| **Filtros por Nombre (case-insensitive)** | ✅ **Implementado** | Fase 2 |
+| **Despliegue en Producción (Render)** | ✅ **Implementado y Operativo** | Fase 5 |
+| **Pruebas Unitarias con APITestCase** | ✅ **Implementado** | Fase 4 |
+| **Endpoints Administrativos (`POST`, `PUT`, `DELETE`)** | 💡 **Disponibles vía ModelViewSet (sin restricción de acceso)** | Fase 2 |
 | **Autenticación con JWT para Administradores** | 💡 **Propuesto (Fuera del MVP inicial)** | Fases posteriores de ampliación |
 
+> [!IMPORTANT]
+> **Nota sobre el prefijo de URL**: Este documento de diseño (Etapa 0) especificó originalmente el prefijo `/api/v1/` para los endpoints. La implementación real utiliza `/api/` como prefijo, sin versionamiento explícito en la URI. Los endpoints reales son:
+> - `GET /api/municipios/`
+> - `GET /api/categorias/`
+> - `GET /api/servicios/`
+
 > [!NOTE]
-> Este documento representa la **especificación técnica formal de diseño de la API REST durante la Etapa 0**. No contiene código backend ni endpoints en ejecución; su propósito es servir como contrato y guía estricta para el equipo de desarrollo durante las Fases 2 (Backend) y 3 (Frontend).
+> **Filtro por nombre**: Además del filtro por ID numérico documentado originalmente, la implementación real permite filtrar servicios por nombre de municipio o categoría (case-insensitive). Por ejemplo: `GET /api/servicios/?municipio=Jericó` o `GET /api/servicios/?categoria=Salud`.
+
+> [!NOTE]
+> Este documento fue creado inicialmente como la **especificación técnica formal de diseño de la API REST durante la Etapa 0**. Las notas anteriores documentan las diferencias entre el diseño original y la implementación final. Para la documentación de la implementación real del backend, consultar `docs/backend/backend.md`.
