@@ -564,6 +564,7 @@ La documentación técnica detallada del proyecto se organiza dentro del directo
 | Pruebas | [`docs/pruebas/pruebas.md`](docs/pruebas/pruebas.md) | Registro de pruebas realizadas |
 | Integración y pruebas | [`docs/Integracion-pruebas.md`](docs/Integracion-pruebas.md) | Informe de la Fase 4 |
 | Evidencias Visuales | [`docs/evidencias/evidencias.md`](docs/evidencias/evidencias.md) | Capturas de pantalla de la aplicación en producción |
+| Presentación del Proyecto | [`docs/presentacion/RuralConecta Descentralización Digital Territorial.PDF.pdf`](docs/presentacion/RuralConecta%20Descentralización%20Digital%20Territorial.PDF.pdf) | Diapositivas de presentación. *(No disponible en vista previa, requiere descarga)* |
 
 ---
 
